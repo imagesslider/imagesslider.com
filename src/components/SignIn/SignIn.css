@@ -1,0 +1,17 @@
+.sign_in {
+  margin-top: 78px;
+  min-height: calc(100vh - 63px);
+}
+
+.sign_in_title {
+  color: #ffc107;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+#sign-in-button-google {
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

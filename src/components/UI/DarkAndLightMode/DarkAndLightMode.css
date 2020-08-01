@@ -1,0 +1,21 @@
+.toggle_theme {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  color: var(--p-color);
+  padding: 5px 10px;
+  transition: all 0.4s ease-in-out;
+}
+
+.toggle_theme:hover {
+  background: hsla(45, 100%, 41%, 0.7);
+}
+
+.theme_title {
+  font-weight: bold;
+  margin-left: 5px;
+}

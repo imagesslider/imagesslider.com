@@ -1,0 +1,21 @@
+#sign-out-button-google {
+  border: none;
+  outline: none;
+  background: none;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  color: var(--p-color);
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.4s ease-in-out;
+}
+
+#sign-out-button-google:hover {
+  background: hsla(45, 100%, 41%, 0.7);
+}
+
+.fa-sign-out-alt {
+  margin-right: 5px;
+}

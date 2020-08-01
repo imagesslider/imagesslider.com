@@ -1,0 +1,27 @@
+.noContent_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  min-height: calc(100vh - 180px);
+}
+
+.noContent_link {
+  text-decoration: none;
+  color: var(--p-color);
+}
+
+.fa-arrow-left.noContent {
+  color: var(--p-color);
+  transition: all 0.4s ease-in-out;
+}
+
+.fa-arrow-left.noContent:hover {
+  color: #ffc107;
+}
+
+.noContent_title {
+  color: var(--p-color);
+  font-weight: 600;
+  margin-left: 5px;
+}

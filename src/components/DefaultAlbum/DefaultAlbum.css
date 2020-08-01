@@ -1,0 +1,35 @@
+.default_album {
+  text-decoration: none;
+  cursor: pointer;
+  background: #ffc107;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.default_album_img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: all 0.4s ease-in-out;
+}
+
+.default_album:hover .default_album_img {
+  opacity: 0.5;
+  transform: scale3d(0.9, 0.9, 1);
+}
+
+.default_album_title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  transition: all 0.4s ease-in-out;
+}
+
+.default_album:hover .default_album_title {
+  color: #000000;
+}

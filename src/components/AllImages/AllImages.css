@@ -1,0 +1,38 @@
+.all_images {
+  display: grid;
+  justify-content: start;
+  align-items: center;
+}
+
+.button_google_all_images {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 250px;
+  height: 300px;
+  font-family: "Lora", serif;
+  background: var(--bg-color);
+  border: 4px solid #ffc107;
+  transition: all 0.4s ease-in-out;
+}
+
+.button_google_all_images:hover {
+  background: #ffc107;
+  color: #000;
+}
+
+.button_google_all_title {
+  color: #ffc107;
+  font-weight: 600;
+  transition: all 0.4s ease-in-out;
+}
+
+.button_google_all_images:hover .button_google_all_title {
+  color: #000;
+}
+
+@media screen and (max-width: 560px) {
+  .all_images {
+    justify-content: center;
+  }
+}

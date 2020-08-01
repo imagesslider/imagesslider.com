@@ -1,0 +1,13 @@
+.footer_wrapper {
+  background: #000;
+  padding: 20px;
+  border-top: 2px solid #ffc107;
+}
+
+.footer_copyright {
+  color: #ffc107;
+}
+
+.footer_email {
+  color: #ffc107;
+}

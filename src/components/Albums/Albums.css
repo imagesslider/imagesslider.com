@@ -1,0 +1,24 @@
+.albums {
+  margin-top: 78px;
+}
+
+.albums_title {
+  color: #ffc107;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.albums_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 560px) {
+  .albums_title {
+    text-align: center;
+  }
+}

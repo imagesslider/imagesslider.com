@@ -1,0 +1,33 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  background: #000;
+  border-bottom: 2px solid #ffc107;
+  padding: 10px 0px;
+}
+
+.header_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.images_slider_logo {
+  margin-left: 20px;
+}
+
+.header_dropDown_wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px;
+  white-space: nowrap;
+}
+
+.header_dropDown_wrapper > * {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,124 @@
+.images__wrapper {
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  overflow-x: hidden;
+  background: #000;
+  position: relative;
+}
+
+.images__container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+}
+
+.images__container > div {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  margin: auto;
+  flex: none;
+  position: relative;
+}
+
+.images__container > div > img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: #ffc107;
+  color: #000;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 50%;
+  outline: none;
+  opacity: 0;
+  transition: all ease-in-out 0.4s;
+  z-index: 1;
+}
+
+.button.prev {
+  left: 10px;
+}
+
+.button.prev.isDisabled {
+  pointer-events: auto;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.button.prev:not(.isDisabled):hover {
+  background: hsla(45, 100%, 41%, 0.7);
+}
+
+.button.next {
+  right: 10px;
+}
+
+.button.next:hover {
+  background: hsla(45, 100%, 41%, 0.7);
+}
+
+.fullscreen {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  border: none;
+  color: #ffc107;
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  z-index: 1;
+  background: none;
+  transition: all ease-in-out 0.4s;
+}
+
+.openFullscreen:hover {
+  color: hsla(45, 100%, 41%, 0.7);
+}
+
+.exitFullscreen:hover {
+  color: hsla(45, 100%, 41%, 0.7);
+}
+
+.fa-arrow-left.back {
+  color: #ffc107;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all ease-in-out 0.4s;
+}
+
+.fa-arrow-left.back:hover {
+  color: hsla(45, 100%, 41%, 0.7);
+}
+
+.button-pause {
+  border: none;
+  outline: none;
+  background: none;
+  color: #ffc107;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all ease-in-out 0.4s;
+}
+
+.button-pause:hover {
+  color: hsla(45, 100%, 41%, 0.7);
+}
