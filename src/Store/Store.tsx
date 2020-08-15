@@ -85,7 +85,7 @@ export type StoreSlider = {
 
 export const initalStoreSlider: StoreSlider = {
   autoSlider: true,
-  intervalTime: 5000,
+  intervalTime: 20000,
 };
 
 //slider search

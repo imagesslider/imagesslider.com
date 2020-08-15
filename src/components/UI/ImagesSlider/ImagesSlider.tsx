@@ -55,7 +55,7 @@ type ImagesSliderProps = {
   onTouchStart?: (event: React.TouchEvent<HTMLDivElement>) => void;
   onTouchEnd?: (event: React.TouchEvent<HTMLDivElement>) => void;
   children?: React.ReactNode;
-  images?: any;
+  imagesArray?: any;
   onClickBack?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   onClickPause?: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -65,7 +65,10 @@ type ImagesSliderProps = {
   ) => void;
 };
 
-const ImagesSlider: React.FC<ImagesSliderProps> = ({ children, images }) => {
+const ImagesSlider: React.FC<ImagesSliderProps> = ({
+  children,
+  imagesArray,
+}) => {
   const [indexImage, setIndexImage] = useState<number>(0);
   const [transitionImgage, setTransitionImgage] = useState<boolean>(true);
   //hover
@@ -95,6 +98,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({ children, images }) => {
   const selelctedAlbumId = useSelector(selectSelelctedAlbumId);
   const selectFullScreen = (state: AppType) => state.appState.fullscreen;
   const fullscreen = useSelector(selectFullScreen);
+  const selectImages = (state: AppType) => state.appState.images;
+  const images = useSelector(selectImages);
 
   //actions redux
   const dispatch = useDispatch();
@@ -102,7 +107,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({ children, images }) => {
   //useEffect auto slider
   useEffect(() => {
     let sliderInterval: any;
-    if (autoSlider && !hover && !buttonHover) {
+    if (autoSlider && !hover && !buttonHover && images.length !== 1) {
       sliderInterval = setInterval(onClickNext, intervalTime);
     }
     return () => {
@@ -121,7 +126,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({ children, images }) => {
 
   //onClickNext
   const onClickNext = () => {
-    if (indexImage === images.length - 1) {
+    if (indexImage === imagesArray.length - 1) {
       setTransitionImgage(false);
       setIndexImage(0);
       if (providerSearch === "google-allImages") {
@@ -286,19 +291,21 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({ children, images }) => {
           title="Back"
         ></i>
       </Link>
-      <RangeSlider
-        title="Interval Time"
-        value={intervalTime}
-        onMouseEnter={onMouseEnterButton}
-        onMouseLeave={onMouseLeaveButton}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          dispatch(intervalTimeSliderAction(parseInt(event.target.value)))
-        }
-        style={hoverStyles}
-      />
+      {images.length !== 1 && (
+        <RangeSlider
+          title="Interval Time"
+          value={intervalTime}
+          onMouseEnter={onMouseEnterButton}
+          onMouseLeave={onMouseLeaveButton}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            dispatch(intervalTimeSliderAction(parseInt(event.target.value)))
+          }
+          style={hoverStyles}
+        />
+      )}
       {autoSlider ? (
         <button
-          className="button-pause"
+          className={images.length !== 1 ? "button-pause" : "isDisabled"}
           onMouseEnter={onMouseEnterButton}
           onMouseLeave={onMouseLeaveButton}
           onClick={onClickPause}
@@ -309,7 +316,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({ children, images }) => {
         </button>
       ) : (
         <button
-          className="button-pause"
+          className={images.length !== 1 ? "button-pause" : "isDisabled"}
           onMouseEnter={onMouseEnterButton}
           onMouseLeave={onMouseLeaveButton}
           onClick={onClickPlay}
@@ -323,7 +330,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({ children, images }) => {
         onMouseEnter={onMouseEnterButton}
         onMouseLeave={onMouseLeaveButton}
         onClick={onClickPrev}
-        className={indexImage === 0 ? "button prev isDisabled" : "button prev"}
+        className={indexImage === 0 ? "isDisabled" : "button prev"}
         style={hoverStyles}
       >
         <i className="fas fa-chevron-left fa-2x"></i>
@@ -332,7 +339,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({ children, images }) => {
         onMouseEnter={onMouseEnterButton}
         onMouseLeave={onMouseLeaveButton}
         onClick={onClickNext}
-        className="button next"
+        className={images.length !== 1 ? "button next" : "isDisabled"}
         style={hoverStyles}
       >
         <i className="fas fa-chevron-right fa-2x"></i>

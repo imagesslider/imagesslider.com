@@ -52,10 +52,12 @@
   left: 10px;
 }
 
-.button.prev.isDisabled {
+/* is disabled for all */
+.isDisabled {
   pointer-events: auto;
   cursor: not-allowed;
   opacity: 0.5;
+  display: none;
 }
 
 .button.prev:not(.isDisabled):hover {
