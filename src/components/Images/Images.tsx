@@ -39,7 +39,7 @@ const Images: FC = () => {
       {images.length === 0 ? (
         <NoContent title="No content available" showLinkBack />
       ) : (
-        <ImagesSlider images={images}>
+        <ImagesSlider imagesArray={images}>
           {images.length === 0
             ? null
             : images.map((image) => {
