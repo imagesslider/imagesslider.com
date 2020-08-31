@@ -5,6 +5,7 @@ import {
   signInActionGoogle,
   signOutActionGoogle,
   setAlbumsActionGoogle,
+  fetchAllImagesActionGoogle,
 } from "../../Actions/actionsGoogle";
 import { AppType } from "../../Type/Type";
 
@@ -16,6 +17,8 @@ const Google: FC = () => {
   const token = useSelector(selectToken);
   const selectProvider = (state: AppType) => state.appState.login.provider;
   const provider = useSelector(selectProvider);
+  const selectNextPageToken = (state: AppType) => state.appState.nextPageToken;
+  const nextPageToken = useSelector(selectNextPageToken);
   //actions redux
   const dispatch = useDispatch();
   //state component
@@ -104,8 +107,9 @@ const Google: FC = () => {
   useEffect(() => {
     if (isLogged && provider === "google") {
       dispatch(setAlbumsActionGoogle(token as string));
+      dispatch(fetchAllImagesActionGoogle(token, nextPageToken));
     }
-  }, [isLogged, provider, token, dispatch]);
+  }, [isLogged, provider, token, nextPageToken, dispatch]);
 
   return <></>;
 };

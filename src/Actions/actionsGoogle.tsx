@@ -5,6 +5,7 @@ import {
   redirectAction,
   setNextPageToken,
   selelctedAlbumId,
+  fetchAllImagesAction,
 } from "../Actions/actionsApp";
 
 import { setproviderSearchAction } from "../Actions/actionsSearch";
@@ -179,6 +180,40 @@ export const setDataAllImagesGoogleAction = (data: any) => {
     } else {
       dispatch(setNextPageToken(""));
     }
+  };
+};
+
+//fetch all google images
+export const fetchAllImagesActionGoogle = (
+  token: string | null,
+  nextPageToken: string
+) => {
+  return (dispatch: any) => {
+    dispatch(isLoadingAction(true));
+    dispatch(setproviderSearchAction("google-allImages"));
+    fetch(
+      `https://photoslibrary.googleapis.com/v1/mediaItems?pageToken=${nextPageToken}&key=AIzaSyCq9IBDkMGuXmbdUkLM-FLTBY7zBp_hI9k`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: `application/json`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!!data.mediaItems) {
+          dispatch(fetchAllImagesAction(true));
+        } else {
+          dispatch(fetchAllImagesAction(false));
+        }
+      })
+      .then(() => dispatch(isLoadingAction(false)))
+      .catch((e) => {
+        dispatch(isLoadingAction(false));
+        console.log(e);
+      });
   };
 };
 

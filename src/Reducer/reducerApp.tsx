@@ -15,6 +15,7 @@ import {
   SET_INDEX_TAB,
   SET_NEXTPAGE_TOKEN,
   SET_FULLSCREEN,
+  FETCH_ALLIMAGES,
 } from "../Actions/actionsApp";
 import {
   SIGN_IN_GOOGLE,
@@ -102,6 +103,11 @@ const reducerApp = (
       return {
         ...state,
         fullscreen: action.payload,
+      };
+    case FETCH_ALLIMAGES:
+      return {
+        ...state,
+        fetchAllImages: action.payload,
       };
     //google actions
     case SIGN_IN_GOOGLE:

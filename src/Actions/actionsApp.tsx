@@ -191,6 +191,20 @@ export const setFullScreenAction = (
   payload: fullscreen,
 });
 
+//fetch All Images
+export type ActionFETCH_ALLIMAGES = {
+  type: "FETCH_ALLIMAGES";
+  payload: boolean;
+};
+
+export const FETCH_ALLIMAGES = "FETCH_ALLIMAGES";
+export const fetchAllImagesAction = (
+  fetchAllImages: boolean
+): ActionFETCH_ALLIMAGES => ({
+  type: FETCH_ALLIMAGES,
+  payload: fetchAllImages,
+});
+
 export type AllActionsApp =
   | ActionSET_USER
   | ActionALBUMS
@@ -205,4 +219,5 @@ export type AllActionsApp =
   | ActionSET_TOTALPAGES_COLLECTIONS
   | ActionSET_INDEX_TAB
   | ActionNEXTPAGE_TOKEN
-  | ActionSET_FULLSCREEN;
+  | ActionSET_FULLSCREEN
+  | ActionFETCH_ALLIMAGES;
