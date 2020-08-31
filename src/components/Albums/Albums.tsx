@@ -21,6 +21,9 @@ const Albums: FC = () => {
   const provider = useSelector(selectProvider);
   const selectIndexTab = (state: AppType) => state.appState.indexTab;
   const indexTab = useSelector(selectIndexTab);
+  const selectFetchAllImages = (state: AppType) =>
+    state.appState.fetchAllImages;
+  const fetchAllImages = useSelector(selectFetchAllImages);
 
   //actions redux
   const dispatch = useDispatch();
@@ -34,13 +37,17 @@ const Albums: FC = () => {
     <div className="albums">
       {isLoading && <Spinner />}
       <h2 className="albums_title">{provider} Albums</h2>
-      <div className="albums_wrapper">
-        <AllImages />
-        {!!albums &&
-          albums.map((album) => {
-            return <Album key={album.id} {...album} />;
-          })}
-      </div>
+      {fetchAllImages ? (
+        <div className="albums_wrapper">
+          <AllImages />
+          {!!albums &&
+            albums.map((album) => {
+              return <Album key={album.id} {...album} />;
+            })}
+        </div>
+      ) : (
+        <p className="allimages">No content available.</p>
+      )}
       <Tabs activeIndex={indexTab} onClick={onClickBtn}>
         <Tab label="Collections">
           <DefaultCollections />

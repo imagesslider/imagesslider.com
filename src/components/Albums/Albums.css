@@ -17,6 +17,11 @@
   padding-right: 20px;
 }
 
+.allimages {
+  text-align: center;
+  color: var(--p-color);
+}
+
 @media screen and (max-width: 560px) {
   .albums_title {
     text-align: center;
