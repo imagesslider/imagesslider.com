@@ -88,9 +88,9 @@ const Google: FC = () => {
       dispatch(signInActionGoogle(user.wc.access_token));
       let userObject = {
         // image: user.nt.JJ,
-        firstName: user.nt.dV,
-        lastName: user.nt.fT,
-        email: user.nt.Wt,
+        firstName: user.tt.gV,
+        lastName: user.tt.jT,
+        email: user.tt.$t,
       };
       if (!!userObject) {
         dispatch(setUserAction(userObject));
