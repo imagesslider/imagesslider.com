@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import SignIn from "./components/SignIn/SignIn";
 import { AppType } from "./Type/Type";
 import Footer from "./components/Footer/Footer";
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 
 const App: FC = () => {
   //state redux
@@ -24,12 +25,14 @@ const App: FC = () => {
           <Switch>
             <Route path="/" exact component={SignIn} />
             <Route path="/images" exact component={Images} />
+            <Route path="/privacy-policy" exact component={PrivacyPolicy} />
           </Switch>
         ) : (
           <>
             <Switch>
               <Route path="/" exact component={Albums} />
               <Route path="/images" exact component={Images} />
+              <Route path="/privacy-policy" exact component={PrivacyPolicy} />
             </Switch>
           </>
         )}

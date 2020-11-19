@@ -12,3 +12,11 @@
 .footer_email {
   color: #ffc107;
 }
+
+.footer_privacy-policy {
+  text-decoration: none;
+  color: #ffc107;
+}
+.footer_privacy-policy:hover {
+  color: hsl(45, 100%, 41%);
+}

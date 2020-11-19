@@ -1,0 +1,17 @@
+.PrivacyPolicy_container {
+  background: var(--bg-color);
+  padding-top: 63px;
+  padding-bottom: 20px;
+  max-width: 1200px;
+  margin: auto;
+  text-align: justify;
+}
+
+.PrivacyPolicy_title {
+  color: var(--h1-color);
+  margin: 20px 0px;
+}
+
+.PrivacyPolicy_description {
+  color: var(--p-color);
+}
