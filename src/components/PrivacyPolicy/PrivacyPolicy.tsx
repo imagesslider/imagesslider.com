@@ -13,9 +13,8 @@ const PrivacyPolicy: FC = () => {
         Service and the choices you have associated with that data. We use your
         data to provide and improve the Service. By using the Service, you agree
         to the collection and use of information in accordance with this policy.
-        Unless otherwise defined in this Privacy Policy, the terms used in this
-        Privacy Policy have the same meanings as in our Terms and Conditions,
-        accessible from https://imagesslider.com
+        Unless otherwise defined in this Privacy Policy,from
+        https://imagesslider.com
       </p>
       <h1 className="PrivacyPolicy_title">Information Collection And Use</h1>
       <p className="PrivacyPolicy_description">
@@ -126,6 +125,30 @@ const PrivacyPolicy: FC = () => {
         Service is used. These third parties have access to your Personal Data
         only to perform these tasks on our behalf and are obligated not to
         disclose or use it for any other purpose.
+      </p>
+      <h1 className="PrivacyPolicy_title">Sign In</h1>
+      <p className="PrivacyPolicy_description">
+        By accepting the privacy policy, you agree to give us permission to
+        readonly your albums, pictures, and videos on our application
+        https://imagesslider.com
+        <br />
+        For more information on the privacy practices of Google, please visit
+        the Google Privacy & Terms web page:
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://policies.google.com/privacy?hl=en"
+        >
+          https://policies.google.com/privacy?hl=en
+        </a>
+        <br />
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://console.developers.google.com/apis/dashboard?project=upbeat-grammar-285017"
+        >
+          https://console.developers.google.com/apis/dashboard?project=upbeat-grammar-285017
+        </a>
       </p>
       <h1 className="PrivacyPolicy_title">Analytics</h1>
       <p className="PrivacyPolicy_description">

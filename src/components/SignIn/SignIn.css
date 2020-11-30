@@ -15,3 +15,7 @@
   border: none;
   cursor: pointer;
 }
+
+.sign_in_description {
+  color: var(--p-color);
+}

@@ -9,6 +9,7 @@ import Tab from "../UI/Tab/Tab";
 import DefaultCollections from "../DefaultCollections/DefaultCollections";
 import { setIndexTabAction } from "../../Actions/actionsApp";
 import { AppType } from "../../Type/Type";
+import { Link } from "react-router-dom";
 
 const SignIn: FC = () => {
   const selectIndexTab = (state: AppType) => state.appState.indexTab;
@@ -29,6 +30,13 @@ const SignIn: FC = () => {
       <button id="sign-in-button-google">
         <img src={logoGoogle} alt={logoGoogle} />{" "}
       </button>
+      <p className="sign_in_description">
+        Click “Sign In” to agree to ImagesSlider acknowledge that ImagesSlider{" "}
+        <Link to="/privacy-policy" className="footer_privacy-policy">
+          Privacy Policy
+        </Link>{" "}
+        applies to you.
+      </p>
       <Tabs activeIndex={indexTab} onClick={onClickBtn}>
         <Tab label="Collections">
           <DefaultCollections />
