@@ -138,6 +138,7 @@ const PrivacyPolicy: FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           href="https://policies.google.com/privacy?hl=en"
+          className="PrivacyPolicy_a_link"
         >
           https://policies.google.com/privacy?hl=en
         </a>
@@ -146,6 +147,7 @@ const PrivacyPolicy: FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           href="https://console.developers.google.com/apis/dashboard?project=upbeat-grammar-285017"
+          className="PrivacyPolicy_a_link"
         >
           https://console.developers.google.com/apis/dashboard?project=upbeat-grammar-285017
         </a>
@@ -175,6 +177,7 @@ const PrivacyPolicy: FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           href="https://policies.google.com/privacy?hl=en"
+          className="PrivacyPolicy_a_link"
         >
           https://policies.google.com/privacy?hl=en
         </a>
