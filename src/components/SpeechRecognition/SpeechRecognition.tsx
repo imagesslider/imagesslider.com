@@ -1,7 +1,10 @@
 import React, { FC, useState, useEffect, useRef } from "react";
 import "../SpeechRecognition/SpeechRecognition.css";
 import { useDispatch } from "react-redux";
-import { showDropDownAction } from "../../Actions/actionsApp";
+import {
+  showDropDownAction,
+  darkAndLightModeAction,
+} from "../../Actions/actionsApp";
 
 declare global {
   interface Window {
@@ -62,10 +65,10 @@ const SpeechRecognition: FC = () => {
       setSpeechRecognitionContent(transcript);
       if (event.results[0].isFinal) {
         setSpeechRecognitionContent(transcript);
-        if (transcript.toLowerCase().includes("open menu")) {
+        if (transcript.toLowerCase() === "open menu") {
           dispatch(showDropDownAction(true));
           readOutLoud(`Ok,done`, voices);
-        } else if (transcript.toLowerCase().includes("close menu")) {
+        } else if (transcript.toLowerCase() === "close menu") {
           dispatch(showDropDownAction(false));
           readOutLoud(`Ok,done`, voices);
         } else if (
@@ -74,6 +77,16 @@ const SpeechRecognition: FC = () => {
         ) {
           readOutLoud("Microphone off", voices);
           handleClickOf();
+        } else if (transcript.toLowerCase() === "dark mode off") {
+          dispatch(darkAndLightModeAction("light"));
+          window.localStorage.setItem("theme", "light");
+          document.documentElement.setAttribute("data-theme", "light");
+          readOutLoud(`Ok, I turned Dark Mode Off`, voices);
+        } else if (transcript.toLowerCase() === "dark mode on") {
+          dispatch(darkAndLightModeAction("dark"));
+          window.localStorage.setItem("theme", "dark");
+          document.documentElement.setAttribute("data-theme", "dark");
+          readOutLoud(`Ok, I turned Dark Mode On`, voices);
         } else {
           readOutLoud(`Sorry, try again`, voices);
         }

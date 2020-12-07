@@ -1,5 +1,8 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import "../DarkAndLightMode/DarkAndLightMode.css";
+import { useSelector, useDispatch } from "react-redux";
+import { AppType } from "../../../Type/Type";
+import { darkAndLightModeAction } from "../../../Actions/actionsApp";
 
 export type DarkAndLightModeProps = {
   toggleTheme?: (
@@ -8,16 +11,21 @@ export type DarkAndLightModeProps = {
 };
 
 const DarkAndLightMode: FC<DarkAndLightModeProps> = () => {
-  const [theme, setTheme] = useState<string>("dark");
+  //state redux
+  const selectTheme = (state: AppType) => state.appState.theme;
+  const theme = useSelector(selectTheme);
+
+  //actions redux
+  const dispatch = useDispatch();
 
   const toggleTheme = () => {
     if (theme === "light") {
       window.localStorage.setItem("theme", "dark");
-      setTheme("dark");
+      dispatch(darkAndLightModeAction("dark"));
       document.documentElement.setAttribute("data-theme", "dark");
     } else {
       window.localStorage.setItem("theme", "light");
-      setTheme("light");
+      dispatch(darkAndLightModeAction("light"));
       document.documentElement.setAttribute("data-theme", "light");
     }
   };
@@ -25,10 +33,10 @@ const DarkAndLightMode: FC<DarkAndLightModeProps> = () => {
   useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
     if (localTheme) {
-      setTheme(localTheme);
+      dispatch(darkAndLightModeAction(localTheme));
       document.documentElement.setAttribute("data-theme", localTheme);
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <button

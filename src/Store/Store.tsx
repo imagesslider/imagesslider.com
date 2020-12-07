@@ -51,6 +51,7 @@ export type Store = {
   fullscreen: boolean;
   fetchAllImages: boolean;
   showDropDown: boolean;
+  theme: string;
 };
 
 export const initalStore: Store = {
@@ -79,6 +80,7 @@ export const initalStore: Store = {
   fullscreen: false,
   fetchAllImages: false,
   showDropDown: false,
+  theme: "dark",
 };
 
 //slider store

@@ -17,6 +17,7 @@ import {
   SET_FULLSCREEN,
   FETCH_ALLIMAGES,
   SHOW_DROP_DOWN,
+  DARK_AND_LIGHT_MODE,
 } from "../Actions/actionsApp";
 import {
   SIGN_IN_GOOGLE,
@@ -114,6 +115,11 @@ const reducerApp = (
       return {
         ...state,
         showDropDown: action.payload,
+      };
+    case DARK_AND_LIGHT_MODE:
+      return {
+        ...state,
+        theme: action.payload,
       };
     //google actions
     case SIGN_IN_GOOGLE:

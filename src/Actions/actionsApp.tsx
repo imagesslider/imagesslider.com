@@ -219,6 +219,20 @@ export const showDropDownAction = (
   payload: showDropDown,
 });
 
+//DarkAndLightMode
+export type ActionDARK_AND_LIGHT_MODE = {
+  type: "DARK_AND_LIGHT_MODE";
+  payload: string;
+};
+
+export const DARK_AND_LIGHT_MODE = "DARK_AND_LIGHT_MODE";
+export const darkAndLightModeAction = (
+  theme: string
+): ActionDARK_AND_LIGHT_MODE => ({
+  type: DARK_AND_LIGHT_MODE,
+  payload: theme,
+});
+
 export type AllActionsApp =
   | ActionSET_USER
   | ActionALBUMS
@@ -235,4 +249,5 @@ export type AllActionsApp =
   | ActionNEXTPAGE_TOKEN
   | ActionSET_FULLSCREEN
   | ActionFETCH_ALLIMAGES
-  | ActionSHOW_DROP_DOWN;
+  | ActionSHOW_DROP_DOWN
+  | ActionDARK_AND_LIGHT_MODE;
