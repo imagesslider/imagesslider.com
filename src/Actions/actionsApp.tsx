@@ -205,6 +205,20 @@ export const fetchAllImagesAction = (
   payload: fetchAllImages,
 });
 
+//showDropDown
+export type ActionSHOW_DROP_DOWN = {
+  type: "SHOW_DROP_DOWN";
+  payload: boolean;
+};
+
+export const SHOW_DROP_DOWN = "SHOW_DROP_DOWN";
+export const showDropDownAction = (
+  showDropDown: boolean
+): ActionSHOW_DROP_DOWN => ({
+  type: SHOW_DROP_DOWN,
+  payload: showDropDown,
+});
+
 export type AllActionsApp =
   | ActionSET_USER
   | ActionALBUMS
@@ -220,4 +234,5 @@ export type AllActionsApp =
   | ActionSET_INDEX_TAB
   | ActionNEXTPAGE_TOKEN
   | ActionSET_FULLSCREEN
-  | ActionFETCH_ALLIMAGES;
+  | ActionFETCH_ALLIMAGES
+  | ActionSHOW_DROP_DOWN;

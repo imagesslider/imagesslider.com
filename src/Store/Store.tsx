@@ -50,6 +50,7 @@ export type Store = {
   nextPageToken: string;
   fullscreen: boolean;
   fetchAllImages: boolean;
+  showDropDown: boolean;
 };
 
 export const initalStore: Store = {
@@ -77,6 +78,7 @@ export const initalStore: Store = {
   nextPageToken: "",
   fullscreen: false,
   fetchAllImages: false,
+  showDropDown: false,
 };
 
 //slider store

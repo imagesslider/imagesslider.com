@@ -10,6 +10,7 @@ import DefaultCollections from "../DefaultCollections/DefaultCollections";
 import { setIndexTabAction } from "../../Actions/actionsApp";
 import { AppType } from "../../Type/Type";
 import { Link } from "react-router-dom";
+import SpeechRecognition from "../SpeechRecognition/SpeechRecognition";
 
 const SignIn: FC = () => {
   const selectIndexTab = (state: AppType) => state.appState.indexTab;
@@ -37,6 +38,7 @@ const SignIn: FC = () => {
         </Link>{" "}
         applies to you.
       </p>
+      <SpeechRecognition />
       <Tabs activeIndex={indexTab} onClick={onClickBtn}>
         <Tab label="Collections">
           <DefaultCollections />

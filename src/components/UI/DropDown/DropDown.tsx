@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "../DropDown/DropDown.css";
+import { useSelector, useDispatch } from "react-redux";
+import { AppType } from "../../../Type/Type";
+import { showDropDownAction } from "../../../Actions/actionsApp";
 
 type DropDownProps = {
   onClickDropDown?: (
@@ -11,18 +14,23 @@ type DropDownProps = {
 };
 
 const DropDown: React.FC<DropDownProps> = ({ buttonTitle, children }) => {
-  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  //state redux
+  const selectShowDropDown = (state: AppType) => state.appState.showDropDown;
+  const showDropDown = useSelector(selectShowDropDown);
+
+  //actions redux
+  const dispatch = useDispatch();
 
   //onClickDropDown
   const onClickDropDown = () => {
-    setShowDropDown(!showDropDown);
+    dispatch(showDropDownAction(!showDropDown));
   };
 
   //onBlurDropDown
   const onBlurDropDown = () => {
     if (showDropDown) {
       setTimeout(() => {
-        setShowDropDown(false);
+        dispatch(showDropDownAction(false));
       }, 200);
     }
   };

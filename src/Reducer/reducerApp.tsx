@@ -16,6 +16,7 @@ import {
   SET_NEXTPAGE_TOKEN,
   SET_FULLSCREEN,
   FETCH_ALLIMAGES,
+  SHOW_DROP_DOWN,
 } from "../Actions/actionsApp";
 import {
   SIGN_IN_GOOGLE,
@@ -108,6 +109,11 @@ const reducerApp = (
       return {
         ...state,
         fetchAllImages: action.payload,
+      };
+    case SHOW_DROP_DOWN:
+      return {
+        ...state,
+        showDropDown: action.payload,
       };
     //google actions
     case SIGN_IN_GOOGLE:
