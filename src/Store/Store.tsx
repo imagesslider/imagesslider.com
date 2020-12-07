@@ -52,6 +52,7 @@ export type Store = {
   fetchAllImages: boolean;
   showDropDown: boolean;
   theme: string;
+  signInAndOut: boolean | null;
 };
 
 export const initalStore: Store = {
@@ -81,6 +82,7 @@ export const initalStore: Store = {
   fetchAllImages: false,
   showDropDown: false,
   theme: "dark",
+  signInAndOut: null,
 };
 
 //slider store

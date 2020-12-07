@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   showDropDownAction,
   darkAndLightModeAction,
+  signInAndOutAction,
 } from "../../Actions/actionsApp";
 
 declare global {
@@ -81,6 +82,12 @@ const SpeechRecognition: FC = () => {
           window.localStorage.setItem("theme", "dark");
           document.documentElement.setAttribute("data-theme", "dark");
           readOutLoud(`Ok, I turned Dark Mode On`, voices);
+        } else if (transcript.toLowerCase() === "sign in") {
+          dispatch(signInAndOutAction(true));
+          readOutLoud(`Ok,done`, voices);
+        } else if (transcript.toLowerCase() === "sign out") {
+          dispatch(signInAndOutAction(false));
+          readOutLoud(`Ok,done`, voices);
         } else if (
           transcript.toLowerCase() === "end" ||
           transcript.toLowerCase() === "sleep"
