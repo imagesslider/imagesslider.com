@@ -71,12 +71,6 @@ const SpeechRecognition: FC = () => {
         } else if (transcript.toLowerCase() === "close menu") {
           dispatch(showDropDownAction(false));
           readOutLoud(`Ok,done`, voices);
-        } else if (
-          transcript.toLowerCase() === "end" ||
-          transcript.toLowerCase() === "sleep"
-        ) {
-          readOutLoud("Microphone off", voices);
-          handleClickOf();
         } else if (transcript.toLowerCase() === "dark mode off") {
           dispatch(darkAndLightModeAction("light"));
           window.localStorage.setItem("theme", "light");
@@ -87,6 +81,12 @@ const SpeechRecognition: FC = () => {
           window.localStorage.setItem("theme", "dark");
           document.documentElement.setAttribute("data-theme", "dark");
           readOutLoud(`Ok, I turned Dark Mode On`, voices);
+        } else if (
+          transcript.toLowerCase() === "end" ||
+          transcript.toLowerCase() === "sleep"
+        ) {
+          readOutLoud("Microphone off", voices);
+          handleClickOf();
         } else {
           readOutLoud(`Sorry, try again`, voices);
         }

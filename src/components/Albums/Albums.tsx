@@ -10,7 +10,6 @@ import DefaultAlbums from "../DefaultAlbums/DefaultAlbums";
 import Tabs from "../UI/Tabs/Tabs";
 import Tab from "../UI/Tab/Tab";
 import DefaultCollections from "../DefaultCollections/DefaultCollections";
-import SpeechRecognition from "../SpeechRecognition/SpeechRecognition";
 
 const Albums: FC = () => {
   //state redux
@@ -49,7 +48,6 @@ const Albums: FC = () => {
       ) : (
         <p className="allimages">No content available.</p>
       )}
-      <SpeechRecognition />
       <Tabs activeIndex={indexTab} onClick={onClickBtn}>
         <Tab label="Collections">
           <DefaultCollections />
