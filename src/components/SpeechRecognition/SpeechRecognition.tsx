@@ -1,11 +1,16 @@
 import React, { FC, useState, useEffect, useRef } from "react";
 import "../SpeechRecognition/SpeechRecognition.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   showDropDownAction,
   darkAndLightModeAction,
   signInAndOutAction,
 } from "../../Actions/actionsApp";
+import {
+  isListeningAction,
+  nextImageAction,
+} from "../../Actions/actionsSpeechRecognition";
+import { SpeechRecognitionType } from "../../Type/Type";
 
 declare global {
   interface Window {
@@ -13,16 +18,27 @@ declare global {
   }
 }
 
-const SpeechRecognition: FC = () => {
+type SpeechRecognitionProps = {
+  style?: any;
+};
+
+const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
   //state
   let [recognition, setRecognition] = useState<any>();
-  const [isListening, setIsListening] = useState<boolean>(false);
   const synthRef = useRef(window.speechSynthesis);
   const [voices, setVoices] = useState<any>();
   const [
     speechRecognitionContent,
     setSpeechRecognitionContent,
   ] = useState<string>("");
+
+  //state redux
+  const selectIsListening = (state: SpeechRecognitionType) =>
+    state.speechRecognition.isListening;
+  const isListening = useSelector(selectIsListening);
+  const selectInImages = (state: SpeechRecognitionType) =>
+    state.speechRecognition.inImages;
+  const inImages = useSelector(selectInImages);
 
   //actions redux
   const dispatch = useDispatch();
@@ -33,6 +49,7 @@ const SpeechRecognition: FC = () => {
     SpeechRecognitionFunction();
     console.log("useEffect speech recognition");
   }, []);
+
   //getVoices
   useEffect(() => {
     let voicesA = synthRef.current.getVoices()[4];
@@ -56,7 +73,7 @@ const SpeechRecognition: FC = () => {
     recognition.start();
     recognition.onstart = () => {
       console.log("Mics on");
-      setIsListening(true);
+      dispatch(isListeningAction(true));
     };
     recognition.onresult = async (event: any) => {
       console.log("event", event);
@@ -66,36 +83,51 @@ const SpeechRecognition: FC = () => {
       setSpeechRecognitionContent(transcript);
       if (event.results[0].isFinal) {
         setSpeechRecognitionContent(transcript);
-        if (transcript.toLowerCase() === "open menu") {
-          dispatch(showDropDownAction(true));
-          readOutLoud(`Ok,done`, voices);
-        } else if (transcript.toLowerCase() === "close menu") {
-          dispatch(showDropDownAction(false));
-          readOutLoud(`Ok,done`, voices);
-        } else if (transcript.toLowerCase() === "dark mode off") {
-          dispatch(darkAndLightModeAction("light"));
-          window.localStorage.setItem("theme", "light");
-          document.documentElement.setAttribute("data-theme", "light");
-          readOutLoud(`Ok, I turned Dark Mode Off`, voices);
-        } else if (transcript.toLowerCase() === "dark mode on") {
-          dispatch(darkAndLightModeAction("dark"));
-          window.localStorage.setItem("theme", "dark");
-          document.documentElement.setAttribute("data-theme", "dark");
-          readOutLoud(`Ok, I turned Dark Mode On`, voices);
-        } else if (transcript.toLowerCase() === "sign in") {
-          dispatch(signInAndOutAction(true));
-          readOutLoud(`Ok,done`, voices);
-        } else if (transcript.toLowerCase() === "sign out") {
-          dispatch(signInAndOutAction(false));
-          readOutLoud(`Ok,done`, voices);
-        } else if (
-          transcript.toLowerCase() === "end" ||
-          transcript.toLowerCase() === "sleep"
-        ) {
-          readOutLoud("Microphone off", voices);
-          handleClickOf();
+        if (inImages) {
+          if (transcript.toLowerCase() === "next image") {
+            dispatch(nextImageAction(true));
+            readOutLoud(`Ok,done`, voices);
+          } else if (
+            transcript.toLowerCase() === "end" ||
+            transcript.toLowerCase() === "sleep"
+          ) {
+            readOutLoud("Microphone off", voices);
+            handleClickOf();
+          } else {
+            readOutLoud(`Sorry, try again`, voices);
+          }
         } else {
-          readOutLoud(`Sorry, try again`, voices);
+          if (transcript.toLowerCase() === "open menu") {
+            dispatch(showDropDownAction(true));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "close menu") {
+            dispatch(showDropDownAction(false));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "dark mode off") {
+            dispatch(darkAndLightModeAction("light"));
+            window.localStorage.setItem("theme", "light");
+            document.documentElement.setAttribute("data-theme", "light");
+            readOutLoud(`Ok, I turned Dark Mode Off`, voices);
+          } else if (transcript.toLowerCase() === "dark mode on") {
+            dispatch(darkAndLightModeAction("dark"));
+            window.localStorage.setItem("theme", "dark");
+            document.documentElement.setAttribute("data-theme", "dark");
+            readOutLoud(`Ok, I turned Dark Mode On`, voices);
+          } else if (transcript.toLowerCase() === "sign in") {
+            dispatch(signInAndOutAction(true));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "sign out") {
+            dispatch(signInAndOutAction(false));
+            readOutLoud(`Ok,done`, voices);
+          } else if (
+            transcript.toLowerCase() === "end" ||
+            transcript.toLowerCase() === "sleep"
+          ) {
+            readOutLoud("Microphone off", voices);
+            handleClickOf();
+          } else {
+            readOutLoud(`Sorry, try again`, voices);
+          }
         }
       }
     };
@@ -116,7 +148,7 @@ const SpeechRecognition: FC = () => {
     recognition.stop();
     recognition.onend = () => {
       console.log("handleClickOf");
-      setIsListening(false);
+      dispatch(isListeningAction(false));
       setSpeechRecognitionContent("");
     };
   };
@@ -135,7 +167,7 @@ const SpeechRecognition: FC = () => {
 
   if (!!recognition) {
     return (
-      <div className="speechRecognition_container">
+      <div className="speechRecognition_container" style={style}>
         <p
           className="speechRecognition_content"
           style={{

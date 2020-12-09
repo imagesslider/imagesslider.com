@@ -108,3 +108,16 @@ export const initalStoreSearch: StoreSearch = {
   query: "",
   providerSearch: "",
 };
+
+//SpeechRecognition
+export type StoreSpeechRecognition = {
+  inImages: boolean;
+  isListening: boolean;
+  nextImage: boolean;
+};
+
+export const initalStoreSpeechRecognition: StoreSpeechRecognition = {
+  inImages: false,
+  isListening: false,
+  nextImage: false,
+};
