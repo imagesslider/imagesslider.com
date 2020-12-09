@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ImagesSlider.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearImagesAction,
@@ -31,6 +31,7 @@ import {
 import {
   inImagesAction,
   nextImageAction,
+  backToHomeAction,
 } from "../../../Actions/actionsSpeechRecognition";
 import {
   SliderType,
@@ -116,9 +117,15 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   const selectIsListening = (state: SpeechRecognitionType) =>
     state.speechRecognition.isListening;
   const isListening = useSelector(selectIsListening);
+  const selectBackToHome = (state: SpeechRecognitionType) =>
+    state.speechRecognition.backToHome;
+  const backToHome = useSelector(selectBackToHome);
   const selectNextImage = (state: SpeechRecognitionType) =>
     state.speechRecognition.nextImage;
   const nextImage = useSelector(selectNextImage);
+
+  //react-router-dom
+  const history = useHistory();
 
   //actions redux
   const dispatch = useDispatch();
@@ -149,17 +156,20 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     }
   }, [totalPagesRandom, totalPages]);
 
-  //inImagesAction
+  //SpeechRecognition
   useEffect(() => {
     dispatch(inImagesAction(true));
   }, [dispatch]);
 
   useEffect(() => {
-    if (nextImage) {
+    if (backToHome) {
+      onClickBack();
+      dispatch(backToHomeAction(false));
+    } else if (nextImage) {
       onClickNext();
       dispatch(nextImageAction(false));
     }
-  }, [nextImage]);
+  }, [backToHome, nextImage]);
 
   //onClickNext
   const onClickNext = () => {
@@ -232,6 +242,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     dispatch(setNextPageToken(""));
     dispatch(setFullScreenAction(false));
     dispatch(inImagesAction(false));
+    history.push("/");
   };
 
   //onClickPause
@@ -320,7 +331,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
       onTouchEnd={onTouchEnd}
     >
       {inImages && <SpeechRecognition style={hoverStyles} />}
-      <Link to="/">
+      {!isListening && (
         <i
           className="fas fa-arrow-left back  fa-2x"
           onMouseEnter={onMouseEnterButton}
@@ -329,7 +340,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
           style={hoverStyles}
           title="Back"
         ></i>
-      </Link>
+      )}
       {images.length !== 1 && (
         <RangeSlider
           title="Interval Time"

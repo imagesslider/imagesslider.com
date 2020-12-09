@@ -24,6 +24,18 @@ export const isListeningAction = (
   payload: isListening,
 });
 
+//backToHome
+export type ActionBACK_TO_HOME = {
+  type: "BACK_TO_HOME";
+  payload: boolean;
+};
+
+export const BACK_TO_HOME = "BACK_TO_HOME";
+export const backToHomeAction = (backToHome: boolean): ActionBACK_TO_HOME => ({
+  type: BACK_TO_HOME,
+  payload: backToHome,
+});
+
 //nextImage
 export type ActionNEXT_IMAGE = {
   type: "NEXT_IMAGE";
@@ -39,4 +51,5 @@ export const nextImageAction = (nextImage: boolean): ActionNEXT_IMAGE => ({
 export type AllActionsSpeechRecognition =
   | ActionIN_IMAGES
   | ActionIS_LISTENING
+  | ActionBACK_TO_HOME
   | ActionNEXT_IMAGE;

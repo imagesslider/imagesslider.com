@@ -9,6 +9,7 @@ import {
 import {
   isListeningAction,
   nextImageAction,
+  backToHomeAction,
 } from "../../Actions/actionsSpeechRecognition";
 import { SpeechRecognitionType } from "../../Type/Type";
 
@@ -84,7 +85,13 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
       if (event.results[0].isFinal) {
         setSpeechRecognitionContent(transcript);
         if (inImages) {
-          if (transcript.toLowerCase() === "next image") {
+          if (transcript.toLowerCase() === "back to home") {
+            handleClickOf();
+            setTimeout(() => {
+              dispatch(backToHomeAction(true));
+            }, 500);
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "next image") {
             dispatch(nextImageAction(true));
             readOutLoud(`Ok,done`, voices);
           } else if (

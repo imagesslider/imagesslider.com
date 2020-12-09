@@ -6,6 +6,7 @@ import {
   AllActionsSpeechRecognition,
   IN_IMAGES,
   IS_LISTENING,
+  BACK_TO_HOME,
   NEXT_IMAGE,
 } from "../Actions/actionsSpeechRecognition";
 
@@ -23,6 +24,11 @@ const reducerSpeechRecognition = (
       return {
         ...state,
         isListening: action.payload,
+      };
+    case BACK_TO_HOME:
+      return {
+        ...state,
+        backToHome: action.payload,
       };
     case NEXT_IMAGE:
       return {
