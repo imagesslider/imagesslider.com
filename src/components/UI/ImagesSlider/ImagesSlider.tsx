@@ -32,6 +32,9 @@ import {
   inImagesAction,
   nextImageAction,
   backToHomeAction,
+  previousImageAction,
+  pauseAutoSliderAction,
+  playAutoSliderAction,
 } from "../../../Actions/actionsSpeechRecognition";
 import {
   SliderType,
@@ -123,6 +126,15 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   const selectNextImage = (state: SpeechRecognitionType) =>
     state.speechRecognition.nextImage;
   const nextImage = useSelector(selectNextImage);
+  const selectPreviousImage = (state: SpeechRecognitionType) =>
+    state.speechRecognition.previousImage;
+  const previousImage = useSelector(selectPreviousImage);
+  const selectPauseAutoSlider = (state: SpeechRecognitionType) =>
+    state.speechRecognition.pauseAutoSlider;
+  const pauseAutoSlider = useSelector(selectPauseAutoSlider);
+  const selectPlayAutoSlider = (state: SpeechRecognitionType) =>
+    state.speechRecognition.playAutoSlider;
+  const playAutoSlider = useSelector(selectPlayAutoSlider);
 
   //react-router-dom
   const history = useHistory();
@@ -168,8 +180,17 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     } else if (nextImage) {
       onClickNext();
       dispatch(nextImageAction(false));
+    } else if (previousImage) {
+      onClickPrev();
+      dispatch(previousImageAction(false));
+    } else if (pauseAutoSlider) {
+      onClickPause();
+      dispatch(pauseAutoSliderAction(false));
+    } else if (playAutoSlider) {
+      onClickPlay();
+      dispatch(playAutoSliderAction(false));
     }
-  }, [backToHome, nextImage]);
+  }, [backToHome, nextImage, previousImage, pauseAutoSlider, playAutoSlider]);
 
   //onClickNext
   const onClickNext = () => {

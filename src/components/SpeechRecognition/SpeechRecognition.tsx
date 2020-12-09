@@ -10,6 +10,9 @@ import {
   isListeningAction,
   nextImageAction,
   backToHomeAction,
+  previousImageAction,
+  pauseAutoSliderAction,
+  playAutoSliderAction,
 } from "../../Actions/actionsSpeechRecognition";
 import { SpeechRecognitionType } from "../../Type/Type";
 
@@ -93,6 +96,15 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
             readOutLoud(`Ok,done`, voices);
           } else if (transcript.toLowerCase() === "next image") {
             dispatch(nextImageAction(true));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "previous image") {
+            dispatch(previousImageAction(true));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "pause auto slider") {
+            dispatch(pauseAutoSliderAction(true));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "play auto slider") {
+            dispatch(playAutoSliderAction(true));
             readOutLoud(`Ok,done`, voices);
           } else if (
             transcript.toLowerCase() === "end" ||

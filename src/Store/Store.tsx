@@ -115,6 +115,9 @@ export type StoreSpeechRecognition = {
   isListening: boolean;
   backToHome: boolean;
   nextImage: boolean;
+  previousImage: boolean;
+  pauseAutoSlider: boolean;
+  playAutoSlider: boolean;
 };
 
 export const initalStoreSpeechRecognition: StoreSpeechRecognition = {
@@ -122,4 +125,7 @@ export const initalStoreSpeechRecognition: StoreSpeechRecognition = {
   isListening: false,
   backToHome: false,
   nextImage: false,
+  previousImage: false,
+  pauseAutoSlider: false,
+  playAutoSlider: false,
 };

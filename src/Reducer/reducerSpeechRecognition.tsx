@@ -8,6 +8,9 @@ import {
   IS_LISTENING,
   BACK_TO_HOME,
   NEXT_IMAGE,
+  PREVIOUS_IMAGE,
+  PAUSE_AUTO_SLIDER,
+  PLAY_AUTO_SLIDER,
 } from "../Actions/actionsSpeechRecognition";
 
 const reducerSpeechRecognition = (
@@ -34,6 +37,21 @@ const reducerSpeechRecognition = (
       return {
         ...state,
         nextImage: action.payload,
+      };
+    case PREVIOUS_IMAGE:
+      return {
+        ...state,
+        previousImage: action.payload,
+      };
+    case PAUSE_AUTO_SLIDER:
+      return {
+        ...state,
+        pauseAutoSlider: action.payload,
+      };
+    case PLAY_AUTO_SLIDER:
+      return {
+        ...state,
+        playAutoSlider: action.payload,
       };
     default:
       return state;
