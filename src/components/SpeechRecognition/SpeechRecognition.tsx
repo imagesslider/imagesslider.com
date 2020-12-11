@@ -14,6 +14,7 @@ import {
   pauseAutoSliderAction,
   playAutoSliderAction,
 } from "../../Actions/actionsSpeechRecognition";
+import { intervalTimeSliderAction } from "../../Actions/actionsSlider";
 import { SpeechRecognitionType } from "../../Type/Type";
 
 declare global {
@@ -105,6 +106,15 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
             readOutLoud(`Ok,done`, voices);
           } else if (transcript.toLowerCase() === "play auto slider") {
             dispatch(playAutoSliderAction(true));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "10 seconds") {
+            dispatch(intervalTimeSliderAction(10000));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "30 seconds") {
+            dispatch(intervalTimeSliderAction(30000));
+            readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "60 seconds") {
+            dispatch(intervalTimeSliderAction(60000));
             readOutLoud(`Ok,done`, voices);
           } else if (
             transcript.toLowerCase() === "end" ||
