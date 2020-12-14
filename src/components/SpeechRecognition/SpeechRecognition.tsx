@@ -58,14 +58,12 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
   useEffect(() => {
     let voicesA = synthRef.current.getVoices()[4];
     setVoices(voicesA);
-    console.log("useEffect Voices");
   }, [voices]);
 
   //useEffect
   //SpeechRecognitionFunction
   useEffect(() => {
     SpeechRecognitionFunction();
-    console.log("useEffect speech recognition");
   }, []);
 
   //function
@@ -83,14 +81,11 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
     recognition.interimResults = true;
     recognition.start();
     recognition.onstart = () => {
-      console.log("Mics on");
       dispatch(isListeningAction(true));
     };
     recognition.onresult = async (event: any) => {
-      console.log("event", event);
       const current = event.resultIndex;
       const transcript = event.results[current][0].transcript;
-      console.log("transcript", transcript);
       setSpeechRecognitionContent(transcript);
       if (event.results[0].isFinal) {
         setSpeechRecognitionContent(transcript);
@@ -168,7 +163,7 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
             const finalResult = result.join(" ");
             dispatch(setSearchAction(finalResult));
             dispatch(searchUnsplashCollectionsAction(finalResult, 1));
-            readOutLoud(`Ok,done ${finalResult}`, voices);
+            readOutLoud(`Ok,Collection is ${finalResult}`, voices);
           } else if (transcript.toLowerCase().includes("albums")) {
             let arrayTranscript = transcript.split(" ");
             const result = arrayTranscript.filter(
@@ -195,11 +190,9 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
       }
     };
     recognition.onend = () => {
-      console.log("onend");
       recognition.start();
     };
     recognition.onerror = (event: any) => {
-      console.log(event.error);
       handleClickOf();
       readOutLoud(`Please check your microphone and audio levels`, voices);
       setSpeechRecognitionContent("");
@@ -210,7 +203,6 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
   const handleClickOf = () => {
     recognition.stop();
     recognition.onend = () => {
-      console.log("handleClickOf");
       dispatch(isListeningAction(false));
       setSpeechRecognitionContent("");
     };
