@@ -5,6 +5,7 @@ import {
   showDropDownAction,
   darkAndLightModeAction,
   signInAndOutAction,
+  setIndexTabAction,
 } from "../../Actions/actionsApp";
 import {
   isListeningAction,
@@ -15,6 +16,11 @@ import {
   playAutoSliderAction,
 } from "../../Actions/actionsSpeechRecognition";
 import { intervalTimeSliderAction } from "../../Actions/actionsSlider";
+import { setSearchAction } from "../../Actions/actionsSearch";
+import {
+  searchUnsplashCollectionsAction,
+  setImagesUnsplashAlbumsAction,
+} from "../../Actions/actionsUnsplash";
 import { SpeechRecognitionType } from "../../Type/Type";
 
 declare global {
@@ -48,19 +54,19 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
   //actions redux
   const dispatch = useDispatch();
 
-  //useEffect
-  //SpeechRecognitionFunction
-  useEffect(() => {
-    SpeechRecognitionFunction();
-    console.log("useEffect speech recognition");
-  }, []);
-
   //getVoices
   useEffect(() => {
     let voicesA = synthRef.current.getVoices()[4];
     setVoices(voicesA);
     console.log("useEffect Voices");
   }, [voices]);
+
+  //useEffect
+  //SpeechRecognitionFunction
+  useEffect(() => {
+    SpeechRecognitionFunction();
+    console.log("useEffect speech recognition");
+  }, []);
 
   //function
   //SpeechRecognitionFunction
@@ -148,6 +154,34 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
           } else if (transcript.toLowerCase() === "sign out") {
             dispatch(signInAndOutAction(false));
             readOutLoud(`Ok,done`, voices);
+          } else if (transcript.toLowerCase() === "go to collections") {
+            dispatch(setIndexTabAction(0));
+            readOutLoud(`ok,I am in collections`, voices);
+          } else if (transcript.toLowerCase() === "go to albums") {
+            dispatch(setIndexTabAction(1));
+            readOutLoud(`ok,I am in albums`, voices);
+          } else if (transcript.toLowerCase().includes("collections")) {
+            let arrayTranscript = transcript.split(" ");
+            const result = arrayTranscript.filter(
+              (word: string) => word !== "collections"
+            );
+            const finalResult = result.join(" ");
+            dispatch(setSearchAction(finalResult));
+            dispatch(searchUnsplashCollectionsAction(finalResult, 1));
+            readOutLoud(`Ok,done ${finalResult}`, voices);
+          } else if (transcript.toLowerCase().includes("albums")) {
+            let arrayTranscript = transcript.split(" ");
+            const result = arrayTranscript.filter(
+              (word: string) => word !== "albums"
+            );
+            const finalResult = result.join(" ");
+            dispatch(setIndexTabAction(1));
+            dispatch(setSearchAction(finalResult));
+            handleClickOf();
+            setTimeout(() => {
+              dispatch(setImagesUnsplashAlbumsAction(finalResult, 1));
+            }, 500);
+            readOutLoud(`Ok,Album is ${finalResult}`, voices);
           } else if (
             transcript.toLowerCase() === "end" ||
             transcript.toLowerCase() === "sleep"
