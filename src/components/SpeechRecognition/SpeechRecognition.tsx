@@ -215,7 +215,7 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
     speech.volume = 1;
     speech.rate = 1;
     speech.pitch = 1;
-    speech.voice = voices;
+    speech.voice = voices || synthRef.current.getVoices()[4];
 
     synthRef.current.speak(speech);
   };
@@ -238,6 +238,7 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
             style={{
               animation: isListening ? "pulse-animation 1s infinite" : "",
             }}
+            title="speak"
           >
             <i className="fas fa-microphone fa-2x"></i>
           </button>

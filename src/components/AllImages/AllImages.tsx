@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAllImagesActionGoogle } from "../../Actions/actionsGoogle";
 import { Redirect } from "react-router-dom";
 import logoGooglePng from "../../ImagesPngSvg/kisspng-google-logo-logo-logo-5ade7dc784e2a0.4068700815245306315443.png";
-import { AppType } from "../../Type/Type";
+import { AppType, SpeechRecognitionType } from "../../Type/Type";
 
 export type AllImagesType = {
   onClickAllGoogleImages?: (
@@ -24,19 +24,32 @@ const AllImages: FC<AllImagesType> = () => {
   const images = useSelector(selectImages);
   const selectNextPageToken = (state: AppType) => state.appState.nextPageToken;
   const nextPageToken = useSelector(selectNextPageToken);
+  const selectIsListening = (state: SpeechRecognitionType) =>
+    state.speechRecognition.isListening;
+  const isListening = useSelector(selectIsListening);
+
   //actions redux
   const dispatch = useDispatch();
 
   //onClickAllGoogleImages
   const onClickAllGoogleImages = () => {
-    dispatch(setAllImagesActionGoogle(token, nextPageToken));
+    if (!isListening) {
+      dispatch(setAllImagesActionGoogle(token, nextPageToken));
+    }
   };
 
   return (
     <>
       {redirect && !!images ? <Redirect to="/images" /> : null}
       {provider === "google" && (
-        <div className="all_images">
+        <div
+          className="all_images"
+          title={`${
+            isListening
+              ? "Click the Microphone to turn it off and click all google images"
+              : ""
+          }`}
+        >
           <button
             className="button_google_all_images"
             onClick={onClickAllGoogleImages}

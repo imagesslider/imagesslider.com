@@ -6,6 +6,7 @@ type SearchType = {
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  title?: string;
 };
 
 const Search: React.FC<SearchType> = ({
@@ -13,6 +14,7 @@ const Search: React.FC<SearchType> = ({
   value,
   onChange,
   placeholder,
+  title,
 }) => {
   return (
     <form onSubmit={onSubmit} className="blog-search-form">
@@ -23,7 +25,11 @@ const Search: React.FC<SearchType> = ({
         placeholder={placeholder}
         className="blog-search"
       />
-      <button type="submit" className="blog-search-btn" title="search">
+      <button
+        type="submit"
+        className="blog-search-btn"
+        title={title || "Search"}
+      >
         <i className="fas fa-search"></i>
       </button>
     </form>
