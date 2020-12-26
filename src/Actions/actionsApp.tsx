@@ -205,6 +205,48 @@ export const fetchAllImagesAction = (
   payload: fetchAllImages,
 });
 
+//showDropDown
+export type ActionSHOW_DROP_DOWN = {
+  type: "SHOW_DROP_DOWN";
+  payload: boolean;
+};
+
+export const SHOW_DROP_DOWN = "SHOW_DROP_DOWN";
+export const showDropDownAction = (
+  showDropDown: boolean
+): ActionSHOW_DROP_DOWN => ({
+  type: SHOW_DROP_DOWN,
+  payload: showDropDown,
+});
+
+//DarkAndLightMode
+export type ActionDARK_AND_LIGHT_MODE = {
+  type: "DARK_AND_LIGHT_MODE";
+  payload: string;
+};
+
+export const DARK_AND_LIGHT_MODE = "DARK_AND_LIGHT_MODE";
+export const darkAndLightModeAction = (
+  theme: string
+): ActionDARK_AND_LIGHT_MODE => ({
+  type: DARK_AND_LIGHT_MODE,
+  payload: theme,
+});
+
+//signInAndOut
+export type ActionSIGN_IN_AND_OUT = {
+  type: "SIGN_IN_AND_OUT";
+  payload: boolean | null;
+};
+
+export const SIGN_IN_AND_OUT = "SIGN_IN_AND_OUT";
+export const signInAndOutAction = (
+  signInAndOut: boolean | null
+): ActionSIGN_IN_AND_OUT => ({
+  type: SIGN_IN_AND_OUT,
+  payload: signInAndOut,
+});
+
 export type AllActionsApp =
   | ActionSET_USER
   | ActionALBUMS
@@ -220,4 +262,7 @@ export type AllActionsApp =
   | ActionSET_INDEX_TAB
   | ActionNEXTPAGE_TOKEN
   | ActionSET_FULLSCREEN
-  | ActionFETCH_ALLIMAGES;
+  | ActionFETCH_ALLIMAGES
+  | ActionSHOW_DROP_DOWN
+  | ActionDARK_AND_LIGHT_MODE
+  | ActionSIGN_IN_AND_OUT;

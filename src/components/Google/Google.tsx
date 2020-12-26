@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserAction } from "../../Actions/actionsApp";
+import { setUserAction, signInAndOutAction } from "../../Actions/actionsApp";
 import {
   signInActionGoogle,
   signOutActionGoogle,
@@ -19,6 +19,8 @@ const Google: FC = () => {
   const provider = useSelector(selectProvider);
   const selectNextPageToken = (state: AppType) => state.appState.nextPageToken;
   const nextPageToken = useSelector(selectNextPageToken);
+  const selectSignInAndOut = (state: AppType) => state.appState.signInAndOut;
+  const signInAndOut = useSelector(selectSignInAndOut);
   //actions redux
   const dispatch = useDispatch();
   //state component
@@ -36,7 +38,7 @@ const Google: FC = () => {
   //gapi
   useEffect(() => {
     handleClientLoad();
-  }, []);
+  }, [signInAndOut]);
 
   const handleClientLoad = () => {
     window.gapi.load("client:auth2", initClient);
@@ -66,6 +68,12 @@ const Google: FC = () => {
         authSignOutClick?.addEventListener("click", () => {
           handleSignOut();
         });
+        if (signInAndOut === false) {
+          handleSignOut();
+        }
+        if (signInAndOut === true) {
+          handleSignIn();
+        }
       });
   };
 
@@ -78,6 +86,7 @@ const Google: FC = () => {
   const handleSignOut = () => {
     if (GoogleAuth.isSignedIn.get()) {
       GoogleAuth.signOut();
+      dispatch(signInAndOutAction(null));
     }
   };
 

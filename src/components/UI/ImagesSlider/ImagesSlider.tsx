@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ImagesSlider.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearImagesAction,
@@ -28,9 +28,23 @@ import {
   setAllImagesActionGoogle,
   setImagesActionGoogle,
 } from "../../../Actions/actionsGoogle";
-import { SliderType, SearchType, AppType } from "../../../Type/Type";
+import {
+  inImagesAction,
+  nextImageAction,
+  backToHomeAction,
+  previousImageAction,
+  pauseAutoSliderAction,
+  playAutoSliderAction,
+} from "../../../Actions/actionsSpeechRecognition";
+import {
+  SliderType,
+  SearchType,
+  AppType,
+  SpeechRecognitionType,
+} from "../../../Type/Type";
 import RangeSlider from "../RangeSlider/RangeSlider";
 import { getRandomInt } from "../../../HelperFunctions/index";
+import SpeechRecognition from "../../SpeechRecognition/SpeechRecognition";
 
 type ImagesSliderProps = {
   onClickNext?: (
@@ -100,6 +114,30 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   const fullscreen = useSelector(selectFullScreen);
   const selectImages = (state: AppType) => state.appState.images;
   const images = useSelector(selectImages);
+  const selectInImages = (state: SpeechRecognitionType) =>
+    state.speechRecognition.inImages;
+  const inImages = useSelector(selectInImages);
+  const selectIsListening = (state: SpeechRecognitionType) =>
+    state.speechRecognition.isListening;
+  const isListening = useSelector(selectIsListening);
+  const selectBackToHome = (state: SpeechRecognitionType) =>
+    state.speechRecognition.backToHome;
+  const backToHome = useSelector(selectBackToHome);
+  const selectNextImage = (state: SpeechRecognitionType) =>
+    state.speechRecognition.nextImage;
+  const nextImage = useSelector(selectNextImage);
+  const selectPreviousImage = (state: SpeechRecognitionType) =>
+    state.speechRecognition.previousImage;
+  const previousImage = useSelector(selectPreviousImage);
+  const selectPauseAutoSlider = (state: SpeechRecognitionType) =>
+    state.speechRecognition.pauseAutoSlider;
+  const pauseAutoSlider = useSelector(selectPauseAutoSlider);
+  const selectPlayAutoSlider = (state: SpeechRecognitionType) =>
+    state.speechRecognition.playAutoSlider;
+  const playAutoSlider = useSelector(selectPlayAutoSlider);
+
+  //react-router-dom
+  const history = useHistory();
 
   //actions redux
   const dispatch = useDispatch();
@@ -107,13 +145,19 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   //useEffect auto slider
   useEffect(() => {
     let sliderInterval: any;
-    if (autoSlider && !hover && !buttonHover && images.length !== 1) {
+    if (
+      autoSlider &&
+      !hover &&
+      !buttonHover &&
+      !isListening &&
+      images.length !== 1
+    ) {
       sliderInterval = setInterval(onClickNext, intervalTime);
     }
     return () => {
       clearInterval(sliderInterval);
     };
-  }, [indexImage, autoSlider, intervalTime, hover, buttonHover]);
+  }, [indexImage, autoSlider, intervalTime, hover, buttonHover, isListening]);
 
   //total pages random
   useEffect(() => {
@@ -123,6 +167,30 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
       setTotalPagesRandom(10);
     }
   }, [totalPagesRandom, totalPages]);
+
+  //SpeechRecognition
+  useEffect(() => {
+    dispatch(inImagesAction(true));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (backToHome) {
+      onClickBack();
+      dispatch(backToHomeAction(false));
+    } else if (nextImage) {
+      onClickNext();
+      dispatch(nextImageAction(false));
+    } else if (previousImage) {
+      onClickPrev();
+      dispatch(previousImageAction(false));
+    } else if (pauseAutoSlider) {
+      onClickPause();
+      dispatch(pauseAutoSliderAction(false));
+    } else if (playAutoSlider) {
+      onClickPlay();
+      dispatch(playAutoSliderAction(false));
+    }
+  }, [backToHome, nextImage, previousImage, pauseAutoSlider, playAutoSlider]);
 
   //onClickNext
   const onClickNext = () => {
@@ -194,6 +262,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     dispatch(setDefaultCollections([]));
     dispatch(setNextPageToken(""));
     dispatch(setFullScreenAction(false));
+    dispatch(inImagesAction(false));
+    history.push("/");
   };
 
   //onClickPause
@@ -271,7 +341,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
 
   //hoverStyles
   const hoverStyles = {
-    opacity: hover || buttonHover ? "1" : "0",
+    opacity: hover || buttonHover || isListening ? "1" : "0",
   };
 
   return (
@@ -281,7 +351,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      <Link to="/">
+      {inImages && <SpeechRecognition style={hoverStyles} />}
+      {!isListening && (
         <i
           className="fas fa-arrow-left back  fa-2x"
           onMouseEnter={onMouseEnterButton}
@@ -290,7 +361,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
           style={hoverStyles}
           title="Back"
         ></i>
-      </Link>
+      )}
       {images.length !== 1 && (
         <RangeSlider
           title="Interval Time"

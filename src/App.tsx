@@ -9,6 +9,7 @@ import SignIn from "./components/SignIn/SignIn";
 import { AppType } from "./Type/Type";
 import Footer from "./components/Footer/Footer";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import SpeechRecognition from "./components/SpeechRecognition/SpeechRecognition";
 
 const App: FC = () => {
   //state redux
@@ -36,6 +37,7 @@ const App: FC = () => {
             </Switch>
           </>
         )}
+        {images.length === 0 && <SpeechRecognition />}
         {images.length === 0 && <Footer />}
       </div>
     </Router>

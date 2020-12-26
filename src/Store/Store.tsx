@@ -50,6 +50,9 @@ export type Store = {
   nextPageToken: string;
   fullscreen: boolean;
   fetchAllImages: boolean;
+  showDropDown: boolean;
+  theme: string;
+  signInAndOut: boolean | null;
 };
 
 export const initalStore: Store = {
@@ -77,6 +80,9 @@ export const initalStore: Store = {
   nextPageToken: "",
   fullscreen: false,
   fetchAllImages: false,
+  showDropDown: false,
+  theme: "dark",
+  signInAndOut: null,
 };
 
 //slider store
@@ -101,4 +107,25 @@ export const initalStoreSearch: StoreSearch = {
   search: "",
   query: "",
   providerSearch: "",
+};
+
+//SpeechRecognition
+export type StoreSpeechRecognition = {
+  inImages: boolean;
+  isListening: boolean;
+  backToHome: boolean;
+  nextImage: boolean;
+  previousImage: boolean;
+  pauseAutoSlider: boolean;
+  playAutoSlider: boolean;
+};
+
+export const initalStoreSpeechRecognition: StoreSpeechRecognition = {
+  inImages: false,
+  isListening: false,
+  backToHome: false,
+  nextImage: false,
+  previousImage: false,
+  pauseAutoSlider: false,
+  playAutoSlider: false,
 };

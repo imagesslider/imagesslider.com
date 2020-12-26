@@ -4,6 +4,7 @@
   align-items: center;
   gap: 5px;
   transition: all 0.4s ease-in-out;
+  cursor: pointer;
 }
 
 .album_wrapper:hover .album_title {
