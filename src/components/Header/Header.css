@@ -31,3 +31,12 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.header_navLInk {
+  color: hsl(45, 100%, 51%);
+  text-decoration: none;
+}
+
+.header_selected-navLink {
+  color: hsl(45, 100%, 41%);
+}

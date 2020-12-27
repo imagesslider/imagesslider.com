@@ -10,6 +10,7 @@ import { AppType } from "./Type/Type";
 import Footer from "./components/Footer/Footer";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import SpeechRecognition from "./components/SpeechRecognition/SpeechRecognition";
+import SpeechRecognitionCommands from "./components/SpeechRecognitionCommands/SpeechRecognitionCommands";
 
 const App: FC = () => {
   //state redux
@@ -27,6 +28,11 @@ const App: FC = () => {
             <Route path="/" exact component={SignIn} />
             <Route path="/images" exact component={Images} />
             <Route path="/privacy-policy" exact component={PrivacyPolicy} />
+            <Route
+              path="/speech-recognition-commands"
+              exact
+              component={SpeechRecognitionCommands}
+            />
           </Switch>
         ) : (
           <>
@@ -34,6 +40,11 @@ const App: FC = () => {
               <Route path="/" exact component={Albums} />
               <Route path="/images" exact component={Images} />
               <Route path="/privacy-policy" exact component={PrivacyPolicy} />
+              <Route
+                path="/speech-recognition-commands"
+                exact
+                component={SpeechRecognitionCommands}
+              />
             </Switch>
           </>
         )}
