@@ -1,3 +1,15 @@
+//recognition
+export type ActionRECOGNITION = {
+  type: "RECOGNITION";
+  payload: any;
+};
+
+export const RECOGNITION = "RECOGNITION";
+export const recognitionAction = (recognition: any): ActionRECOGNITION => ({
+  type: RECOGNITION,
+  payload: recognition,
+});
+
 //inImages
 export type ActionIN_IMAGES = {
   type: "IN_IMAGES";
@@ -91,6 +103,7 @@ export const playAutoSliderAction = (
 });
 
 export type AllActionsSpeechRecognition =
+  | ActionRECOGNITION
   | ActionIN_IMAGES
   | ActionIS_LISTENING
   | ActionBACK_TO_HOME

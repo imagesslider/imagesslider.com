@@ -11,6 +11,7 @@ import {
   PREVIOUS_IMAGE,
   PAUSE_AUTO_SLIDER,
   PLAY_AUTO_SLIDER,
+  RECOGNITION,
 } from "../Actions/actionsSpeechRecognition";
 
 const reducerSpeechRecognition = (
@@ -18,6 +19,11 @@ const reducerSpeechRecognition = (
   action: AllActionsSpeechRecognition
 ) => {
   switch (action.type) {
+    case RECOGNITION:
+      return {
+        ...state,
+        recognition: action.payload,
+      };
     case IN_IMAGES:
       return {
         ...state,

@@ -111,6 +111,7 @@ export const initalStoreSearch: StoreSearch = {
 
 //SpeechRecognition
 export type StoreSpeechRecognition = {
+  recognition: any;
   inImages: boolean;
   isListening: boolean;
   backToHome: boolean;
@@ -121,6 +122,7 @@ export type StoreSpeechRecognition = {
 };
 
 export const initalStoreSpeechRecognition: StoreSpeechRecognition = {
+  recognition: null,
   inImages: false,
   isListening: false,
   backToHome: false,

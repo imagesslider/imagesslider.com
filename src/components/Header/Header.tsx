@@ -7,7 +7,7 @@ import Logo from "../UI/Logo/Logo";
 import SignOut from "../SignOut/SignOut";
 import User from "../UI/User/User";
 import UserImage from "../UI/UserImage/UserImage";
-import { AppType } from "../../Type/Type";
+import { AppType, SpeechRecognitionType } from "../../Type/Type";
 import { Link, NavLink } from "react-router-dom";
 
 const Header: FC = () => {
@@ -16,6 +16,9 @@ const Header: FC = () => {
   const isLogged = useSelector(selectIsLogged);
   const selectUser = (state: AppType) => state.appState.login.user;
   const user = useSelector(selectUser);
+  const selectRecognition = (state: SpeechRecognitionType) =>
+    state.speechRecognition.recognition;
+  const recognition = useSelector(selectRecognition);
 
   return (
     <header className="header">
@@ -23,14 +26,16 @@ const Header: FC = () => {
         <Link to="/">
           <Logo />
         </Link>
-        <NavLink
-          to="/speech-recognition-commands"
-          className="header_navLInk"
-          activeClassName="header_selected-navLink"
-          exact
-        >
-          Speech Recognition Commands
-        </NavLink>
+        {!!recognition && (
+          <NavLink
+            to="/speech-recognition-commands"
+            className="header_navLInk"
+            activeClassName="header_selected-navLink"
+            exact
+          >
+            Speech Recognition Commands
+          </NavLink>
+        )}
         <DropDown
           buttonTitle={
             isLogged ? (
