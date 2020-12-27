@@ -14,6 +14,7 @@ import {
   previousImageAction,
   pauseAutoSliderAction,
   playAutoSliderAction,
+  recognitionAction,
 } from "../../Actions/actionsSpeechRecognition";
 import { intervalTimeSliderAction } from "../../Actions/actionsSlider";
 import { setSearchAction } from "../../Actions/actionsSearch";
@@ -35,7 +36,6 @@ type SpeechRecognitionProps = {
 
 const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
   //state
-  let [recognition, setRecognition] = useState<any>();
   const synthRef = useRef(window.speechSynthesis);
   const [voices, setVoices] = useState<any>();
   const [
@@ -50,6 +50,9 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
   const selectInImages = (state: SpeechRecognitionType) =>
     state.speechRecognition.inImages;
   const inImages = useSelector(selectInImages);
+  const selectRecognition = (state: SpeechRecognitionType) =>
+    state.speechRecognition.recognition;
+  const recognition = useSelector(selectRecognition);
 
   //actions redux
   const dispatch = useDispatch();
@@ -63,18 +66,18 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
   //useEffect
   //SpeechRecognitionFunction
   useEffect(() => {
-    SpeechRecognitionFunction();
-  }, []);
+    //function
+    //SpeechRecognitionFunction
+    const SpeechRecognitionFunction = () => {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        dispatch(recognitionAction(new SpeechRecognition()));
+      }
+    };
 
-  //function
-  //SpeechRecognitionFunction
-  const SpeechRecognitionFunction = () => {
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      setRecognition(new SpeechRecognition());
-    }
-  };
+    SpeechRecognitionFunction();
+  }, [dispatch]);
 
   //handleClickOn
   const handleClickOn = () => {
