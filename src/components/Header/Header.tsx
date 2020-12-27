@@ -8,7 +8,7 @@ import SignOut from "../SignOut/SignOut";
 import User from "../UI/User/User";
 import UserImage from "../UI/UserImage/UserImage";
 import { AppType } from "../../Type/Type";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header: FC = () => {
   //state redux
@@ -23,6 +23,14 @@ const Header: FC = () => {
         <Link to="/">
           <Logo />
         </Link>
+        <NavLink
+          to="/speech-recognition-commands"
+          className="header_navLInk"
+          activeClassName="header_selected-navLink"
+          exact
+        >
+          Speech Recognition Commands
+        </NavLink>
         <DropDown
           buttonTitle={
             isLogged ? (

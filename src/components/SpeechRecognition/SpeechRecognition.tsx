@@ -143,7 +143,7 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
             window.localStorage.setItem("theme", "dark");
             document.documentElement.setAttribute("data-theme", "dark");
             readOutLoud(`Ok, I turned Dark Mode On`, voices);
-          } else if (transcript.toLowerCase() === "sign in") {
+          } else if (transcript.toLowerCase() === "sign in with google") {
             dispatch(signInAndOutAction(true));
             readOutLoud(`Ok,done`, voices);
           } else if (transcript.toLowerCase() === "sign out") {
