@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import SpeechRecognition from "./components/SpeechRecognition/SpeechRecognition";
 import SpeechRecognitionCommands from "./components/SpeechRecognitionCommands/SpeechRecognitionCommands";
+import NotFound404 from "./components/NotFound404/NotFound404";
 
 const App: FC = () => {
   //state redux
@@ -33,6 +34,7 @@ const App: FC = () => {
               exact
               component={SpeechRecognitionCommands}
             />
+            <Route component={NotFound404} />
           </Switch>
         ) : (
           <>
@@ -45,6 +47,7 @@ const App: FC = () => {
                 exact
                 component={SpeechRecognitionCommands}
               />
+              <Route component={NotFound404} />
             </Switch>
           </>
         )}

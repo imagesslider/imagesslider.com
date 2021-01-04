@@ -1,9 +1,6 @@
 .user_wrapper {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: 1fr;
-  gap: 5px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
   padding-left: 10px;
   padding-right: 10px;
@@ -31,8 +28,12 @@
 .user_fullName {
   color: #ffc107;
   font-weight: 600;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .user_email {
   color: var(--p-color);
+  white-space: normal;
+  word-wrap: break-word;
 }

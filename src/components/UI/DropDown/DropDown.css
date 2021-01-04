@@ -34,3 +34,9 @@
 .dropdown-container .dropdown-list:hover {
   box-shadow: 0 2px 4px 0 hsla(45, 100%, 41%, 0.7);
 }
+
+@media screen and (max-width: 425px) {
+  .dropdown-container .dropdown-list {
+    max-width: 280px;
+  }
+}
