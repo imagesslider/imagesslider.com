@@ -1,0 +1,29 @@
+.notFound404_container {
+  border: 1px solid hsl(45, 100%, 51%);
+  padding: 20px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  width: 600px;
+  margin: 85px auto 20px auto;
+}
+
+.notFound404_container h1 {
+  color: var(--h1-color);
+}
+
+.notFound404_link {
+  color: hsl(45, 100%, 51%);
+  margin-top: 20px;
+}
+
+.notFound404_link:hover {
+  color: hsl(45, 100%, 41%);
+}
+
+@media screen and (max-width: 600px) {
+  .notFound404_container {
+    width: 100%;
+    border: 1px solid transparent;
+  }
+}

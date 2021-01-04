@@ -34,29 +34,31 @@ const Albums: FC = () => {
   };
 
   return (
-    <div className="albums">
+    <>
       {isLoading && <Spinner />}
-      <h2 className="albums_title">{provider} Albums</h2>
-      {fetchAllImages ? (
-        <div className="albums_wrapper">
-          <AllImages />
-          {!!albums &&
-            albums.map((album) => {
-              return <Album key={album.id} {...album} />;
-            })}
-        </div>
-      ) : (
-        <p className="allimages">No content available.</p>
-      )}
-      <Tabs activeIndex={indexTab} onClick={onClickBtn}>
-        <Tab label="Collections">
-          <DefaultCollections />
-        </Tab>
-        <Tab label="Albums">
-          <DefaultAlbums />
-        </Tab>
-      </Tabs>
-    </div>
+      <div className="albums">
+        <h2 className="albums_title">{provider} Albums</h2>
+        {fetchAllImages ? (
+          <div className="albums_wrapper">
+            <AllImages />
+            {!!albums &&
+              albums.map((album) => {
+                return <Album key={album.id} {...album} />;
+              })}
+          </div>
+        ) : (
+          <p className="allimages">No content available.</p>
+        )}
+        <Tabs activeIndex={indexTab} onClick={onClickBtn}>
+          <Tab label="Collections">
+            <DefaultCollections />
+          </Tab>
+          <Tab label="Albums">
+            <DefaultAlbums />
+          </Tab>
+        </Tabs>
+      </div>
+    </>
   );
 };
 

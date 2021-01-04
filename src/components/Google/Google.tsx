@@ -96,7 +96,7 @@ const Google: FC = () => {
     if (isAuthorized) {
       dispatch(signInActionGoogle(user.xc.access_token));
       let userObject = {
-        // image: user.nt.JJ,
+        // image: user.wt.SJ,
         firstName: user.wt.fV,
         lastName: user.wt.iT,
         email: user.wt.cu,
@@ -115,8 +115,8 @@ const Google: FC = () => {
 
   useEffect(() => {
     if (isLogged && provider === "google") {
-      dispatch(setAlbumsActionGoogle(token as string));
       dispatch(fetchAllImagesActionGoogle(token, nextPageToken));
+      dispatch(setAlbumsActionGoogle(token as string));
     }
   }, [isLogged, provider, token, nextPageToken, dispatch]);
 

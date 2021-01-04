@@ -6,7 +6,6 @@ import DropDown from "../UI/DropDown/DropDown";
 import Logo from "../UI/Logo/Logo";
 import SignOut from "../SignOut/SignOut";
 import User from "../UI/User/User";
-import UserImage from "../UI/UserImage/UserImage";
 import { AppType, SpeechRecognitionType } from "../../Type/Type";
 import { Link, NavLink } from "react-router-dom";
 
@@ -36,20 +35,7 @@ const Header: FC = () => {
             Speech Recognition Commands
           </NavLink>
         )}
-        <DropDown
-          buttonTitle={
-            isLogged ? (
-              <UserImage
-                image={user.image}
-                src={user.image}
-                alt={user.image}
-                title="Account"
-              />
-            ) : (
-              <i className="fas fa-adjust" title="Theme"></i>
-            )
-          }
-        >
+        <DropDown buttonTitle={<i className="fas fa-ellipsis-v"></i>}>
           <div className="header_dropDown_wrapper">
             {isLogged && (
               <User
