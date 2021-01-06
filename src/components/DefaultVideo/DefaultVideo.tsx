@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import "./DefaultAlbum.css";
+import "./DefaultVideo.css";
 import { useSelector } from "react-redux";
 import { SpeechRecognitionType } from "../../Type/Type";
 
-export type DefaultAlbumType = {
+export type DefaultVideoType = {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   src: string;
   title?: string;
@@ -11,7 +11,7 @@ export type DefaultAlbumType = {
   height?: string;
 };
 
-const DefaultAlbum: FC<DefaultAlbumType> = ({
+const DefaultVideo: FC<DefaultVideoType> = ({
   onClick,
   src,
   title,
@@ -25,22 +25,22 @@ const DefaultAlbum: FC<DefaultAlbumType> = ({
 
   return (
     <div
-      className="default_album"
+      className="default_video"
       onClick={onClick}
       title={`${
-        isListening ? "Click the Microphone to turn it off and click image" : ""
+        isListening ? "Click the Microphone to turn it off and click video" : ""
       }`}
     >
       <img
         src={src}
         alt={src}
-        className="default_album_img"
+        className="default_video_img"
         width={width}
         height={height}
       />
-      <h2 className="default_album_title">{title}</h2>
+      <h2 className="default_video_title">{title}</h2>
     </div>
   );
 };
 
-export default DefaultAlbum;
+export default DefaultVideo;

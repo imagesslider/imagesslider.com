@@ -18,10 +18,7 @@ import {
 } from "../../Actions/actionsSpeechRecognition";
 import { intervalTimeSliderAction } from "../../Actions/actionsSlider";
 import { setSearchAction } from "../../Actions/actionsSearch";
-import {
-  searchUnsplashCollectionsAction,
-  setImagesUnsplashAlbumsAction,
-} from "../../Actions/actionsUnsplash";
+import { setVideosPXAction, setImagesPXAction } from "../../Actions/actionsPX";
 import { SpeechRecognitionType } from "../../Type/Type";
 
 declare global {
@@ -152,32 +149,36 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
           } else if (transcript.toLowerCase() === "sign out") {
             dispatch(signInAndOutAction(false));
             readOutLoud(`Ok,done`, voices);
-          } else if (transcript.toLowerCase() === "go to collections") {
-            dispatch(setIndexTabAction(0));
-            readOutLoud(`ok,I am in collections`, voices);
-          } else if (transcript.toLowerCase() === "go to albums") {
+          } else if (transcript.toLowerCase() === "go to videos") {
             dispatch(setIndexTabAction(1));
+            readOutLoud(`ok,I am in videos`, voices);
+          } else if (transcript.toLowerCase() === "go to albums") {
+            dispatch(setIndexTabAction(0));
             readOutLoud(`ok,I am in albums`, voices);
-          } else if (transcript.toLowerCase().includes("collections")) {
+          } else if (transcript.toLowerCase().includes("videos")) {
             let arrayTranscript = transcript.split(" ");
             const result = arrayTranscript.filter(
-              (word: string) => word !== "collections"
-            );
-            const finalResult = result.join(" ");
-            dispatch(setSearchAction(finalResult));
-            dispatch(searchUnsplashCollectionsAction(finalResult, 1));
-            readOutLoud(`Ok,Collection is ${finalResult}`, voices);
-          } else if (transcript.toLowerCase().includes("albums")) {
-            let arrayTranscript = transcript.split(" ");
-            const result = arrayTranscript.filter(
-              (word: string) => word !== "albums"
+              (word: string) => word !== "videos"
             );
             const finalResult = result.join(" ");
             dispatch(setIndexTabAction(1));
             dispatch(setSearchAction(finalResult));
             handleClickOf();
             setTimeout(() => {
-              dispatch(setImagesUnsplashAlbumsAction(finalResult, 1));
+              dispatch(setVideosPXAction(finalResult));
+            }, 500);
+            readOutLoud(`Ok,Videos is ${finalResult}`, voices);
+          } else if (transcript.toLowerCase().includes("albums")) {
+            let arrayTranscript = transcript.split(" ");
+            const result = arrayTranscript.filter(
+              (word: string) => word !== "albums"
+            );
+            const finalResult = result.join(" ");
+            dispatch(setIndexTabAction(0));
+            dispatch(setSearchAction(finalResult));
+            handleClickOf();
+            setTimeout(() => {
+              dispatch(setImagesPXAction(finalResult));
             }, 500);
             readOutLoud(`Ok,Album is ${finalResult}`, voices);
           } else if (

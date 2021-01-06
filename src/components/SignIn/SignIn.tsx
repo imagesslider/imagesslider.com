@@ -4,9 +4,9 @@ import "./SignIn.css";
 import { useSelector, useDispatch } from "react-redux";
 import logoGoogle from "../../ImagesPngSvg/btn_google_signin_light_normal_web.png";
 import DefaultAlbums from "../DefaultAlbums/DefaultAlbums";
+import DefaultVidoes from "../DefaultVideos/DefaultVideos";
 import Tabs from "../UI/Tabs/Tabs";
 import Tab from "../UI/Tab/Tab";
-import DefaultCollections from "../DefaultCollections/DefaultCollections";
 import { setIndexTabAction } from "../../Actions/actionsApp";
 import { AppType } from "../../Type/Type";
 import { Link } from "react-router-dom";
@@ -38,11 +38,11 @@ const SignIn: FC = () => {
         applies to you.
       </p>
       <Tabs activeIndex={indexTab} onClick={onClickBtn}>
-        <Tab label="Collections">
-          <DefaultCollections />
-        </Tab>
         <Tab label="Albums">
           <DefaultAlbums />
+        </Tab>
+        <Tab label="Videos">
+          <DefaultVidoes />
         </Tab>
       </Tabs>
     </div>

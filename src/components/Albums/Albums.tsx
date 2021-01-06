@@ -7,9 +7,9 @@ import AllImages from "../AllImages/AllImages";
 import { AppType } from "../../Type/Type";
 import { setIndexTabAction } from "../../Actions/actionsApp";
 import DefaultAlbums from "../DefaultAlbums/DefaultAlbums";
+import DefaultVidoes from "../DefaultVideos/DefaultVideos";
 import Tabs from "../UI/Tabs/Tabs";
 import Tab from "../UI/Tab/Tab";
-import DefaultCollections from "../DefaultCollections/DefaultCollections";
 
 const Albums: FC = () => {
   //state redux
@@ -50,11 +50,11 @@ const Albums: FC = () => {
           <p className="allimages">No content available.</p>
         )}
         <Tabs activeIndex={indexTab} onClick={onClickBtn}>
-          <Tab label="Collections">
-            <DefaultCollections />
-          </Tab>
           <Tab label="Albums">
             <DefaultAlbums />
+          </Tab>
+          <Tab label="Videos">
+            <DefaultVidoes />
           </Tab>
         </Tabs>
       </div>

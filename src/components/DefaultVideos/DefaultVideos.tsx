@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import "./DefaultAlbums.css";
+import "./DefaultVideos.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchAction } from "../../Actions/actionsSearch";
-import { setImagesPXAction } from "../../Actions/actionsPX";
-import DefaultAlbum from "../DefaultAlbum/DefaultAlbum";
+import { setVideosPXAction } from "../../Actions/actionsPX";
+import DefaultVideo from "../DefaultVideo/DefaultVideo";
 import Search from "../UI/Search/Search";
 import { SearchType, AppType, SpeechRecognitionType } from "../../Type/Type";
 import { useHistory, Redirect } from "react-router-dom";
@@ -30,7 +30,7 @@ import Animals from "../../ImagesPX/Animals.jpg";
 import All from "../../ImagesPX/All.jpg";
 import pixabayLogo from "../../ImagesPX/pixabay-logo.jpg";
 
-const DefaultAlbums: FC = () => {
+const DefaultVideos: FC = () => {
   //state redux
   const selectSearch = (state: SearchType) => state.search.search;
   const search = useSelector(selectSearch);
@@ -54,16 +54,16 @@ const DefaultAlbums: FC = () => {
   const onSubmitSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!!search && !isListening) {
-      dispatch(setImagesPXAction(search));
+      dispatch(setVideosPXAction(search));
     }
   };
 
   return (
     <>
       {redirect && !!images && !isListening ? <Redirect to="/images" /> : null}
-      <div className="default_albums_wrapper">
+      <div className="default_videos_wrapper">
         <Search
-          placeholder="Search albums"
+          placeholder="Search videos"
           value={search}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             dispatch(setSearchAction(event.target.value))
@@ -76,7 +76,7 @@ const DefaultAlbums: FC = () => {
           }`}
         />
         {!!noContent && <NoContent title={noContent} />}
-        <div className="default_albums">
+        <div className="default_videos">
           <a
             href="https://pixabay.com/"
             target="_blank"
@@ -85,181 +85,181 @@ const DefaultAlbums: FC = () => {
           >
             <img src={pixabayLogo} alt="Pixabay" style={{ display: "block" }} />
           </a>
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("all")) &&
+                dispatch(setVideosPXAction("all")) &&
                 history.push("/images");
             }}
             src={All}
             title="All"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Animals")) &&
+                dispatch(setVideosPXAction("Animals")) &&
                 history.push("/images");
             }}
             src={Animals}
             title="Animals"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Architecture")) &&
+                dispatch(setVideosPXAction("Architecture")) &&
                 history.push("/images");
             }}
             src={Architecture}
             title="Architecture"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Backgrounds")) &&
+                dispatch(setVideosPXAction("Backgrounds")) &&
                 history.push("/images");
             }}
             src={Backgrounds}
             title="Backgrounds"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Fashion")) &&
+                dispatch(setVideosPXAction("Fashion")) &&
                 history.push("/images");
             }}
             src={Fashion}
             title="Fashion"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Business")) &&
+                dispatch(setVideosPXAction("Business")) &&
                 history.push("/images");
             }}
             src={Business}
             title="Business"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Computer")) &&
+                dispatch(setVideosPXAction("Computer")) &&
                 history.push("/images");
             }}
             src={Computer}
             title="Computer"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Education")) &&
+                dispatch(setVideosPXAction("Education")) &&
                 history.push("/images");
             }}
             src={Education}
             title="Education"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Feelings")) &&
+                dispatch(setVideosPXAction("Feelings")) &&
                 history.push("/images");
             }}
             src={Feelings}
             title="Feelings"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Food")) &&
+                dispatch(setVideosPXAction("Food")) &&
                 history.push("/images");
             }}
             src={Food}
             title="Food"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Health")) &&
+                dispatch(setVideosPXAction("Health")) &&
                 history.push("/images");
             }}
             src={Health}
             title="Health"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Industry")) &&
+                dispatch(setVideosPXAction("Industry")) &&
                 history.push("/images");
             }}
             src={Industry}
             title="Industry"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Music")) &&
+                dispatch(setVideosPXAction("Music")) &&
                 history.push("/images");
             }}
             src={Music}
             title="Music"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Nature")) &&
+                dispatch(setVideosPXAction("Nature")) &&
                 history.push("/images");
             }}
             src={Nature}
             title="Nature"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("People")) &&
+                dispatch(setVideosPXAction("People")) &&
                 history.push("/images");
             }}
             src={People}
             title="People"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Places")) &&
+                dispatch(setVideosPXAction("Places")) &&
                 history.push("/images");
             }}
             src={Places}
             title="Places"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Science")) &&
+                dispatch(setVideosPXAction("Science")) &&
                 history.push("/images");
             }}
             src={Science}
             title="Science"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Sports")) &&
+                dispatch(setVideosPXAction("Sports")) &&
                 history.push("/images");
             }}
             src={Sports}
             title="Sports"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Transportation")) &&
+                dispatch(setVideosPXAction("Transportation")) &&
                 history.push("/images");
             }}
             src={Transport}
             title="Transportation"
           />
-          <DefaultAlbum
+          <DefaultVideo
             onClick={() => {
               !isListening &&
-                dispatch(setImagesPXAction("Travel")) &&
+                dispatch(setVideosPXAction("Travel")) &&
                 history.push("/images");
             }}
             src={Travel}
@@ -271,4 +271,4 @@ const DefaultAlbums: FC = () => {
   );
 };
 
-export default DefaultAlbums;
+export default DefaultVideos;
