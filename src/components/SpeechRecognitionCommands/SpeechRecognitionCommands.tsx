@@ -46,16 +46,16 @@ const SpeechRecognitionCommands: FC = () => {
               <td>dark mode on</td>
             </tr>
             <tr className="speechRecognitionCommands_tbody-tr">
-              <td>Go to collections</td>
-              <td>go to collections</td>
+              <td>Go to videos</td>
+              <td>go to videos</td>
             </tr>
             <tr className="speechRecognitionCommands_tbody-tr">
               <td>Go to albums</td>
               <td>go to albums</td>
             </tr>
             <tr className="speechRecognitionCommands_tbody-tr">
-              <td>Search collections</td>
-              <td>collections (name of collection)</td>
+              <td>Search videos</td>
+              <td>videos (name of video)</td>
             </tr>
             <tr className="speechRecognitionCommands_tbody-tr">
               <td>Search albums</td>
