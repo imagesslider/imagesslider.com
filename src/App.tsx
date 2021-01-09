@@ -24,33 +24,17 @@ const App: FC = () => {
     <Router>
       <div className="App">
         {images.length === 0 && <Header />}
-        {!isLogged ? (
-          <Switch>
-            <Route path="/" exact component={SignIn} />
-            <Route path="/images" exact component={Images} />
-            <Route path="/privacy-policy" exact component={PrivacyPolicy} />
-            <Route
-              path="/speech-recognition-commands"
-              exact
-              component={SpeechRecognitionCommands}
-            />
-            <Route component={NotFound404} />
-          </Switch>
-        ) : (
-          <>
-            <Switch>
-              <Route path="/" exact component={Albums} />
-              <Route path="/images" exact component={Images} />
-              <Route path="/privacy-policy" exact component={PrivacyPolicy} />
-              <Route
-                path="/speech-recognition-commands"
-                exact
-                component={SpeechRecognitionCommands}
-              />
-              <Route component={NotFound404} />
-            </Switch>
-          </>
-        )}
+        <Switch>
+          <Route path="/" exact component={!isLogged ? SignIn : Albums} />
+          <Route path="/images" exact component={Images} />
+          <Route path="/privacy-policy" exact component={PrivacyPolicy} />
+          <Route
+            path="/speech-recognition-commands"
+            exact
+            component={SpeechRecognitionCommands}
+          />
+          <Route component={NotFound404} />
+        </Switch>
         {images.length === 0 && <SpeechRecognition />}
         {images.length === 0 && <Footer />}
       </div>
