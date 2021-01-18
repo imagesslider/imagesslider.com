@@ -41,3 +41,9 @@
     box-shadow: 0 0 0 10px hsl(45, 100%, 80%);
   }
 }
+
+@media screen and (min-width: 769px) {
+  .speechRecognition_container {
+    right: 50px;
+  }
+}

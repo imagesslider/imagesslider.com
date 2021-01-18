@@ -4,7 +4,7 @@ import "../PrivacyPolicy/PrivacyPolicy.css";
 const PrivacyPolicy: FC = () => {
   return (
     <div className="PrivacyPolicy_container">
-      <h1 className="PrivacyPolicy_title">Privacy Policy</h1>
+      <h2 className="PrivacyPolicy_title">Privacy Policy</h2>
       <p className="PrivacyPolicy_description">
         ImagesSlider ("us", "we", or "our") operates the
         https://imagesslider.com website (hereinafter referred to as the
@@ -16,12 +16,12 @@ const PrivacyPolicy: FC = () => {
         Unless otherwise defined in this Privacy Policy,from
         https://imagesslider.com
       </p>
-      <h1 className="PrivacyPolicy_title">Information Collection And Use</h1>
+      <h2 className="PrivacyPolicy_title">Information Collection And Use</h2>
       <p className="PrivacyPolicy_description">
         We collect several different types of information for various purposes
         to provide and improve our Service to you.
       </p>
-      <h1 className="PrivacyPolicy_title">Types of Data Collected</h1>
+      <h2 className="PrivacyPolicy_title">Types of Data Collected</h2>
       <p className="PrivacyPolicy_description">
         <b>Personal Data</b>
         <br />
@@ -56,7 +56,7 @@ const PrivacyPolicy: FC = () => {
         preferences and various settings. Security Cookies. We use Security
         Cookies for security purposes.
       </p>
-      <h1 className="PrivacyPolicy_title">Use of Data</h1>
+      <h2 className="PrivacyPolicy_title">Use of Data</h2>
       <p className="PrivacyPolicy_description">
         <b>Imagesslider uses the collected data for various purposes:</b>
         <br />
@@ -76,7 +76,7 @@ const PrivacyPolicy: FC = () => {
         <br />
         To detect, prevent and address technical issues
       </p>
-      <h1 className="PrivacyPolicy_title">Transfer Of Data</h1>
+      <h2 className="PrivacyPolicy_title">Transfer Of Data</h2>
       <p className="PrivacyPolicy_description">
         Your information, including Personal Data, may be transferred to — and
         maintained on — computers located outside of your state, province,
@@ -90,8 +90,8 @@ const PrivacyPolicy: FC = () => {
         there are adequate controls in place including the security of your data
         and other personal information.
       </p>
-      <h1 className="PrivacyPolicy_title">Disclosure Of Data</h1>
-      <h1 className="PrivacyPolicy_title">Legal Requirements</h1>
+      <h2 className="PrivacyPolicy_title">Disclosure Of Data</h2>
+      <h2 className="PrivacyPolicy_title">Legal Requirements</h2>
       <p className="PrivacyPolicy_description">
         <b>
           ImagesSlider may disclose your Personal Data in the good faith belief
@@ -109,7 +109,7 @@ const PrivacyPolicy: FC = () => {
         <br />
         To protect against legal liability
       </p>
-      <h1 className="PrivacyPolicy_title">Security Of Data</h1>
+      <h2 className="PrivacyPolicy_title">Security Of Data</h2>
       <p className="PrivacyPolicy_description">
         The security of your data is important to us, but remember that no
         method of transmission over the Internet, or method of electronic
@@ -117,7 +117,7 @@ const PrivacyPolicy: FC = () => {
         means to protect your Personal Data, we cannot guarantee its absolute
         security.
       </p>
-      <h1 className="PrivacyPolicy_title">Service Providers</h1>
+      <h2 className="PrivacyPolicy_title">Service Providers</h2>
       <p className="PrivacyPolicy_description">
         We may employ third party companies and individuals to facilitate our
         Service ("Service Providers"), to provide the Service on our behalf, to
@@ -126,7 +126,7 @@ const PrivacyPolicy: FC = () => {
         only to perform these tasks on our behalf and are obligated not to
         disclose or use it for any other purpose.
       </p>
-      <h1 className="PrivacyPolicy_title">Sign In</h1>
+      <h2 className="PrivacyPolicy_title">Sign In</h2>
       <p className="PrivacyPolicy_description">
         By accepting the privacy policy, you agree to give us permission to
         readonly your albums, pictures, and videos on our application
@@ -152,7 +152,7 @@ const PrivacyPolicy: FC = () => {
           https://console.developers.google.com/apis/dashboard?project=upbeat-grammar-285017
         </a>
       </p>
-      <h1 className="PrivacyPolicy_title">Analytics</h1>
+      <h2 className="PrivacyPolicy_title">Analytics</h2>
       <p className="PrivacyPolicy_description">
         We may use third-party Service Providers to monitor and analyze the use
         of our Service.
@@ -182,7 +182,7 @@ const PrivacyPolicy: FC = () => {
           https://policies.google.com/privacy?hl=en
         </a>
       </p>
-      <h1 className="PrivacyPolicy_title">Links To Other Sites</h1>
+      <h2 className="PrivacyPolicy_title">Links To Other Sites</h2>
       <p className="PrivacyPolicy_description">
         Our Service may contain links to other sites that are not operated by
         us. If you click on a third party link, you will be directed to that
@@ -191,7 +191,7 @@ const PrivacyPolicy: FC = () => {
         responsibility for the content, privacy policies or practices of any
         third party sites or services.
       </p>
-      <h1 className="PrivacyPolicy_title">Children's Privacy</h1>
+      <h2 className="PrivacyPolicy_title">Children's Privacy</h2>
       <p className="PrivacyPolicy_description">
         Our Service does not address anyone under the age of 18 ("Children"). We
         do not knowingly collect personally identifiable information from anyone
@@ -201,7 +201,7 @@ const PrivacyPolicy: FC = () => {
         children without verification of parental consent, we take steps to
         remove that information from our servers.
       </p>
-      <h1 className="PrivacyPolicy_title">Changes To This Privacy Policy</h1>
+      <h2 className="PrivacyPolicy_title">Changes To This Privacy Policy</h2>
       <p className="PrivacyPolicy_description">
         We may update our Privacy Policy from time to time. We will notify you
         of any changes by posting the new Privacy Policy on this page. We will
@@ -211,7 +211,7 @@ const PrivacyPolicy: FC = () => {
         Policy periodically for any changes. Changes to this Privacy Policy are
         effective when they are posted on this page.
       </p>
-      <h1 className="PrivacyPolicy_title">Contact Us</h1>
+      <h2 className="PrivacyPolicy_title">Contact Us</h2>
       <p className="PrivacyPolicy_description">
         If you have any questions about this Privacy Policy, please contact us:
         <br />

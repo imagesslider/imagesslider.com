@@ -115,8 +115,8 @@ export const setDataAlbumImagesGoogleAction = (data: any) => {
     let dataMediaItems = data.mediaItems.map((imageG: ImageGoogleProps) => {
       return {
         id: imageG.id,
-        src: `${imageG.baseUrl}=w2048-h1024`,
-        alt: `${imageG.baseUrl}=w2048-h1024`,
+        src: `${imageG.baseUrl}=w1920-h1080`,
+        alt: `${imageG.baseUrl}=w1920-h1080`,
         videoType: imageG.mimeType,
         srcVideo: `${imageG.baseUrl}=dv`,
       };
@@ -168,8 +168,8 @@ export const setDataAllImagesGoogleAction = (data: any) => {
     let dataMediaItems = data.mediaItems.map((imageG: ImageGoogleProps) => {
       return {
         id: imageG.id,
-        src: `${imageG.baseUrl}=w2048-h1024`,
-        alt: `${imageG.baseUrl}=w2048-h1024`,
+        src: `${imageG.baseUrl}=w1920-h1080`,
+        alt: `${imageG.baseUrl}=w1920-h1080`,
         videoType: imageG.mimeType,
         srcVideo: `${imageG.baseUrl}=dv`,
       };

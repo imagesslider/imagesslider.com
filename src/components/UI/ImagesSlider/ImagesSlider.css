@@ -124,3 +124,21 @@
 .button-pause:hover {
   color: hsla(45, 100%, 41%, 0.7);
 }
+
+@media screen and (min-width: 769px) {
+  .fa-arrow-left.back {
+    left: 50px;
+  }
+  .button.prev {
+    left: 50px;
+  }
+  .button.next {
+    right: 50px;
+  }
+  .fullscreen {
+    right: 50px;
+  }
+  .button-pause {
+    right: 100px;
+  }
+}

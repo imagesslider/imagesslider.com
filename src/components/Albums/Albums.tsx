@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Album from "../Album/Album";
 import Spinner from "../UI/Spinner/Spinner";
@@ -10,8 +10,12 @@ import DefaultAlbums from "../DefaultAlbums/DefaultAlbums";
 import DefaultVidoes from "../DefaultVideos/DefaultVideos";
 import Tabs from "../UI/Tabs/Tabs";
 import Tab from "../UI/Tab/Tab";
+import HowItWorks from "../HowItWorks/HowItWorks";
+import Accordion from "../UI/Accordion/Accordion";
 
 const Albums: FC = () => {
+  const [isOpenAccordion, setIsOpenAccordion] = useState<boolean>(false);
+
   //state redux
   const selectAlbums = (state: AppType) => state.appState.albums;
   const albums = useSelector(selectAlbums);
@@ -33,10 +37,22 @@ const Albums: FC = () => {
     dispatch(setIndexTabAction(index));
   };
 
+  //handleClickIsOpen
+  const handleClickIsOpen = () => {
+    setIsOpenAccordion(!isOpenAccordion);
+  };
+
   return (
     <>
       {isLoading && <Spinner />}
       <div className="albums">
+        <Accordion
+          title="How it works"
+          isOpen={isOpenAccordion}
+          handleClick={handleClickIsOpen}
+        >
+          <HowItWorks />
+        </Accordion>
         <h2 className="albums_title">{provider} Albums</h2>
         {fetchAllImages ? (
           <div className="albums_wrapper">

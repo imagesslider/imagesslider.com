@@ -1,0 +1,17 @@
+.how_it_works {
+  border: 1px solid #ffc107;
+  max-width: 1360px;
+  margin: auto;
+  padding: 20px;
+  text-align: left;
+}
+
+.how_it_works_title {
+  color: #ffc107;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.how_it_works_description {
+  color: var(--p-color);
+}

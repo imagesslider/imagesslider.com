@@ -19,3 +19,17 @@
 .sign_in_description {
   color: var(--p-color);
 }
+
+.sign_in_container {
+  border: 1px solid #ffc107;
+  max-width: 1360px;
+  margin: auto;
+  padding: 20px;
+  text-align: left;
+}
+
+@media screen and (max-width: 1400px) {
+  .sign_in_container {
+    margin: 20px;
+  }
+}
