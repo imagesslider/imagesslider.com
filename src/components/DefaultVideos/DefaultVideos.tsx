@@ -28,7 +28,6 @@ import Backgrounds from "../../ImagesPX/Backgrounds.jpg";
 import Architecture from "../../ImagesPX/Architecture.jpg";
 import Animals from "../../ImagesPX/Animals.jpg";
 import All from "../../ImagesPX/All.jpg";
-import pixabayLogo from "../../ImagesPX/pixabay-logo.jpg";
 
 const DefaultVideos: FC = () => {
   //state redux
@@ -77,14 +76,6 @@ const DefaultVideos: FC = () => {
         />
         {!!noContent && <NoContent title={noContent} />}
         <div className="default_videos">
-          <a
-            href="https://pixabay.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: "none", textAlign: "left" }}
-          >
-            <img src={pixabayLogo} alt="Pixabay" style={{ display: "block" }} />
-          </a>
           <DefaultVideo
             onClick={() => {
               !isListening &&

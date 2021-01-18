@@ -1,7 +1,8 @@
 .default_albums_wrapper {
-  margin: 20px 0px;
+  margin: 20px auto;
   padding-left: 20px;
   padding-right: 20px;
+  max-width: 1400px;
 }
 
 .default_videos {

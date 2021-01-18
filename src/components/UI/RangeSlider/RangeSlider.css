@@ -43,3 +43,9 @@
   cursor: pointer;
   box-shadow: -150px 0 0 150px #ffc107;
 }
+
+@media screen and (min-width: 769px) {
+  .range_slider_container {
+    right: 145px;
+  }
+}
