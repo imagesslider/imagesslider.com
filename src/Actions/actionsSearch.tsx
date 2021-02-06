@@ -31,11 +31,11 @@ export const setSearchAction = (search: string): ActionSET_SEARCH => {
 //set query
 export type ActionSET_QUERY = {
   type: "SET_QUERY";
-  payload: string;
+  payload: string | undefined;
 };
 
 export const SET_QUERY = "SET_QUERY";
-export const setQueryAction = (query: string): ActionSET_QUERY => ({
+export const setQueryAction = (query: string | undefined): ActionSET_QUERY => ({
   type: SET_QUERY,
   payload: query,
 });

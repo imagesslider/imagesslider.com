@@ -13,7 +13,9 @@ export type ImageType = {
   alt?: string;
   videoType?: string;
   srcVideo?: string;
-  description?: string;
+  description?: string | undefined | null;
+  user?: string;
+  userLink?: string | undefined;
 };
 
 export type UserType = {
@@ -30,6 +32,19 @@ export type DefaultCollectionType = {
   totalPhotos?: number;
 };
 
+export type DefaultAlbumType = {
+  id?: string;
+  name?: string;
+  images?: any;
+};
+
+export type DefaultVideoType = {
+  id?: string;
+  name?: string;
+  images?: any;
+  videoImage?: string;
+};
+
 export type Store = {
   login: {
     isLogged: boolean;
@@ -38,6 +53,8 @@ export type Store = {
     user: UserType;
   };
   albums: Array<AlbumType>;
+  defaultAlbums: Array<DefaultAlbumType>;
+  defaultVideos: Array<DefaultVideoType>;
   selelctedAlbumId: string | null;
   images: Array<ImageType>;
   isLoading: boolean;
@@ -68,6 +85,8 @@ export const initalStore: Store = {
     },
   },
   albums: [],
+  defaultAlbums: [],
+  defaultVideos: [],
   selelctedAlbumId: null,
   images: [],
   isLoading: false,

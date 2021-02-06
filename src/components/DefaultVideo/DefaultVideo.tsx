@@ -9,6 +9,7 @@ export type DefaultVideoType = {
   title?: string;
   width?: string;
   height?: string;
+  imagesLenght?: string;
 };
 
 const DefaultVideo: FC<DefaultVideoType> = ({
@@ -17,6 +18,7 @@ const DefaultVideo: FC<DefaultVideoType> = ({
   title,
   width,
   height,
+  imagesLenght,
 }) => {
   //state redux
   const selectIsListening = (state: SpeechRecognitionType) =>
@@ -38,7 +40,14 @@ const DefaultVideo: FC<DefaultVideoType> = ({
         width={width}
         height={height}
       />
-      <h2 className="default_video_title">{title}</h2>
+      <div className="default_video_content">
+        <h2 className="default_video_title">{title}</h2>
+        <h4 className="default_video_imagesLength">
+          {imagesLenght?.length === 1
+            ? `${imagesLenght?.length} Video`
+            : `${imagesLenght?.length} Videos`}
+        </h4>
+      </div>
     </div>
   );
 };
