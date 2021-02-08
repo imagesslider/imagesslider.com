@@ -45,7 +45,25 @@ const Images: FC = () => {
             : images.map((image) => {
                 return (
                   <div key={image.id} className="images_wrapper">
-                    <p className="images_description">{image.description}</p>
+                    <div className="images_content">
+                      {image.userLink?.length !== 0 ? (
+                        <a
+                          href={image.userLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="images_link"
+                        >
+                          {image.user}
+                        </a>
+                      ) : (
+                        <p className="images_description">{image.user}</p>
+                      )}
+                      {!!image.description && (
+                        <p className="images_description">
+                          {image.description}
+                        </p>
+                      )}
+                    </div>
                     {image.videoType === videotype ? (
                       <Video
                         srcVideo={image.srcVideo}

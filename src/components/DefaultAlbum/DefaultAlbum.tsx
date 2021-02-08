@@ -9,6 +9,7 @@ export type DefaultAlbumType = {
   title?: string;
   width?: string;
   height?: string;
+  imagesLenght?: string;
 };
 
 const DefaultAlbum: FC<DefaultAlbumType> = ({
@@ -17,6 +18,7 @@ const DefaultAlbum: FC<DefaultAlbumType> = ({
   title,
   width,
   height,
+  imagesLenght,
 }) => {
   //state redux
   const selectIsListening = (state: SpeechRecognitionType) =>
@@ -38,7 +40,14 @@ const DefaultAlbum: FC<DefaultAlbumType> = ({
         width={width}
         height={height}
       />
-      <h2 className="default_album_title">{title}</h2>
+      <div className="default_album_content">
+        <h2 className="default_album_title">{title}</h2>
+        <h4 className="default_album_imagesLength">
+          {imagesLenght?.length === 1
+            ? `${imagesLenght?.length} Photo`
+            : `${imagesLenght?.length} Photos`}
+        </h4>
+      </div>
     </div>
   );
 };

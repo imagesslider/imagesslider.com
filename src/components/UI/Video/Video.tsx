@@ -7,6 +7,12 @@ export type VideoType = {
 };
 
 const Video: FC<ImageType & VideoType> = ({ srcVideo, onPlay, onEnded }) => {
+  //Disable right click
+  const onContextMenu = (event: any) => {
+    event.preventDefault();
+    alert(`Sorry can't do that!!!`);
+  };
+
   return (
     <video
       controls
@@ -19,6 +25,7 @@ const Video: FC<ImageType & VideoType> = ({ srcVideo, onPlay, onEnded }) => {
         border: "none",
         outline: "none",
       }}
+      onContextMenu={onContextMenu}
     >
       <source src={srcVideo} type="video/mp4" />
       <source src={srcVideo} type="video/webm" />

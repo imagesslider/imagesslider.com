@@ -3,6 +3,8 @@ import {
   AlbumType,
   ImageType,
   DefaultCollectionType,
+  DefaultAlbumType,
+  DefaultVideoType,
 } from "../Store/Store";
 
 //set user object
@@ -247,6 +249,38 @@ export const signInAndOutAction = (
   payload: signInAndOut,
 });
 
+//set Defaultalbums
+export type ActionDEFAULT_ALBUMS = {
+  type: "SET_DEFAULT_ALBUMS";
+  payload: Array<DefaultAlbumType>;
+};
+
+export const SET_DEFAULT_ALBUMS = "SET_DEFAULT_ALBUMS";
+export const setDefaultAlbums = (
+  defaultAlbums: Array<DefaultAlbumType>
+): ActionDEFAULT_ALBUMS => {
+  return {
+    type: SET_DEFAULT_ALBUMS,
+    payload: defaultAlbums,
+  };
+};
+
+//set Defaultvideos
+export type ActionDEFAULT_VIDEOS = {
+  type: "SET_DEFAULT_VIDEOS";
+  payload: Array<DefaultVideoType>;
+};
+
+export const SET_DEFAULT_VIDEOS = "SET_DEFAULT_VIDEOS";
+export const setDefaultVideos = (
+  defaultVideos: Array<DefaultVideoType>
+): ActionDEFAULT_VIDEOS => {
+  return {
+    type: SET_DEFAULT_VIDEOS,
+    payload: defaultVideos,
+  };
+};
+
 export type AllActionsApp =
   | ActionSET_USER
   | ActionALBUMS
@@ -265,4 +299,6 @@ export type AllActionsApp =
   | ActionFETCH_ALLIMAGES
   | ActionSHOW_DROP_DOWN
   | ActionDARK_AND_LIGHT_MODE
-  | ActionSIGN_IN_AND_OUT;
+  | ActionSIGN_IN_AND_OUT
+  | ActionDEFAULT_ALBUMS
+  | ActionDEFAULT_VIDEOS;

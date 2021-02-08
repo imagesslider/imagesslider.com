@@ -19,6 +19,8 @@ import {
   SHOW_DROP_DOWN,
   DARK_AND_LIGHT_MODE,
   SIGN_IN_AND_OUT,
+  SET_DEFAULT_ALBUMS,
+  SET_DEFAULT_VIDEOS,
 } from "../Actions/actionsApp";
 import {
   SIGN_IN_GOOGLE,
@@ -44,6 +46,16 @@ const reducerApp = (
       return {
         ...state,
         albums: [...action.payload],
+      };
+    case SET_DEFAULT_ALBUMS:
+      return {
+        ...state,
+        defaultAlbums: [...action.payload],
+      };
+    case SET_DEFAULT_VIDEOS:
+      return {
+        ...state,
+        defaultVideos: [...action.payload],
       };
     case SELECTED_ALBUM_ID:
       return {

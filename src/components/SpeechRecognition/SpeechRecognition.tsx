@@ -18,8 +18,11 @@ import {
 } from "../../Actions/actionsSpeechRecognition";
 import { intervalTimeSliderAction } from "../../Actions/actionsSlider";
 import { setSearchAction } from "../../Actions/actionsSearch";
-import { setVideosPXAction, setImagesPXAction } from "../../Actions/actionsPX";
 import { SpeechRecognitionType } from "../../Type/Type";
+import {
+  setImagesFirebaseAction,
+  setImagesVideosFirebaseAction,
+} from "../../Actions/actionsFirebase";
 
 declare global {
   interface Window {
@@ -162,10 +165,12 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
             );
             const finalResult = result.join(" ");
             dispatch(setIndexTabAction(1));
-            dispatch(setSearchAction(finalResult));
+            dispatch(setSearchAction(finalResult.toLowerCase()));
             handleClickOf();
             setTimeout(() => {
-              dispatch(setVideosPXAction(finalResult));
+              dispatch(
+                setImagesVideosFirebaseAction(finalResult.toLowerCase())
+              );
             }, 500);
             readOutLoud(`Ok,Videos is ${finalResult}`, voices);
           } else if (transcript.toLowerCase().includes("albums")) {
@@ -175,10 +180,10 @@ const SpeechRecognition: FC<SpeechRecognitionProps> = ({ style }) => {
             );
             const finalResult = result.join(" ");
             dispatch(setIndexTabAction(0));
-            dispatch(setSearchAction(finalResult));
+            dispatch(setSearchAction(finalResult.toLowerCase()));
             handleClickOf();
             setTimeout(() => {
-              dispatch(setImagesPXAction(finalResult));
+              dispatch(setImagesFirebaseAction(finalResult.toLowerCase()));
             }, 500);
             readOutLoud(`Ok,Album is ${finalResult}`, voices);
           } else if (

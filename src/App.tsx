@@ -12,6 +12,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import SpeechRecognition from "./components/SpeechRecognition/SpeechRecognition";
 import SpeechRecognitionCommands from "./components/SpeechRecognitionCommands/SpeechRecognitionCommands";
 import NotFound404 from "./components/NotFound404/NotFound404";
+import Artist from "./components/Artist/Artist";
 
 const App: FC = () => {
   //state redux
@@ -36,6 +37,7 @@ const App: FC = () => {
           <Route component={NotFound404} />
         </Switch>
         {images.length === 0 && <SpeechRecognition />}
+        {images.length === 0 && <Artist />}
         {images.length === 0 && <Footer />}
       </div>
     </Router>
