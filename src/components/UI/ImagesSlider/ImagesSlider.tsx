@@ -47,36 +47,8 @@ import { getRandomInt } from "../../../HelperFunctions/index";
 import SpeechRecognition from "../../SpeechRecognition/SpeechRecognition";
 
 type ImagesSliderProps = {
-  onClickNext?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  onClickPrev?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  openFullscreen?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  closeFullscreen?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  onMouseEnterButton?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  onMouseLeaveButton?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  onMouseMove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onTouchStart?: (event: React.TouchEvent<HTMLDivElement>) => void;
-  onTouchEnd?: (event: React.TouchEvent<HTMLDivElement>) => void;
   children?: React.ReactNode;
   imagesArray?: any;
-  onClickBack?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  onClickPause?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  onClickPlay?: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
 };
 
 const ImagesSlider: React.FC<ImagesSliderProps> = ({
@@ -91,6 +63,15 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   const [buttonHover, setButtonHover] = useState<boolean>(false);
   //total pages random
   const [totalPagesRandom, setTotalPagesRandom] = useState<number>(10);
+  //Mouse event
+  const [mouseDown, setMouseDown] = useState<number>(0);
+  const [mouseMove, setMouseMove] = useState<number>(0);
+  const [isMouseMove, setIsMouseMove] = useState<boolean>(false);
+  const [isGrabbing, setIsGrabbing] = useState<boolean>(false);
+  //Touch event
+  const [touchStart, setTouchStart] = useState<number>(0);
+  const [touchMove, setTouchMove] = useState<number>(0);
+  const [isTouchMove, setIsTouchMove] = useState<boolean>(false);
   //state redux
   const selectAutoSlider = (state: SliderType) => state.slider.autoSlider;
   const autoSlider = useSelector(selectAutoSlider);
@@ -244,9 +225,31 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     }
   };
 
+  //onMouseDownPrev
+  const onMouseDownNext = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpPrev
+  const onMouseUpNext = (event: any) => {
+    event.stopPropagation();
+    onClickNext();
+  };
+
   //onClickPrev
   const onClickPrev = () => {
     setIndexImage(indexImage - 1);
+  };
+
+  //onMouseDownPrev
+  const onMouseDownPrev = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpPrev
+  const onMouseUpPrev = (event: any) => {
+    event.stopPropagation();
+    onClickPrev();
   };
 
   //onClickBack
@@ -266,9 +269,31 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     history.push("/");
   };
 
+  //onMouseDownBack
+  const onMouseDownBack = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpBack
+  const onMouseUpBack = (event: any) => {
+    event.stopPropagation();
+    onClickBack();
+  };
+
   //onClickPause
   const onClickPause = () => {
     dispatch(autoSliderAction(false));
+  };
+
+  //onMouseDownPause
+  const onMouseDownPause = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpPause
+  const onMouseUpPause = (event: any) => {
+    event.stopPropagation();
+    onClickPause();
   };
 
   //onClickPlay
@@ -276,8 +301,32 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     dispatch(autoSliderAction(true));
   };
 
+  //onMouseDownPlay
+  const onMouseDownPlay = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpPlay
+  const onMouseUpPlay = (event: any) => {
+    event.stopPropagation();
+    onClickPlay();
+  };
+
+  //onDragStart
+  const onDragStart = (event: any) => {
+    event.preventDefault();
+  };
+
+  //onMouseDown
+  const onMouseDown = (event: any) => {
+    setMouseDown(event.pageX);
+    setIsGrabbing(true);
+  };
+
   //onMouseMove
-  const onMouseMove = () => {
+  const onMouseMove = (event: any) => {
+    setMouseMove(event.pageX);
+    setIsMouseMove(true);
     setHover(true);
     if (hoverTimeout >= 0) {
       clearTimeout(hoverTimeout);
@@ -289,6 +338,27 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     );
   };
 
+  //onMouseUp
+  const onMouseUp = () => {
+    if (
+      mouseDown > mouseMove &&
+      indexImage === imagesArray.length - 1 &&
+      isMouseMove
+    ) {
+      setIndexImage(0);
+    } else if (
+      mouseDown > mouseMove &&
+      indexImage !== imagesArray.length - 1 &&
+      isMouseMove
+    ) {
+      setIndexImage(indexImage + 1);
+    } else if (mouseDown < mouseMove && indexImage !== 0 && isMouseMove) {
+      setIndexImage(indexImage - 1);
+    }
+    setIsMouseMove(false);
+    setIsGrabbing(false);
+  };
+
   //onMouseEnterButton
   const onMouseEnterButton = () => {
     setButtonHover(true);
@@ -296,6 +366,41 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
 
   //onMouseLeaveButton
   const onMouseLeaveButton = () => {
+    setButtonHover(false);
+  };
+
+  //onTouchStart
+  const onTouchStart = (event: any) => {
+    setTouchStart(event.touches[0].clientX);
+    setHover(true);
+    setButtonHover(true);
+  };
+
+  //onTouchMove
+  const onTouchMove = (event: any) => {
+    setTouchMove(event.touches[0].clientX);
+    setIsTouchMove(true);
+  };
+
+  //onTouchEnd
+  const onTouchEnd = () => {
+    if (
+      touchStart > touchMove &&
+      indexImage === imagesArray.length - 1 &&
+      isTouchMove
+    ) {
+      setIndexImage(0);
+    } else if (
+      touchStart > touchMove &&
+      indexImage !== imagesArray.length - 1 &&
+      isTouchMove
+    ) {
+      setIndexImage(indexImage + 1);
+    } else if (touchStart < touchMove && indexImage !== 0 && isTouchMove) {
+      setIndexImage(indexImage - 1);
+    }
+    setIsTouchMove(false);
+    setHover(false);
     setButtonHover(false);
   };
 
@@ -309,12 +414,34 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     }
   };
 
+  //onMouseDownOpenFullscreen
+  const onMouseDownOpenFullscreen = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpOpenFullscreen
+  const onMouseUpOpenFullscreen = (event: any) => {
+    event.stopPropagation();
+    openFullscreen();
+  };
+
   /* Close fullscreen */
   const closeFullscreen = () => {
     if (document.exitFullscreen) {
       document.exitFullscreen();
       dispatch(setFullScreenAction(false));
     }
+  };
+
+  //onMouseDownCloseFullscreen
+  const onMouseDownCloseFullscreen = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpCloseFullscreen
+  const onMouseUpCloseFullscreen = (event: any) => {
+    event.stopPropagation();
+    closeFullscreen();
   };
 
   //useEffect fullscreenchange
@@ -328,15 +455,14 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     });
   }, [fullscreen, dispatch]);
 
-  //onTouchStart
-  const onTouchStart = () => {
-    setHover(true);
-    setButtonHover(true);
+  //onMouseDownRangeSlider
+  const onMouseDownRangeSlider = (event: any) => {
+    event.stopPropagation();
   };
 
-  const onTouchEnd = () => {
-    setHover(false);
-    setButtonHover(false);
+  //onMouseUpRangeSlider
+  const onMouseUpRangeSlider = (event: any) => {
+    event.stopPropagation();
   };
 
   //hoverStyles
@@ -347,9 +473,16 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   return (
     <div
       className="images__wrapper"
+      onDragStart={onDragStart}
+      onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
+      onTouchMove={onTouchMove}
+      style={{
+        cursor: isGrabbing ? "grabbing" : "grab",
+      }}
     >
       {inImages && <SpeechRecognition style={hoverStyles} />}
       {!isListening && (
@@ -357,7 +490,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
           className="fas fa-arrow-left back  fa-2x"
           onMouseEnter={onMouseEnterButton}
           onMouseLeave={onMouseLeaveButton}
-          onClick={onClickBack}
+          onMouseDown={onMouseDownBack}
+          onMouseUp={onMouseUpBack}
           style={hoverStyles}
           title="Back"
         ></i>
@@ -368,6 +502,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
           value={intervalTime}
           onMouseEnter={onMouseEnterButton}
           onMouseLeave={onMouseLeaveButton}
+          onMouseDown={onMouseDownRangeSlider}
+          onMouseUp={onMouseUpRangeSlider}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             dispatch(intervalTimeSliderAction(parseInt(event.target.value)))
           }
@@ -379,7 +515,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
           className={images.length !== 1 ? "button-pause" : "isDisabled"}
           onMouseEnter={onMouseEnterButton}
           onMouseLeave={onMouseLeaveButton}
-          onClick={onClickPause}
+          onMouseDown={onMouseDownPause}
+          onMouseUp={onMouseUpPause}
           style={hoverStyles}
           title="Pause auto slider"
         >
@@ -390,7 +527,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
           className={images.length !== 1 ? "button-pause" : "isDisabled"}
           onMouseEnter={onMouseEnterButton}
           onMouseLeave={onMouseLeaveButton}
-          onClick={onClickPlay}
+          onMouseDown={onMouseDownPlay}
+          onMouseUp={onMouseUpPlay}
           style={hoverStyles}
           title="Play auto slider"
         >
@@ -400,7 +538,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
       <button
         onMouseEnter={onMouseEnterButton}
         onMouseLeave={onMouseLeaveButton}
-        onClick={onClickPrev}
+        onMouseDown={onMouseDownPrev}
+        onMouseUp={onMouseUpPrev}
         className={indexImage === 0 ? "isDisabled" : "button prev"}
         style={hoverStyles}
       >
@@ -409,7 +548,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
       <button
         onMouseEnter={onMouseEnterButton}
         onMouseLeave={onMouseLeaveButton}
-        onClick={onClickNext}
+        onMouseDown={onMouseDownNext}
+        onMouseUp={onMouseUpNext}
         className={images.length !== 1 ? "button next" : "isDisabled"}
         style={hoverStyles}
       >
@@ -419,7 +559,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
         <button
           onMouseEnter={onMouseEnterButton}
           onMouseLeave={onMouseLeaveButton}
-          onClick={openFullscreen}
+          onMouseDown={onMouseDownOpenFullscreen}
+          onMouseUp={onMouseUpOpenFullscreen}
           className="fullscreen openFullscreen"
           style={hoverStyles}
           title="Full Screen"
@@ -430,7 +571,8 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
         <button
           onMouseEnter={onMouseEnterButton}
           onMouseLeave={onMouseLeaveButton}
-          onClick={closeFullscreen}
+          onMouseDown={onMouseDownCloseFullscreen}
+          onMouseUp={onMouseUpCloseFullscreen}
           className="fullscreen exitFullscreen"
           style={hoverStyles}
           title="Exit full screen"
