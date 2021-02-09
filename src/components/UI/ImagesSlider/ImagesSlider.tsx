@@ -16,10 +16,6 @@ import {
   intervalTimeSliderAction,
 } from "../../../Actions/actionsSlider";
 import {
-  setImagesUnsplashAlbumsAction,
-  setImagesActionUnsplashCollection,
-} from "../../../Actions/actionsUnsplash";
-import {
   setproviderSearchAction,
   setSearchAction,
   setQueryAction,
@@ -43,7 +39,6 @@ import {
   SpeechRecognitionType,
 } from "../../../Type/Type";
 import RangeSlider from "../RangeSlider/RangeSlider";
-import { getRandomInt } from "../../../HelperFunctions/index";
 import SpeechRecognition from "../../SpeechRecognition/SpeechRecognition";
 
 type ImagesSliderProps = {
@@ -77,8 +72,6 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   const autoSlider = useSelector(selectAutoSlider);
   const selectIntervalTime = (state: SliderType) => state.slider.intervalTime;
   const intervalTime = useSelector(selectIntervalTime);
-  const selectQuery = (state: SearchType) => state.search.query;
-  const query = useSelector(selectQuery);
   const selectProviderSearch = (state: SearchType) =>
     state.search.providerSearch;
   const providerSearch = useSelector(selectProviderSearch);
@@ -195,29 +188,6 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
             setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
           );
         }
-      }
-      if (providerSearch === "unsplash-albums") {
-        dispatch(
-          setImagesUnsplashAlbumsAction(query, getRandomInt(totalPagesRandom))
-        );
-      }
-      if (providerSearch === "unsplash-collections") {
-        dispatch(
-          setImagesActionUnsplashCollection(
-            query,
-            getRandomInt(totalPagesRandom),
-            10
-          )
-        );
-      }
-      if (providerSearch === "unsplash-collections-search") {
-        dispatch(
-          setImagesActionUnsplashCollection(
-            query,
-            getRandomInt(totalPagesRandom),
-            10
-          )
-        );
       }
     } else {
       setTransitionImgage(true);
@@ -345,14 +315,35 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
       indexImage === imagesArray.length - 1 &&
       isMouseMove
     ) {
+      setTransitionImgage(false);
       setIndexImage(0);
+      if (providerSearch === "google-allImages") {
+        if (!!nextPageToken) {
+          dispatch(setAllImagesActionGoogle(token, nextPageToken));
+        } else {
+          dispatch(setAllImagesActionGoogle(token, nextPageToken));
+        }
+      }
+      if (providerSearch === "google-albumImages") {
+        if (!!nextPageToken) {
+          dispatch(
+            setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
+          );
+        } else {
+          dispatch(
+            setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
+          );
+        }
+      }
     } else if (
       mouseDown > mouseMove &&
       indexImage !== imagesArray.length - 1 &&
       isMouseMove
     ) {
+      setTransitionImgage(true);
       setIndexImage(indexImage + 1);
     } else if (mouseDown < mouseMove && indexImage !== 0 && isMouseMove) {
+      setTransitionImgage(true);
       setIndexImage(indexImage - 1);
     }
     setIsMouseMove(false);
@@ -389,14 +380,35 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
       indexImage === imagesArray.length - 1 &&
       isTouchMove
     ) {
+      setTransitionImgage(false);
       setIndexImage(0);
+      if (providerSearch === "google-allImages") {
+        if (!!nextPageToken) {
+          dispatch(setAllImagesActionGoogle(token, nextPageToken));
+        } else {
+          dispatch(setAllImagesActionGoogle(token, nextPageToken));
+        }
+      }
+      if (providerSearch === "google-albumImages") {
+        if (!!nextPageToken) {
+          dispatch(
+            setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
+          );
+        } else {
+          dispatch(
+            setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
+          );
+        }
+      }
     } else if (
       touchStart > touchMove &&
       indexImage !== imagesArray.length - 1 &&
       isTouchMove
     ) {
+      setTransitionImgage(true);
       setIndexImage(indexImage + 1);
     } else if (touchStart < touchMove && indexImage !== 0 && isTouchMove) {
+      setTransitionImgage(true);
       setIndexImage(indexImage - 1);
     }
     setIsTouchMove(false);
