@@ -1,11 +1,7 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import "../Pagination/Pagination.css";
 import { useDispatch, useSelector } from "react-redux";
 import { SearchType, AppType } from "../../../Type/Type";
-import {
-  setUnsplashCollectionsAction,
-  searchUnsplashCollectionsAction,
-} from "../../../Actions/actionsUnsplash";
 
 const Pagination: FC = () => {
   //state
@@ -40,16 +36,6 @@ const Pagination: FC = () => {
       setIndexPage(indexPage + 1);
     }
   };
-
-  //useEffect
-  useEffect(() => {
-    if (providerSearch === "unsplash-collections") {
-      dispatch(setUnsplashCollectionsAction(indexPage));
-    }
-    if (providerSearch === "unsplash-collections-search") {
-      dispatch(searchUnsplashCollectionsAction(query, indexPage));
-    }
-  }, [dispatch, providerSearch, query, indexPage]);
 
   return (
     <div className="pagination_wrapper">
