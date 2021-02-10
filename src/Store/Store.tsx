@@ -98,7 +98,7 @@ export const initalStore: Store = {
   indexTab: 0,
   nextPageToken: "",
   fullscreen: false,
-  fetchAllImages: false,
+  fetchAllImages: true,
   showDropDown: false,
   theme: "dark",
   signInAndOut: null,

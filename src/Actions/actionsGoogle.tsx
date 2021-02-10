@@ -9,6 +9,7 @@ import {
 } from "../Actions/actionsApp";
 
 import { setproviderSearchAction } from "../Actions/actionsSearch";
+import { isEmpty } from "../HelperFunctions";
 
 //sign in with google
 export type ActionSIGN_IN_GOOGLE = {
@@ -203,10 +204,10 @@ export const fetchAllImagesActionGoogle = (
     )
       .then((response) => response.json())
       .then((data) => {
-        if (!!data.mediaItems) {
-          dispatch(fetchAllImagesAction(true));
-        } else {
+        if (isEmpty(data)) {
           dispatch(fetchAllImagesAction(false));
+        } else {
+          dispatch(fetchAllImagesAction(true));
         }
       })
       .then(() => dispatch(isLoadingAction(false)))
