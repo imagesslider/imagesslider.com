@@ -9,7 +9,7 @@ const Footer: FC = () => {
         Privacy Policy
       </Link>
       <p className="footer_copyright">
-        Copyright © 2021 imagesslider.com .All rights reserved.
+        Copyright © 2020 - 2021 imagesslider.com .All rights reserved.
       </p>
     </div>
   );
