@@ -94,12 +94,12 @@ const Google: FC = () => {
     let user = GoogleAuth.currentUser.get();
     let isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
-      dispatch(signInActionGoogle(user.uc.access_token));
+      dispatch(signInActionGoogle(user.tc.access_token));
       let userObject = {
         // image: user.wt.SJ,
-        firstName: user.Hs.QS,
-        lastName: user.Hs.SQ,
-        email: user.Hs.nt,
+        firstName: user.Qs.oT,
+        lastName: user.Qs.kR,
+        email: user.Qs.zt,
       };
       if (!!userObject) {
         dispatch(setUserAction(userObject));
