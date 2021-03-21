@@ -21,8 +21,8 @@ const Albums: FC = () => {
   const albums = useSelector(selectAlbums);
   const selectIsLoading = (state: AppType) => state.appState.isLoading;
   const isLoading = useSelector(selectIsLoading);
-  const selectProvider = (state: AppType) => state.appState.login.provider;
-  const provider = useSelector(selectProvider);
+  // const selectProvider = (state: AppType) => state.appState.login.provider;
+  // const provider = useSelector(selectProvider);
   const selectIndexTab = (state: AppType) => state.appState.indexTab;
   const indexTab = useSelector(selectIndexTab);
   const selectFetchAllImages = (state: AppType) =>
@@ -53,7 +53,7 @@ const Albums: FC = () => {
         >
           <HowItWorks />
         </Accordion>
-        <h2 className="albums_title">{provider} Albums</h2>
+        {/* <h2 className="albums_title">{provider} Albums</h2> */}
         {fetchAllImages ? (
           <div className="albums_wrapper">
             <AllImages />

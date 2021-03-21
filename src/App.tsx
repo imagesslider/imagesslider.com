@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Albums from "./components/Albums/Albums";
 import Images from "./components/Images/Images";
 import Header from "./components/Header/Header";
-import SignIn from "./components/SignIn/SignIn";
+// import SignIn from "./components/SignIn/SignIn";
 import { AppType } from "./Type/Type";
 import Footer from "./components/Footer/Footer";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
@@ -16,8 +16,8 @@ import Artist from "./components/Artist/Artist";
 
 const App: FC = () => {
   //state redux
-  const selectIsLogged = (state: AppType) => state.appState.login.isLogged;
-  const isLogged = useSelector(selectIsLogged);
+  // const selectIsLogged = (state: AppType) => state.appState.login.isLogged;
+  // const isLogged = useSelector(selectIsLogged);
   const selectImages = (state: AppType) => state.appState.images;
   const images = useSelector(selectImages);
 
@@ -26,7 +26,7 @@ const App: FC = () => {
       <div className="App">
         {images.length === 0 && <Header />}
         <Switch>
-          <Route path="/" exact component={!isLogged ? SignIn : Albums} />
+          <Route path="/" exact component={Albums} />
           <Route path="/images" exact component={Images} />
           <Route path="/privacy-policy" exact component={PrivacyPolicy} />
           <Route
