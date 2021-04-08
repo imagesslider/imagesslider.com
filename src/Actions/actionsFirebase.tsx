@@ -12,7 +12,9 @@ import { setproviderSearchAction, setQueryAction } from "./actionsSearch";
 export const setAlbumsFirebaseAction = () => {
   return (dispatch: any) => {
     dispatch(isLoadingAction(true));
-    return fetch(`https://images-b71e6-default-rtdb.firebaseio.com/albums.json`)
+    return fetch(
+      `https://${process.env.REACT_APP_FIREBASE_ID}.firebaseio.com/albums.json`
+    )
       .then((response) => response.json())
       .then((data) =>
         dispatch(
@@ -37,7 +39,7 @@ export const setImagesFirebaseAction = (query: string | undefined) => {
     dispatch(setQueryAction(query));
     dispatch(setproviderSearchAction("firebase-images"));
     return fetch(
-      `https://images-b71e6-default-rtdb.firebaseio.com/albums/${query}/images.json`
+      `https://${process.env.REACT_APP_FIREBASE_ID}.firebaseio.com/albums/${query}/images.json`
     )
       .then((response) => response.json())
       .then((data) => dispatch(setDataImagesActionFirebase(data)))
@@ -88,7 +90,9 @@ export type ImageFirebaseProps = {
 export const setVideosFirebaseAction = () => {
   return (dispatch: any) => {
     dispatch(isLoadingAction(true));
-    return fetch(`https://images-b71e6-default-rtdb.firebaseio.com/videos.json`)
+    return fetch(
+      `https://${process.env.REACT_APP_FIREBASE_ID}.firebaseio.com/videos.json`
+    )
       .then((response) => response.json())
       .then((data) =>
         dispatch(
@@ -113,7 +117,7 @@ export const setImagesVideosFirebaseAction = (query: string | undefined) => {
     dispatch(setQueryAction(query));
     dispatch(setproviderSearchAction("firebase-videos"));
     return fetch(
-      `https://images-b71e6-default-rtdb.firebaseio.com/videos/${query}/images.json`
+      `https://${process.env.REACT_APP_FIREBASE_ID}.firebaseio.com/videos/${query}/images.json`
     )
       .then((response) => response.json())
       .then((data) => dispatch(setDataImagesVideosActionFirebase(data)))
