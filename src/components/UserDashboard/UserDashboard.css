@@ -1,0 +1,75 @@
+.user_dashboard {
+  margin-top: 78px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 1400px;
+}
+
+.collections_private {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.collections_private_link {
+  text-decoration: none;
+  cursor: pointer;
+  background: #ffc107;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.collections_private_img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease-in-out;
+}
+
+.collections_private_link:hover .collections_private_img {
+  opacity: 0.5;
+  transform: scale3d(0.9, 0.9, 1);
+}
+
+.collections_private_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.collections_private_title {
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease-in-out;
+}
+
+.collections_private_title::first-letter {
+  text-transform: uppercase;
+}
+
+.collections_private_link:hover .collections_private_title {
+  color: #000000;
+  text-shadow: none;
+}
+
+.collections_private_imagesLength {
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease-in-out;
+}
+
+.collections_private_link:hover .collections_private_imagesLength {
+  color: #000000;
+  text-shadow: none;
+}

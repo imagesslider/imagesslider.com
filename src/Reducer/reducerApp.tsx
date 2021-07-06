@@ -10,7 +10,7 @@ import {
   REDIRECT,
   SET_TOTALPAGES,
   SET_NOCONTENT,
-  SET_DEFAULTCOLLECTIONS,
+  SET_COLLECTIONS_PRIVATE,
   SET_TOTALPAGES_COLLECTIONS,
   SET_INDEX_TAB,
   SET_NEXTPAGE_TOKEN,
@@ -21,6 +21,10 @@ import {
   SIGN_IN_AND_OUT,
   SET_DEFAULT_ALBUMS,
   SET_DEFAULT_VIDEOS,
+  SET_CURRENT_USER,
+  SET_COLLECTION_PRIVATE,
+  IN_IMAGE,
+  SET_USER_IS_LOGGED,
 } from "../Actions/actionsApp";
 import {
   SIGN_IN_GOOGLE,
@@ -37,10 +41,7 @@ const reducerApp = (
     case SET_USER:
       return {
         ...state,
-        login: {
-          ...state.login,
-          user: action.payload,
-        },
+        user: action.payload,
       };
     case SET_ALBUMS:
       return {
@@ -94,10 +95,15 @@ const reducerApp = (
         ...state,
         noContent: action.payload,
       };
-    case SET_DEFAULTCOLLECTIONS:
+    case SET_COLLECTIONS_PRIVATE:
       return {
         ...state,
-        defaultCollections: [...action.payload],
+        collectionsPrivate: [...action.payload],
+      };
+    case SET_COLLECTION_PRIVATE:
+      return {
+        ...state,
+        collectionPrivate: action.payload,
       };
     case SET_TOTALPAGES_COLLECTIONS:
       return {
@@ -138,6 +144,21 @@ const reducerApp = (
       return {
         ...state,
         signInAndOut: action.payload,
+      };
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: action.currentUser,
+      };
+    case IN_IMAGE:
+      return {
+        ...state,
+        inImage: action.payload,
+      };
+    case SET_USER_IS_LOGGED:
+      return {
+        ...state,
+        userIsLogged: action.payload,
       };
     //google actions
     case SIGN_IN_GOOGLE:

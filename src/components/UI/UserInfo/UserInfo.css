@@ -1,0 +1,53 @@
+.userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userInfo_img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.userInfo_name_wrapper {
+  display: flex;
+}
+
+.userInfo_name {
+  color: #ffc107;
+  font-weight: 600;
+  padding-right: 5px;
+}
+
+.userInfo_name::first-letter {
+  text-transform: uppercase;
+}
+
+#fa-user-circle {
+  margin-right: 20px;
+}
+
+.userInfo_pro {
+  background: #ffc107;
+  font-weight: 600;
+  color: #000;
+  padding: 3px;
+}
+
+@media screen and (max-width: 425px) {
+  .userInfo {
+    flex-direction: column;
+  }
+  .userInfo_img {
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+  #fa-user-circle {
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+}

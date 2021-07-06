@@ -7,9 +7,10 @@ import {
   setTotalPagesAction,
   setNoContentAction,
   setTotalPagesCollectionsAction,
-  setDefaultCollections,
+  setCollectionsPrivate,
   setNextPageToken,
   setFullScreenAction,
+  isImageAction,
 } from "../../../Actions/actionsApp";
 import {
   autoSliderAction,
@@ -142,9 +143,10 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     }
   }, [totalPagesRandom, totalPages]);
 
-  //SpeechRecognition
+  //SpeechRecognition and inImage
   useEffect(() => {
     dispatch(inImagesAction(true));
+    dispatch(isImageAction(true));
   }, [dispatch]);
 
   useEffect(() => {
@@ -232,10 +234,11 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     dispatch(setTotalPagesAction(0));
     dispatch(setNoContentAction(""));
     dispatch(setTotalPagesCollectionsAction(0));
-    dispatch(setDefaultCollections([]));
+    dispatch(setCollectionsPrivate([]));
     dispatch(setNextPageToken(""));
     dispatch(setFullScreenAction(false));
     dispatch(inImagesAction(false));
+    dispatch(isImageAction(false));
     history.push("/");
   };
 

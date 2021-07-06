@@ -41,3 +41,15 @@
 .header_selected-navLink {
   color: hsl(45, 100%, 41%);
 }
+
+.header_link {
+  text-decoration: none;
+  color: var(--p-color);
+  padding: 5px;
+  font-weight: 600;
+}
+
+.header_link:hover {
+  text-decoration: none;
+  background: hsla(45, 100%, 41%, 0.7);
+}

@@ -1,54 +1,51 @@
 import React, { FC, useState } from "react";
-import Google from "../Google/Google";
 import "./SignIn.css";
-import { useSelector, useDispatch } from "react-redux";
-import logoGoogle from "../../ImagesPngSvg/btn_google_signin_light_normal_web.png";
-import DefaultAlbums from "../DefaultAlbums/DefaultAlbums";
-import DefaultVidoes from "../DefaultVideos/DefaultVideos";
-import Tabs from "../UI/Tabs/Tabs";
-import Tab from "../UI/Tab/Tab";
-import { setIndexTabAction } from "../../Actions/actionsApp";
-import { AppType } from "../../Type/Type";
-import { Link } from "react-router-dom";
-import HowItWorks from "../HowItWorks/HowItWorks";
-import Accordion from "../UI/Accordion/Accordion";
+import { Link, useHistory } from "react-router-dom";
+import { auth } from "../../Firebase/Firebase";
+import Error from "../UI/Error/Error";
 
 const SignIn: FC = () => {
-  const [isOpenAccordion, setIsOpenAccordion] = useState<boolean>(false);
+  //state
+  const [email, setEmail] = useState<any>("");
+  const [password, setPassword] = useState<any>("");
+  const [error, setError] = useState<string>("");
 
-  //state redux
-  const selectIndexTab = (state: AppType) => state.appState.indexTab;
-  const indexTab = useSelector(selectIndexTab);
+  //react-router
+  const history = useHistory();
 
-  //actions redux
-  const dispatch = useDispatch();
-
-  //onClickBtn
-  const onClickBtn = (index: number) => {
-    dispatch(setIndexTabAction(index));
-  };
-
-  //handleClickIsOpen
-  const handleClickIsOpen = () => {
-    setIsOpenAccordion(!isOpenAccordion);
+  //formsubmit
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      setError("");
+      await auth.signInWithEmailAndPassword(email, password);
+      await history.push(`/`);
+    } catch (error) {
+      setError(error?.message);
+    }
   };
 
   return (
     <div className="sign_in">
-      <Google />
-      <Accordion
-        title="How it works"
-        isOpen={isOpenAccordion}
-        handleClick={handleClickIsOpen}
-      >
-        <HowItWorks />
-      </Accordion>
-
       <div className="sign_in_container">
-        <h2 className="sign_in_title">Sign In With:</h2>
-        <button id="sign-in-button-google">
-          <img src={logoGoogle} alt={logoGoogle} />{" "}
-        </button>
+        {error && <Error title={error} />}
+        <h2 className="sign_in_title">Sign In</h2>
+        <form onSubmit={handleSubmit} className="sign_in_form">
+          <input
+            placeholder="Email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <button type="submit" className="buttonSubmit">
+            Submit
+          </button>
+        </form>
         <p className="sign_in_description">
           Click “Sign In” to agree to ImagesSlider acknowledge that ImagesSlider{" "}
           <Link to="/privacy-policy" className="footer_privacy-policy">
@@ -57,14 +54,6 @@ const SignIn: FC = () => {
           applies to you.
         </p>
       </div>
-      <Tabs activeIndex={indexTab} onClick={onClickBtn}>
-        <Tab label="Albums">
-          <DefaultAlbums />
-        </Tab>
-        <Tab label="Videos">
-          <DefaultVidoes />
-        </Tab>
-      </Tabs>
     </div>
   );
 };

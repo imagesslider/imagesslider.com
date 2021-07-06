@@ -21,8 +21,7 @@ const HowItWorks: FC = () => {
         library are free for use.
         <br />
         Transform your place into digital art and add some color in your life.
-        You can also run your personal collection connecting with your google
-        account.
+        You can also run your collection connecting with your account.
         <br />
         The app has further more voice commands and it is very easy to set up.
       </p>

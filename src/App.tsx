@@ -1,32 +1,65 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Albums from "./components/Albums/Albums";
+import { useSelector, useDispatch } from "react-redux";
 import Images from "./components/Images/Images";
 import Header from "./components/Header/Header";
-// import SignIn from "./components/SignIn/SignIn";
 import { AppType } from "./Type/Type";
 import Footer from "./components/Footer/Footer";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
-import SpeechRecognition from "./components/SpeechRecognition/SpeechRecognition";
+// import SpeechRecognition from "./components/SpeechRecognition/SpeechRecognition";
 import SpeechRecognitionCommands from "./components/SpeechRecognitionCommands/SpeechRecognitionCommands";
 import NotFound404 from "./components/NotFound404/NotFound404";
 import Artist from "./components/Artist/Artist";
+import SignIn from "./components/SignIn/SignIn";
+import Home from "./components/Home/Home";
+import { auth } from "./Firebase/Firebase";
+import { setCurrentUserAction } from "./Actions/actionsApp";
+import Users from "./components/Users/Users";
+import UserDashboard from "./components/UserDashboard/UserDashboard";
+import CollectionPrivate from "./components/CollectionPrivate/CollectionPrivate";
+import ImageSlider from "./components/ImageSlider/ImageSlider";
 
 const App: FC = () => {
   //state redux
-  // const selectIsLogged = (state: AppType) => state.appState.login.isLogged;
-  // const isLogged = useSelector(selectIsLogged);
-  const selectImages = (state: AppType) => state.appState.images;
-  const images = useSelector(selectImages);
+  // const selectImages = (state: AppType) => state.appState.images;
+  // const images = useSelector(selectImages);
+  const selectCurrentUser = (state: AppType) => state.appState.currentUser;
+  const currentUser = useSelector(selectCurrentUser);
+  const selectInImage = (state: AppType) => state.appState.inImage;
+  const inImage = useSelector(selectInImage);
+
+  //actions redux
+  const dispatch = useDispatch();
+
+  //useEffect
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      dispatch(setCurrentUserAction(user));
+    });
+
+    return unsubscribe;
+  }, [dispatch]);
 
   return (
     <Router>
       <div className="App">
-        {images.length === 0 && <Header />}
+        {!inImage && <Header />}
         <Switch>
-          <Route path="/" exact component={Albums} />
+          <Route path="/" exact component={Home} />
+          {!currentUser && <Route path="/signin" exact component={SignIn} />}
+          <Route path="/users" exact component={Users} />
+          <Route path="/users/:userID" exact component={UserDashboard} />
+          <Route
+            path="/users/:userID/collection_private/:collection_private_id"
+            exact
+            component={CollectionPrivate}
+          />
+          <Route
+            path="/users/:userID/collection_private/:collection_private_id/image/:image_id/:image_index"
+            exact
+            component={ImageSlider}
+          />
           <Route path="/images" exact component={Images} />
           <Route path="/privacy-policy" exact component={PrivacyPolicy} />
           <Route
@@ -36,9 +69,9 @@ const App: FC = () => {
           />
           <Route component={NotFound404} />
         </Switch>
-        {images.length === 0 && <SpeechRecognition />}
-        {images.length === 0 && <Artist />}
-        {images.length === 0 && <Footer />}
+        {/* {!inImage && <SpeechRecognition />} */}
+        {!inImage && <Artist />}
+        {!inImage && <Footer />}
       </div>
     </Router>
   );

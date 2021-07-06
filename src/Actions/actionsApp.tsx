@@ -1,8 +1,7 @@
 import {
-  UserType,
   AlbumType,
   ImageType,
-  DefaultCollectionType,
+  CollectionsPrivateType,
   DefaultAlbumType,
   DefaultVideoType,
 } from "../Store/Store";
@@ -10,11 +9,11 @@ import {
 //set user object
 export type ActionSET_USER = {
   type: "SET_USER";
-  payload: UserType;
+  payload: any;
 };
 
 export const SET_USER = "SET_USER";
-export const setUserAction = (user: UserType): ActionSET_USER => ({
+export const setUserAction = (user: any): ActionSET_USER => ({
   type: SET_USER,
   payload: user,
 });
@@ -124,18 +123,34 @@ export const setNoContentAction = (noContent: string): ActionNOCONTENT => ({
 });
 
 //set defaultCollections
-export type ActionDEFAULTCOLLECTIONS = {
-  type: "SET_DEFAULTCOLLECTIONS";
-  payload: Array<DefaultCollectionType>;
+export type ActionSET_COLLECTIONS_PRIVATES = {
+  type: "SET_COLLECTIONS_PRIVATE";
+  payload: Array<CollectionsPrivateType>;
 };
 
-export const SET_DEFAULTCOLLECTIONS = "SET_DEFAULTCOLLECTIONS";
-export const setDefaultCollections = (
-  defaultCollections: Array<DefaultCollectionType>
-): ActionDEFAULTCOLLECTIONS => {
+export const SET_COLLECTIONS_PRIVATE = "SET_COLLECTIONS_PRIVATE";
+export const setCollectionsPrivate = (
+  collectionsPrivate: Array<CollectionsPrivateType>
+): ActionSET_COLLECTIONS_PRIVATES => {
   return {
-    type: SET_DEFAULTCOLLECTIONS,
-    payload: defaultCollections,
+    type: SET_COLLECTIONS_PRIVATE,
+    payload: collectionsPrivate,
+  };
+};
+
+//set defaultCollection
+export type ActionSET_COLLECTION_PRIVATES = {
+  type: "SET_COLLECTION_PRIVATE";
+  payload: any;
+};
+
+export const SET_COLLECTION_PRIVATE = "SET_COLLECTION_PRIVATE";
+export const setCollectionPrivate = (
+  collectionPrivate: any
+): ActionSET_COLLECTION_PRIVATES => {
+  return {
+    type: SET_COLLECTION_PRIVATE,
+    payload: collectionPrivate,
   };
 };
 
@@ -281,6 +296,44 @@ export const setDefaultVideos = (
   };
 };
 
+//signInAndOut
+export type ActionCURRENT_USER = {
+  type: "SET_CURRENT_USER";
+  currentUser: any;
+};
+
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const setCurrentUserAction = (currentUser: any): ActionCURRENT_USER => ({
+  type: SET_CURRENT_USER,
+  currentUser: currentUser,
+});
+
+//is Image
+export type ActionIN_IMAGE = {
+  type: "IN_IMAGE";
+  payload: boolean;
+};
+
+export const IN_IMAGE = "IN_IMAGE";
+export const isImageAction = (inImage: boolean): ActionIN_IMAGE => ({
+  type: IN_IMAGE,
+  payload: inImage,
+});
+
+//set user object
+export type ActionUSER_IS_LOGGED = {
+  type: "SET_USER_IS_LOGGED";
+  payload: any;
+};
+
+export const SET_USER_IS_LOGGED = "SET_USER_IS_LOGGED";
+export const setUserIsLoggedAction = (
+  userIsLogged: any
+): ActionUSER_IS_LOGGED => ({
+  type: SET_USER_IS_LOGGED,
+  payload: userIsLogged,
+});
+
 export type AllActionsApp =
   | ActionSET_USER
   | ActionALBUMS
@@ -291,7 +344,8 @@ export type AllActionsApp =
   | ActionREDIRECT
   | ActionSET_TOTALPAGES
   | ActionNOCONTENT
-  | ActionDEFAULTCOLLECTIONS
+  | ActionSET_COLLECTIONS_PRIVATES
+  | ActionSET_COLLECTION_PRIVATES
   | ActionSET_TOTALPAGES_COLLECTIONS
   | ActionSET_INDEX_TAB
   | ActionNEXTPAGE_TOKEN
@@ -301,4 +355,7 @@ export type AllActionsApp =
   | ActionDARK_AND_LIGHT_MODE
   | ActionSIGN_IN_AND_OUT
   | ActionDEFAULT_ALBUMS
-  | ActionDEFAULT_VIDEOS;
+  | ActionDEFAULT_VIDEOS
+  | ActionCURRENT_USER
+  | ActionIN_IMAGE
+  | ActionUSER_IS_LOGGED;
