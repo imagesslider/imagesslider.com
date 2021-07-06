@@ -4,9 +4,17 @@ import { ImageType } from "../../../Store/Store";
 export type VideoType = {
   onPlay?: (event: React.SyntheticEvent<HTMLVideoElement, Event>) => void;
   onEnded?: (event: React.SyntheticEvent<HTMLVideoElement, Event>) => void;
+  autoPlay?: any;
+  muted?: any;
 };
 
-const Video: FC<ImageType & VideoType> = ({ srcVideo, onPlay, onEnded }) => {
+const Video: FC<ImageType & VideoType> = ({
+  srcVideo,
+  onPlay,
+  onEnded,
+  autoPlay,
+  muted,
+}) => {
   //Disable right click
   const onContextMenu = (event: any) => {
     event.preventDefault();
@@ -18,6 +26,8 @@ const Video: FC<ImageType & VideoType> = ({ srcVideo, onPlay, onEnded }) => {
       controls
       onPlay={onPlay}
       onEnded={onEnded}
+      autoPlay={autoPlay}
+      muted={muted}
       style={{
         maxHeight: "100%",
         maxWidth: "100%",

@@ -1,23 +1,34 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import "../Header/Header.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import DarkAndLightMode from "../UI/DarkAndLightMode/DarkAndLightMode";
 import DropDown from "../UI/DropDown/DropDown";
 import Logo from "../UI/Logo/Logo";
 import SignOut from "../SignOut/SignOut";
-import User from "../UI/User/User";
-import { AppType, SpeechRecognitionType } from "../../Type/Type";
-import { Link, NavLink } from "react-router-dom";
+import { AppType } from "../../Type/Type";
+import { setUserIsLoggedAction } from "../../Actions/actionsApp";
 
 const Header: FC = () => {
   //state redux
-  const selectIsLogged = (state: AppType) => state.appState.login.isLogged;
-  const isLogged = useSelector(selectIsLogged);
-  const selectUser = (state: AppType) => state.appState.login.user;
-  const user = useSelector(selectUser);
-  const selectRecognition = (state: SpeechRecognitionType) =>
-    state.speechRecognition.recognition;
-  const recognition = useSelector(selectRecognition);
+  // const selectRecognition = (state: SpeechRecognitionType) =>
+  //   state.speechRecognition.recognition;
+  // const recognition = useSelector(selectRecognition);
+  const selectCurrentUser = (state: AppType) => state.appState.currentUser;
+  const currentUser = useSelector(selectCurrentUser);
+  const selectUserIsLogged = (state: AppType) => state.appState.userIsLogged;
+  const userIsLogged = useSelector(selectUserIsLogged);
+
+  //actions redux
+  const dispatch = useDispatch();
+
+  //useEffect
+  useEffect(() => {
+    const localUser = window.localStorage.getItem("userIsLogged");
+    if (localUser) {
+      dispatch(setUserIsLoggedAction(JSON.parse(localUser)));
+    }
+  }, [dispatch]);
 
   return (
     <header className="header">
@@ -25,26 +36,29 @@ const Header: FC = () => {
         <Link to="/">
           <Logo />
         </Link>
-        {!!recognition && (
-          <NavLink
-            to="/speech-recognition-commands"
-            className="header_navLInk"
-            activeClassName="header_selected-navLink"
-            exact
-          >
-            Speech Recognition Commands
-          </NavLink>
-        )}
-        <DropDown buttonTitle={<i className="fas fa-ellipsis-v"></i>}>
+        <DropDown
+          buttonTitle={
+            userIsLogged !== null ? (
+              userIsLogged?.first_name
+            ) : (
+              <i className="fas fa-ellipsis-v"></i>
+            )
+          }
+        >
           <div className="header_dropDown_wrapper">
-            {isLogged && (
-              <User
-                image={user.image}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                email={user.email}
-              />
+            <Link to="/users" className="header_link">
+              Users
+            </Link>
+            {currentUser?.uid && (
+              <Link to={`/users/${currentUser?.uid}`} className="header_link">
+                View profile
+              </Link>
             )}
+            {/* {!!recognition && (
+              <Link to="/speech-recognition-commands" className="header_link">
+                Speech Recognition Commands
+              </Link>
+            )} */}
             <DarkAndLightMode />
             <SignOut />
           </div>

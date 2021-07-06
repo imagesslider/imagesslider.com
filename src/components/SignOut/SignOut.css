@@ -1,4 +1,4 @@
-#sign-out-button-google {
+#sign-out-button {
   border: none;
   outline: none;
   background: none;
@@ -12,7 +12,7 @@
   transition: all 0.4s ease-in-out;
 }
 
-#sign-out-button-google:hover {
+#sign-out-button:hover {
   background: hsla(45, 100%, 41%, 0.7);
 }
 

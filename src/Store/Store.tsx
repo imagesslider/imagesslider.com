@@ -16,20 +16,33 @@ export type ImageType = {
   description?: string | undefined | null;
   user?: string;
   userLink?: string | undefined;
+  url?: string | undefined;
 };
 
 export type UserType = {
-  image?: string;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
+  created_at?: any;
+  user_image?: string | undefined;
+  first_name?: string | undefined;
+  last_name?: string | undefined;
+  email?: string | undefined;
+  user_pro?: boolean | undefined;
+  user_id?: string;
 };
 
-export type DefaultCollectionType = {
+export type CollectionsPrivateType = {
   id?: string | number;
   title?: string;
   coverPhoto?: string;
   totalPhotos?: number;
+  images?: Array<ImageType>;
+};
+
+export type CollectionPrivateType = {
+  id?: string | number;
+  title?: string;
+  coverPhoto?: string;
+  totalPhotos?: number;
+  images?: Array<ImageType>;
 };
 
 export type DefaultAlbumType = {
@@ -50,8 +63,8 @@ export type Store = {
     isLogged: boolean;
     provider: string | null;
     token: string | null;
-    user: UserType;
   };
+  user: UserType;
   albums: Array<AlbumType>;
   defaultAlbums: Array<DefaultAlbumType>;
   defaultVideos: Array<DefaultVideoType>;
@@ -61,7 +74,8 @@ export type Store = {
   redirect: boolean;
   totalPages: number;
   noContent: string;
-  defaultCollections: Array<DefaultCollectionType>;
+  collectionsPrivate: Array<CollectionsPrivateType>;
+  collectionPrivate: any;
   totalPagesCollections: number;
   indexTab: number;
   nextPageToken: string;
@@ -70,6 +84,9 @@ export type Store = {
   showDropDown: boolean;
   theme: string;
   signInAndOut: boolean | null;
+  currentUser: any;
+  inImage: boolean;
+  userIsLogged: any;
 };
 
 export const initalStore: Store = {
@@ -77,12 +94,15 @@ export const initalStore: Store = {
     isLogged: false,
     provider: null,
     token: null,
-    user: {
-      image: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-    },
+  },
+  user: {
+    user_image: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    user_pro: false,
+    created_at: "",
+    user_id: "",
   },
   albums: [],
   defaultAlbums: [],
@@ -93,7 +113,8 @@ export const initalStore: Store = {
   redirect: false,
   totalPages: 0,
   noContent: "",
-  defaultCollections: [],
+  collectionsPrivate: [],
+  collectionPrivate: [],
   totalPagesCollections: 0,
   indexTab: 0,
   nextPageToken: "",
@@ -102,6 +123,9 @@ export const initalStore: Store = {
   showDropDown: false,
   theme: "dark",
   signInAndOut: null,
+  currentUser: null,
+  inImage: false,
+  userIsLogged: null,
 };
 
 //slider store

@@ -1,0 +1,128 @@
+.image_slider_wrapper {
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: #000;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+}
+
+.image_slider_img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.button_image_slider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: #ffc107;
+  color: #000;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 50%;
+  outline: none;
+  opacity: 0;
+  transition: all ease-in-out 0.4s;
+  z-index: 1;
+}
+
+.button_image_slider.prev {
+  left: 10px;
+}
+
+/* is disabled for all */
+.isDisabled {
+  pointer-events: auto;
+  cursor: not-allowed;
+  opacity: 0.5;
+  display: none;
+}
+
+.button_image_slider.prev:not(.isDisabled):hover {
+  background: hsla(45, 100%, 41%, 0.7);
+}
+
+.button_image_slider.next {
+  right: 10px;
+}
+
+.button_image_slider.next:hover {
+  background: hsla(45, 100%, 41%, 0.7);
+}
+
+.button-pause {
+  border: none;
+  outline: none;
+  background: none;
+  color: #ffc107;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all ease-in-out 0.4s;
+}
+
+.button-pause:hover {
+  color: hsla(45, 100%, 41%, 0.7);
+}
+
+.fullscreen {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  border: none;
+  color: #ffc107;
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  z-index: 1;
+  background: none;
+  transition: all ease-in-out 0.4s;
+}
+
+.openFullscreen:hover {
+  color: hsla(45, 100%, 41%, 0.7);
+}
+
+.exitFullscreen:hover {
+  color: hsla(45, 100%, 41%, 0.7);
+}
+
+.fa-arrow-left.back {
+  color: #ffc107;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all ease-in-out 0.4s;
+}
+
+.fa-arrow-left.back:hover {
+  color: hsla(45, 100%, 41%, 0.7);
+}
+
+@media screen and (min-width: 769px) {
+  .fa-arrow-left.back {
+    left: 50px;
+  }
+  .button_image_slider.prev {
+    left: 50px;
+  }
+  .button_image_slider.next {
+    right: 50px;
+  }
+  .fullscreen {
+    right: 50px;
+  }
+  .button-pause {
+    right: 100px;
+  }
+}
