@@ -25,6 +25,8 @@ const ImageSlider: FC<ImageSliderType> = ({ match }) => {
   const [onClickIsTrue, setOnClickIsTrue] = useState<boolean>(false);
   const [hover, setHover] = useState<boolean>(false);
   let [hoverTimeout, setHoverTimeout] = useState<number>(0);
+  //types
+  const types = ["video/mp4", "video/webm", "video/ogg", "video/avi"];
 
   //state redux
   const selectImages = (state: AppType) => state.appState.images;
@@ -236,7 +238,7 @@ const ImageSlider: FC<ImageSliderType> = ({ match }) => {
     <>
       {image !== undefined ? (
         <div className="image_slider_wrapper" onMouseMove={onMouseMove}>
-          {image?.video_type ? (
+          {types.includes(image?.type) ? (
             <Video
               srcVideo={image?.url}
               onPlay={onPlay}

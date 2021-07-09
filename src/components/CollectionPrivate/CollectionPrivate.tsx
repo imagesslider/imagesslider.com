@@ -10,6 +10,7 @@ import {
 } from "../../Actions/actionsApp";
 import { AppType } from "../../Type/Type";
 import Spinner from "../UI/Spinner/Spinner";
+import NewImageFormPrivate from "../NewImageFormPrivate/NewImageFormPrivate";
 
 type CollectionPrivateType = {
   match: any;
@@ -25,6 +26,9 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
   const collectionPrivate = useSelector(selectCollectionPrivate);
   const selectImages = (state: AppType) => state.appState.images;
   const images = useSelector(selectImages);
+
+  //types
+  const types = ["video/mp4", "video/webm", "video/ogg", "video/avi"];
 
   //actions redux
   const dispatch = useDispatch();
@@ -95,6 +99,10 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
           : `${images?.length} Images`}
       </h4>
       <div className="collection_private_images">
+        <NewImageFormPrivate
+          userId={match?.params?.userID}
+          collection_private_id={match?.params?.collection_private_id}
+        />
         {images?.map((collectionPrivateImage: any, index: number) => {
           return (
             <Link
@@ -103,7 +111,7 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
               key={collectionPrivateImage?.id}
             >
               <div className="collection_private_link">
-                {collectionPrivateImage?.video_type ? (
+                {types.includes(collectionPrivateImage?.type) ? (
                   <div className="collection_private_video_type">
                     <div>
                       <i className="fas fa-video fa-2x"></i> is:
@@ -121,7 +129,7 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
                 )}
                 <div className="collection_private_inner">
                   <h2 className="collections_private_description">
-                    {collectionPrivateImage?.video_type
+                    {types.includes(collectionPrivateImage?.type)
                       ? `Video is: ${collectionPrivateImage?.description}`
                       : collectionPrivateImage?.description}
                   </h2>

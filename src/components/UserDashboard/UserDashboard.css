@@ -10,22 +10,25 @@
 }
 
 .collections_private {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
   margin-top: 20px;
   position: relative;
+  column-width: 300px;
+  column-gap: 20px;
 }
 
 .collections_private_link {
+  display: block;
   text-decoration: none;
   cursor: pointer;
   background: #ffc107;
   position: relative;
-  width: 250px;
+  width: 100%;
   height: 250px;
   overflow: hidden;
   text-decoration: none;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin: 0 0 20px 0;
 }
 
 .collections_private_img {
