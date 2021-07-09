@@ -14,6 +14,8 @@ import UserInfo from "../UI/UserInfo/UserInfo";
 import Spinner from "../UI/Spinner/Spinner";
 import Tabs from "../UI/Tabs/Tabs";
 import Tab from "../UI/Tab/Tab";
+import NewCollectionFormPrivate from "../NewCollectionFormPrivate/NewCollectionFormPrivate";
+import UserPro from "../UI/UserPro/UserPro";
 
 type UserDashboardType = {
   match: any;
@@ -32,6 +34,8 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
   const collectionsPrivate = useSelector(selectCollectionsPrivate);
   const selectUser = (state: AppType) => state.appState.user;
   const user = useSelector(selectUser);
+  const selectUserIsLogged = (state: AppType) => state.appState.userIsLogged;
+  const userIsLogged = useSelector(selectUserIsLogged);
 
   //actions redux
   const dispatch = useDispatch();
@@ -88,41 +92,37 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
       <Tabs activeIndex={indexTab} onClick={onClickBtn}>
         <Tab label="Collections Private">
           <div className="collections_private">
-            {match?.params?.userID === currentUser?.uid ? (
-              collectionsPrivate.map(
-                (userCollection: CollectionsPrivateType) => {
-                  return (
-                    <Link
-                      to={`/users/${match?.params?.userID}/collection_private/${userCollection.id}`}
-                      key={userCollection.id}
-                      className="collections_private_link"
-                    >
-                      {/* <img
-                        src={
-                          userCollection.images
-                            ? userCollection.images[0].url
-                            : ""
-                        }
-                        alt={
-                          userCollection.images
-                            ? userCollection.images[0].url
-                            : ""
-                        }
-                        className="collections_private_img"
-                      /> */}
-                      <div className="collections_private_content">
-                        <h2 className="collections_private_title">
-                          {userCollection?.title}
-                        </h2>
-                      </div>
-                    </Link>
-                  );
-                }
-              )
+            {match?.params?.userID === currentUser?.uid &&
+            userIsLogged?.user_pro ? (
+              <>
+                <NewCollectionFormPrivate userId={match?.params?.userID} />
+                {collectionsPrivate.map(
+                  (userCollection: CollectionsPrivateType) => {
+                    return (
+                      <Link
+                        to={`/users/${match?.params?.userID}/collection_private/${userCollection.id}`}
+                        key={userCollection.id}
+                        className="collections_private_link"
+                      >
+                        <div className="collections_private_content">
+                          <h2 className="collections_private_title">
+                            {userCollection?.title}
+                          </h2>
+                        </div>
+                      </Link>
+                    );
+                  }
+                )}
+              </>
             ) : (
-              <h2 style={{ color: "#ffc107", textAlign: "center" }}>
-                Collections Private
-              </h2>
+              <>
+                <h2 style={{ color: "#ffc107", textAlign: "center" }}>
+                  Private Collection is a <UserPro /> feature.
+                </h2>
+                <h2 style={{ color: "#ffc107", textAlign: "center" }}>
+                  Contact us: contact@imagesslider.com
+                </h2>
+              </>
             )}
           </div>
         </Tab>
