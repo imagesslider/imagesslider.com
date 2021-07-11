@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { isImageAction } from "../../Actions/actionsApp";
 import Spinner from "../UI/Spinner/Spinner";
+import UserPro from "../UI/UserPro/UserPro";
 
 const Users: FC = () => {
   //state
@@ -60,6 +61,7 @@ const Users: FC = () => {
                   <div className="users_user_name_wrapper">
                     <h4 className="users_user_name">{user?.first_name}</h4>
                     <h4 className="users_user_name">{user?.last_name}</h4>
+                    {user?.user_pro && <UserPro />}
                   </div>
                 </div>
               </Link>

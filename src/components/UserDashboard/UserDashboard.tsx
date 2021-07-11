@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import "../UserDashboard/UserDashboard.css";
 import { firestore } from "../../Firebase/Firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   setUserAction,
   setCollectionsPrivate,
@@ -16,6 +16,8 @@ import Tabs from "../UI/Tabs/Tabs";
 import Tab from "../UI/Tab/Tab";
 import NewCollectionFormPrivate from "../NewCollectionFormPrivate/NewCollectionFormPrivate";
 import UserPro from "../UI/UserPro/UserPro";
+import DeleteButton from "../UI/DeleteButton/DeleteButton";
+import EditModalCollectionPrivate from "../EditModalCollectionPrivate/EditModalCollectionPrivate";
 
 type UserDashboardType = {
   match: any;
@@ -40,9 +42,44 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
   //actions redux
   const dispatch = useDispatch();
 
+  //history
+  const history = useHistory();
+
   //onClickBtn
   const onClickBtn = (index: number) => {
     setIndexTab(index);
+  };
+
+  //onMouseDownLink
+  const onMouseDownLink = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpLink
+  const onMouseUpLink = (event: any, userCollectionId: any) => {
+    event.stopPropagation();
+    history.push(
+      `/users/${match?.params?.userID}/collection_private/${userCollectionId}`
+    );
+  };
+
+  //onMouseDownDelete
+  const onMouseDownDelete = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpDelete
+  const onMouseUpDelete = async (event: any, userCollectionId: any) => {
+    event.stopPropagation();
+    var r = window.confirm("Really delete?");
+    if (r === true) {
+      await firestore
+        .collection("collections_private")
+        .doc(match?.params?.userID)
+        .collection("collections_private")
+        .doc(userCollectionId)
+        .delete();
+    }
   };
 
   useEffect(() => {
@@ -99,8 +136,11 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
                 {collectionsPrivate.map(
                   (userCollection: CollectionsPrivateType) => {
                     return (
-                      <Link
-                        to={`/users/${match?.params?.userID}/collection_private/${userCollection.id}`}
+                      <div
+                        onMouseUp={(event) =>
+                          onMouseUpLink(event, userCollection.id)
+                        }
+                        onMouseDown={onMouseDownLink}
                         key={userCollection.id}
                         className="collections_private_link"
                       >
@@ -108,8 +148,36 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
                           <h2 className="collections_private_title">
                             {userCollection?.title}
                           </h2>
+                          <h4 className="collections_private_images_length">
+                            {userCollection?.images_length === 1
+                              ? `${userCollection?.images_length} Image`
+                              : `${
+                                  userCollection?.images_length === undefined
+                                    ? 0
+                                    : userCollection?.images_length
+                                } Images`}
+                          </h4>
                         </div>
-                      </Link>
+                        <div className="collections_private_edit_modal">
+                          <EditModalCollectionPrivate
+                            title={userCollection?.title}
+                            userID={match?.params?.userID}
+                            userCollectionId={userCollection.id}
+                          />
+                        </div>
+                        {(userCollection?.images_length === 0 ||
+                          userCollection?.images_length === undefined) && (
+                          <div className="collections_private_delete_button">
+                            <DeleteButton
+                              title="Delete collection"
+                              onMouseDown={onMouseDownDelete}
+                              onMouseUp={(event: any) =>
+                                onMouseUpDelete(event, userCollection.id)
+                              }
+                            />
+                          </div>
+                        )}
+                      </div>
                     );
                   }
                 )}

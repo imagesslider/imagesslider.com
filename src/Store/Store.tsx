@@ -34,6 +34,7 @@ export type CollectionsPrivateType = {
   title?: string;
   coverPhoto?: string;
   totalPhotos?: number;
+  images_length?: number | null;
   images?: Array<ImageType>;
 };
 
