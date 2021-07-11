@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import "../CollectionPrivate/CollectionPrivate.css";
 import { firestore } from "../../Firebase/Firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   isImageAction,
   setCollectionPrivate,
@@ -11,6 +11,7 @@ import {
 import { AppType } from "../../Type/Type";
 import Spinner from "../UI/Spinner/Spinner";
 import NewImageFormPrivate from "../NewImageFormPrivate/NewImageFormPrivate";
+import DeleteButton from "../UI/DeleteButton/DeleteButton";
 
 type CollectionPrivateType = {
   match: any;
@@ -39,6 +40,44 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
   //onClickBack
   const onClickBack = () => {
     history.push(`/users/${match?.params?.userID}`);
+  };
+
+  //onMouseDownLink
+  const onMouseDownLink = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpLink
+  const onMouseUpLink = (
+    event: any,
+    collectionPrivateImageId: any,
+    index: any
+  ) => {
+    event.stopPropagation();
+    history.push(
+      `/users/${match?.params?.userID}/collection_private/${match?.params?.collection_private_id}/image/${collectionPrivateImageId}/${index}`
+    );
+  };
+
+  //onMouseDownDelete
+  const onMouseDownDelete = (event: any) => {
+    event.stopPropagation();
+  };
+
+  //onMouseUpDelete
+  const onMouseUpDelete = async (event: any, imageId: any) => {
+    event.stopPropagation();
+    var r = window.confirm("Really delete?");
+    if (r === true) {
+      await firestore
+        .collection("collections_private")
+        .doc(match?.params?.userID)
+        .collection("collections_private")
+        .doc(match?.params?.collection_private_id)
+        .collection("images")
+        .doc(imageId)
+        .delete();
+    }
   };
 
   //useEffect
@@ -78,6 +117,20 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
     return unmount;
   }, [dispatch, match]);
 
+  useEffect(() => {
+    const updated = async () => {
+      await firestore
+        .collection("collections_private")
+        .doc(match?.params?.userID)
+        .collection("collections_private")
+        .doc(match?.params?.collection_private_id)
+        .update({
+          images_length: images?.length,
+        });
+    };
+    updated();
+  }, [dispatch, match, images]);
+
   //isLoading
   if (isLoading) {
     return <Spinner />;
@@ -92,12 +145,18 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
           onClick={() => onClickBack()}
         ></i>
       </div>
-      <h1 className="collection_private_title">{collectionPrivate?.title}</h1>
-      <h4 className="collection_private_imagesLength">
-        {images?.length === 1
-          ? `${images?.length} Image`
-          : `${images?.length} Images`}
-      </h4>
+      <div className="collection_private_container">
+        <div>
+          <h1 className="collection_private_title">
+            {collectionPrivate?.title}
+          </h1>
+          <h4 className="collection_private_imagesLength">
+            {images?.length === 1
+              ? `${images?.length} Image`
+              : `${images?.length} Images`}
+          </h4>
+        </div>
+      </div>
       <div className="collection_private_images">
         <NewImageFormPrivate
           userId={match?.params?.userID}
@@ -105,10 +164,13 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
         />
         {images?.map((collectionPrivateImage: any, index: number) => {
           return (
-            <Link
-              to={`/users/${match?.params?.userID}/collection_private/${match?.params?.collection_private_id}/image/${collectionPrivateImage?.id}/${index}`}
+            <div
               className="collection_private_link"
               key={collectionPrivateImage?.id}
+              onMouseDown={onMouseDownLink}
+              onMouseUp={(event) =>
+                onMouseUpLink(event, collectionPrivateImage?.id, index)
+              }
             >
               <div className="collection_private_link">
                 {types.includes(collectionPrivateImage?.type) ? (
@@ -134,8 +196,17 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
                       : collectionPrivateImage?.description}
                   </h2>
                 </div>
+                <div className="collection_private_inner_button_wrapper">
+                  <DeleteButton
+                    title="Delete image"
+                    onMouseDown={onMouseDownDelete}
+                    onMouseUp={(event: any) =>
+                      onMouseUpDelete(event, collectionPrivateImage?.id)
+                    }
+                  />
+                </div>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>

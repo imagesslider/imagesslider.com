@@ -1,0 +1,78 @@
+.edit_modal_button_collection_private {
+  position: absolute;
+  top: 22px;
+  right: 60px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.edit_modal_fa-pen {
+  color: #008000;
+  font-size: 18px;
+  transition: all 0.4s ease-in-out;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.edit_modal_fa-pen:hover {
+  color: hsl(120, 100%, 15%);
+  background: #000;
+}
+
+.edit_modal_header_collection_private {
+  background: #ccc;
+  text-align: left;
+  width: 100%;
+  padding: 20px;
+}
+
+.form_group_edit_collection_private {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 20px;
+}
+
+.form_control_edit_collection_private {
+  padding: 5px;
+}
+
+.edit_modal_footer_collection_private {
+  padding: 20px;
+  text-align: right;
+}
+
+.edit_modal_button_close_collection_private {
+  border: 1px solid #000;
+  outline: none;
+  color: #000;
+  font-weight: 600;
+  padding: 5px 10px;
+  margin-right: 20px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.edit_modal_button_close_collection_private:hover {
+  color: #fff;
+  background: #000;
+}
+
+.edit_modal_button_save_collection_private {
+  border: 1px solid #008000;
+  outline: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 5px 10px;
+  background: #008000;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.edit_modal_button_save_collection_private:hover {
+  background: hsl(120, 100%, 15%);
+  border: 1px solid hsl(120, 100%, 15%);
+}

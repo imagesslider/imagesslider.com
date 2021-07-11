@@ -13,6 +13,7 @@
   color: #ffc107;
   font-weight: 600;
   padding-right: 5px;
+  text-align: left;
 }
 
 .collection_private_title::first-letter {
@@ -22,6 +23,7 @@
 .collection_private_imagesLength {
   color: var(--p-color);
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .collection_private_images {
@@ -38,6 +40,8 @@
   position: relative;
   transition: all 0.4s ease-in-out;
   text-decoration: none;
+  text-align: left;
+  cursor: pointer;
 }
 
 .collection_private_img {
@@ -95,4 +99,21 @@
 
 .collection_private_back_i:hover {
   color: hsla(45, 100%, 41%, 0.7);
+}
+
+.collection_private_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collection_private_inner_button_wrapper {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: none;
+  transition: all 0.4s ease-in-out;
+}
+
+.collection_private_link:hover .collection_private_inner_button_wrapper {
+  display: block;
 }
