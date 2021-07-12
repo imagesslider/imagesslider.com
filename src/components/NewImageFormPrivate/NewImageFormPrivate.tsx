@@ -8,13 +8,9 @@ import { AppType } from "../../Type/Type";
 
 type NewImageFormPrivateType = {
   userId?: string;
-  collection_private_id?: string;
 };
 
-const NewImageFormPrivate: FC<NewImageFormPrivateType> = ({
-  userId,
-  collection_private_id,
-}) => {
+const NewImageFormPrivate: FC<NewImageFormPrivateType> = ({ userId }) => {
   //state
   const [file, setFile] = useState<any>(null);
   const [percentage, setPercentage] = useState<any>(null);
@@ -58,10 +54,8 @@ const NewImageFormPrivate: FC<NewImageFormPrivateType> = ({
       },
       async () => {
         await firestore
-          .collection("collections_private")
+          .collection("images_private")
           .doc(userId)
-          .collection("collections_private")
-          .doc(collection_private_id)
           .collection("images")
           .add({
             name: file.name,
@@ -69,6 +63,7 @@ const NewImageFormPrivate: FC<NewImageFormPrivateType> = ({
             type: file.type,
             owner_id: userId,
             created_at: new Date(),
+            image: "private",
             user: userIsLogged,
           })
           .then((docRef) => {
@@ -87,17 +82,15 @@ const NewImageFormPrivate: FC<NewImageFormPrivateType> = ({
   useEffect(() => {
     if (id) {
       firestore
-        .collection("collections_private")
+        .collection("images_private")
         .doc(userId)
-        .collection("collections_private")
-        .doc(collection_private_id)
         .collection("images")
         .doc(id)
         .update({
           id: id,
         });
     }
-  }, [id]);
+  }, [id, userId]);
 
   return (
     <div className="new_image_form_private">

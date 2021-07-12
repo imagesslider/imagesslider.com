@@ -10,7 +10,6 @@ import {
 } from "../../Actions/actionsApp";
 import { AppType } from "../../Type/Type";
 import Spinner from "../UI/Spinner/Spinner";
-import NewImageFormPrivate from "../NewImageFormPrivate/NewImageFormPrivate";
 import DeleteButton from "../UI/DeleteButton/DeleteButton";
 
 type CollectionPrivateType = {
@@ -158,10 +157,6 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
         </div>
       </div>
       <div className="collection_private_images">
-        <NewImageFormPrivate
-          userId={match?.params?.userID}
-          collection_private_id={match?.params?.collection_private_id}
-        />
         {images?.map((collectionPrivateImage: any, index: number) => {
           return (
             <div
@@ -198,7 +193,7 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
                 </div>
                 <div className="collection_private_inner_button_wrapper">
                   <DeleteButton
-                    title="Delete image"
+                    title="Remove from collection private"
                     onMouseDown={onMouseDownDelete}
                     onMouseUp={(event: any) =>
                       onMouseUpDelete(event, collectionPrivateImage?.id)

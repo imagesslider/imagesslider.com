@@ -88,7 +88,7 @@ const NewCollectionFormPrivate: FC<NewCollectionFormPrivateType> = ({
           id: id,
         });
     }
-  }, [id]);
+  }, [id, userId]);
 
   return (
     <form onSubmit={handleSubmit} className="new_collection_form_private">
