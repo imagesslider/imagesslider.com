@@ -19,6 +19,7 @@ import Users from "./components/Users/Users";
 import UserDashboard from "./components/UserDashboard/UserDashboard";
 import CollectionPrivate from "./components/CollectionPrivate/CollectionPrivate";
 import ImageSlider from "./components/ImageSlider/ImageSlider";
+import ImagesPrivateSlider from "./components/ImagesPrivateSlider/ImagesPrivateSlider";
 
 const App: FC = () => {
   //state redux
@@ -50,6 +51,11 @@ const App: FC = () => {
           {!currentUser && <Route path="/signin" exact component={SignIn} />}
           <Route path="/users" exact component={Users} />
           <Route path="/users/:userID" exact component={UserDashboard} />
+          <Route
+            path="/users/:userID/images_private/:image_id/:image_index"
+            exact
+            component={ImagesPrivateSlider}
+          />
           <Route
             path="/users/:userID/collection_private/:collection_private_id"
             exact

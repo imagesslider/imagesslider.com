@@ -6,7 +6,6 @@ import { firestore } from "../../Firebase/Firebase";
 import { AppType } from "../../Type/Type";
 import {
   isImageAction,
-  setIndexTabAction,
   setUserAction,
   setUserIsLoggedAction,
 } from "../../Actions/actionsApp";
@@ -20,12 +19,11 @@ import Spinner from "../UI/Spinner/Spinner";
 
 const Home: FC = () => {
   const [isOpenAccordion, setIsOpenAccordion] = useState<boolean>(false);
+  const [indexTab, setIndexTab] = useState<number>(0);
 
   //state redux
   const selectIsLoading = (state: AppType) => state.appState.isLoading;
   const isLoading = useSelector(selectIsLoading);
-  const selectIndexTab = (state: AppType) => state.appState.indexTab;
-  const indexTab = useSelector(selectIndexTab);
   const selectCurrentUser = (state: AppType) => state.appState.currentUser;
   const currentUser = useSelector(selectCurrentUser);
   const selectUserIsLogged = (state: AppType) => state.appState.userIsLogged;
@@ -36,7 +34,7 @@ const Home: FC = () => {
 
   //onClickBtn
   const onClickBtn = (index: number) => {
-    dispatch(setIndexTabAction(index));
+    setIndexTab(index);
   };
 
   //handleClickIsOpen

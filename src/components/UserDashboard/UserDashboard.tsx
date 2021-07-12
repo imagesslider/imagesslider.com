@@ -7,6 +7,7 @@ import {
   setUserAction,
   setCollectionsPrivate,
   isImageAction,
+  setIndexTabAction,
 } from "../../Actions/actionsApp";
 import { AppType } from "../../Type/Type";
 import { CollectionsPrivateType } from "../../Store/Store";
@@ -17,7 +18,8 @@ import Tab from "../UI/Tab/Tab";
 import NewCollectionFormPrivate from "../NewCollectionFormPrivate/NewCollectionFormPrivate";
 import UserPro from "../UI/UserPro/UserPro";
 import DeleteButton from "../UI/DeleteButton/DeleteButton";
-import EditModalCollectionPrivate from "../EditModalCollectionPrivate/EditModalCollectionPrivate";
+import EditModalCollectionPrivate from "../Modals/EditModalCollectionPrivate/EditModalCollectionPrivate";
+import ImagesPrivate from "../ImagesPrivate/ImagesPrivate";
 
 type UserDashboardType = {
   match: any;
@@ -26,7 +28,6 @@ type UserDashboardType = {
 const UserDashboard: FC<UserDashboardType> = ({ match }) => {
   //state
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [indexTab, setIndexTab] = useState<number>(0);
 
   //state redux
   const selectCurrentUser = (state: AppType) => state.appState.currentUser;
@@ -38,6 +39,8 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
   const user = useSelector(selectUser);
   const selectUserIsLogged = (state: AppType) => state.appState.userIsLogged;
   const userIsLogged = useSelector(selectUserIsLogged);
+  const selectIndexTab = (state: AppType) => state.appState.indexTab;
+  const indexTab = useSelector(selectIndexTab);
 
   //actions redux
   const dispatch = useDispatch();
@@ -47,7 +50,7 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
 
   //onClickBtn
   const onClickBtn = (index: number) => {
-    setIndexTab(index);
+    dispatch(setIndexTabAction(index));
   };
 
   //onMouseDownLink
@@ -127,6 +130,21 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
         user_pro={user?.user_pro}
       />
       <Tabs activeIndex={indexTab} onClick={onClickBtn}>
+        <Tab label="Images Private">
+          {match?.params?.userID === currentUser?.uid &&
+          userIsLogged?.user_pro ? (
+            <ImagesPrivate user_id={match?.params?.userID} />
+          ) : (
+            <>
+              <h2 style={{ color: "#ffc107", textAlign: "center" }}>
+                Private Images is a <UserPro /> feature.
+              </h2>
+              <h2 style={{ color: "#ffc107", textAlign: "center" }}>
+                Contact us: contact@imagesslider.com
+              </h2>
+            </>
+          )}
+        </Tab>
         <Tab label="Collections Private">
           <div className="collections_private">
             {match?.params?.userID === currentUser?.uid &&

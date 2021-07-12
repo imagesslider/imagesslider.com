@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import "./EditModalCollectionPrivate.css";
-import Modal from "../UI/Modal/Modal";
-import { firestore } from "../../Firebase/Firebase";
+import Modal from "../../UI/Modal/Modal";
+import { firestore } from "../../../Firebase/Firebase";
 
 type EditModalCollectionPrivateType = {
   title?: any;
