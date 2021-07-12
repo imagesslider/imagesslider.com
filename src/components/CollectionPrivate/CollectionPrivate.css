@@ -117,3 +117,9 @@
 .collection_private_link:hover .collection_private_inner_button_wrapper {
   display: block;
 }
+
+@media screen and (max-width: 768px) {
+  .collection_private_inner_button_wrapper {
+    display: block;
+  }
+}

@@ -45,3 +45,14 @@
 .images_private_link:hover .images_private_delete_button {
   opacity: 1;
 }
+
+@media screen and (max-width: 768px) {
+  .images_private_add_to_collection_private {
+    display: block;
+    opacity: 1;
+  }
+  .images_private_delete_button {
+    display: block;
+    opacity: 1;
+  }
+}

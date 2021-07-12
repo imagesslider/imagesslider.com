@@ -108,3 +108,17 @@
   color: #000000;
   text-shadow: none;
 }
+
+@media screen and (max-width: 768px) {
+  .collections_private_delete_button {
+    display: block;
+  }
+  .collections_private_edit_modal {
+    display: block;
+  }
+  .collections_private_images_length {
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease-in-out;
+  }
+}
