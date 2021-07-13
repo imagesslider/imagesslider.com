@@ -80,22 +80,6 @@ textarea:hover {
   background: hsla(45, 100%, 41%, 0.7);
 }
 
-.sign_up_signOut {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-}
-
-.sign_up_signOut > h2 {
-  color: #ffc107;
-}
-
-.sign_up_signOut > div {
-  display: flex;
-  justify-content: center;
-}
-
 @media screen and (max-width: 1400px) {
   .sign_up_container {
     margin: 20px;

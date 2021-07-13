@@ -81,87 +81,75 @@ const SignUp: FC = () => {
     }
   };
 
-  //webdevelopmentwebdesign7@gmail.com
-
   return (
     <div className="sign_up">
-      {auth.currentUser?.uid ? (
-        <div className="sign_up_signOut">
-          <h2>Please Sign Out for creating a new user</h2>
-          <div>
-            <SignOut />
-          </div>
-        </div>
-      ) : (
-        <div className="sign_up_container">
-          {error && <Error title={error} />}
-          <h2 className="sign_up_title">Sign Up</h2>
-          <form onSubmit={handleSubmit} className="sign_up_form">
-            <input
-              type="text"
-              placeholder="First Name"
-              value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
-              onBlur={() => setFirstNameBlured(true)}
-            />
-            {(formSubmitted || firstNameBlured) && !isFirstNameValid() && (
-              <Error title="Please fill First Name" />
+      <div className="sign_up_container">
+        {error && <Error title={error} />}
+        <h2 className="sign_up_title">Sign Up</h2>
+        <form onSubmit={handleSubmit} className="sign_up_form">
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+            onBlur={() => setFirstNameBlured(true)}
+          />
+          {(formSubmitted || firstNameBlured) && !isFirstNameValid() && (
+            <Error title="Please fill First Name" />
+          )}
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
+            onBlur={() => setLastNameBlured(true)}
+          />
+          {(formSubmitted || lastNameBlured) && !isLastNameValid() && (
+            <Error title="Please fill Last Name" />
+          )}
+          <input
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            onBlur={() => setEmailBlured(true)}
+          />
+          {(formSubmitted || emailBlured) && !isEmailValid() && (
+            <Error title="Please fill Email" />
+          )}
+          <input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            onBlur={() => setPasswordBlured(true)}
+          />
+          {(formSubmitted || passwordBlured) && !isPasswordValid() && (
+            <Error title="Please fill Password" />
+          )}
+          <input
+            placeholder="Password Confirmation"
+            type="password"
+            value={passwordConfirm}
+            onChange={(event) => setPasswordConfirm(event.target.value)}
+            onBlur={() => setPasswordConfirmBlured(true)}
+          />
+          {(formSubmitted || passwordConfirmBlured) &&
+            !isPasswordConfirmValid() && (
+              <Error title="Please fill Password Confirm" />
             )}
-            <input
-              type="text"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
-              onBlur={() => setLastNameBlured(true)}
-            />
-            {(formSubmitted || lastNameBlured) && !isLastNameValid() && (
-              <Error title="Please fill Last Name" />
-            )}
-            <input
-              placeholder="Email"
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              onBlur={() => setEmailBlured(true)}
-            />
-            {(formSubmitted || emailBlured) && !isEmailValid() && (
-              <Error title="Please fill Email" />
-            )}
-            <input
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              onBlur={() => setPasswordBlured(true)}
-            />
-            {(formSubmitted || passwordBlured) && !isPasswordValid() && (
-              <Error title="Please fill Password" />
-            )}
-            <input
-              placeholder="Password Confirmation"
-              type="password"
-              value={passwordConfirm}
-              onChange={(event) => setPasswordConfirm(event.target.value)}
-              onBlur={() => setPasswordConfirmBlured(true)}
-            />
-            {(formSubmitted || passwordConfirmBlured) &&
-              !isPasswordConfirmValid() && (
-                <Error title="Please fill Password Confirm" />
-              )}
-            <button type="submit" className="sign_up_buttonSubmit">
-              Submit
-            </button>
-          </form>
-          <p className="sign_up_description">
-            Click “Sign Up” to agree to ImagesSlider acknowledge that
-            ImagesSlider{" "}
-            <Link to="/privacy-policy" className="footer_privacy-policy">
-              Privacy Policy
-            </Link>{" "}
-            applies to you.
-          </p>
-        </div>
-      )}
+          <button type="submit" className="sign_up_buttonSubmit">
+            Submit
+          </button>
+        </form>
+        <p className="sign_up_description">
+          Click “Sign Up” to agree to ImagesSlider acknowledge that ImagesSlider{" "}
+          <Link to="/privacy-policy" className="footer_privacy-policy">
+            Privacy Policy
+          </Link>{" "}
+          applies to you.
+        </p>
+      </div>
     </div>
   );
 };
