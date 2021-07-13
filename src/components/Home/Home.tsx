@@ -98,6 +98,9 @@ const Home: FC = () => {
               <h2 className="sign_in_info_home_title">
                 You can also run your collection connecting with your account.
               </h2>
+              <Link to={`/signup`} className="sign_in_info_home_link">
+                Sign Up
+              </Link>
               <Link to={`/signin`} className="sign_in_info_home_link">
                 Sign in
               </Link>

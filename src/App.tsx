@@ -20,6 +20,7 @@ import UserDashboard from "./components/UserDashboard/UserDashboard";
 import CollectionPrivate from "./components/CollectionPrivate/CollectionPrivate";
 import ImageSlider from "./components/ImageSlider/ImageSlider";
 import ImagesPrivateSlider from "./components/ImagesPrivateSlider/ImagesPrivateSlider";
+import SignUp from "./components/SignUp/SignUp";
 
 const App: FC = () => {
   //state redux
@@ -49,6 +50,7 @@ const App: FC = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           {!currentUser && <Route path="/signin" exact component={SignIn} />}
+          <Route exact path="/signup" component={SignUp} />
           <Route path="/users" exact component={Users} />
           <Route path="/users/:userID" exact component={UserDashboard} />
           <Route
