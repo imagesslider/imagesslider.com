@@ -49,8 +49,6 @@ const App: FC = () => {
         {!inImage && <Header />}
         <Switch>
           <Route path="/" exact component={Home} />
-          {!currentUser && <Route path="/signin" exact component={SignIn} />}
-          <Route exact path="/signup" component={SignUp} />
           <Route path="/users" exact component={Users} />
           <Route path="/users/:userID" exact component={UserDashboard} />
           <Route
@@ -75,6 +73,8 @@ const App: FC = () => {
             exact
             component={SpeechRecognitionCommands}
           />
+          {!currentUser && <Route path="/signin" exact component={SignIn} />}
+          <Route path="/signup" component={SignUp} />
           <Route component={NotFound404} />
         </Switch>
         {/* {!inImage && <SpeechRecognition />} */}
