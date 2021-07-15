@@ -128,6 +128,7 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
         first_name={user?.first_name}
         last_name={user?.last_name}
         user_pro={user?.user_pro}
+        user_id={match?.params?.userID}
       />
       <Tabs activeIndex={indexTab} onClick={onClickBtn}>
         <Tab label="Images Private">
@@ -136,12 +137,12 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
             <ImagesPrivate user_id={match?.params?.userID} />
           ) : (
             <>
-              <h2 style={{ color: "#ffc107", textAlign: "center" }}>
+              <h4 style={{ color: "#ffc107", textAlign: "center" }}>
                 Private Images is a <UserPro /> feature.
-              </h2>
-              <h2 style={{ color: "#ffc107", textAlign: "center" }}>
+              </h4>
+              <h4 style={{ color: "#ffc107", textAlign: "center" }}>
                 Contact us: contact@imagesslider.com
-              </h2>
+              </h4>
             </>
           )}
         </Tab>
@@ -202,21 +203,21 @@ const UserDashboard: FC<UserDashboardType> = ({ match }) => {
               </>
             ) : (
               <>
-                <h2 style={{ color: "#ffc107", textAlign: "center" }}>
+                <h4 style={{ color: "#ffc107", textAlign: "center" }}>
                   Private Collection is a <UserPro /> feature.
-                </h2>
-                <h2 style={{ color: "#ffc107", textAlign: "center" }}>
+                </h4>
+                <h4 style={{ color: "#ffc107", textAlign: "center" }}>
                   Contact us: contact@imagesslider.com
-                </h2>
+                </h4>
               </>
             )}
           </div>
         </Tab>
         <Tab label="Images Public">
-          <h2 style={{ color: "#ffc107" }}>Images Public</h2>
+          <h4 style={{ color: "#ffc107" }}>Images Public</h4>
         </Tab>
         <Tab label="Collections Public">
-          <h2 style={{ color: "#ffc107" }}>Collections Public</h2>
+          <h4 style={{ color: "#ffc107" }}>Collections Public</h4>
         </Tab>
       </Tabs>
     </div>

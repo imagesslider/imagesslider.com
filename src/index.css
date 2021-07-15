@@ -22,12 +22,18 @@ body {
   --bg-color: #fff;
   --h1-color: #000000;
   --p-color: #2e2e2e;
+  --bg-color-hover: #000;
+  --h1-color-hover: #fff;
+  --p-color-hover: #e7e7e7;
 }
 
 [data-theme="dark"] {
   --bg-color: #000;
   --h1-color: #ffffff;
   --p-color: #e7e7e7;
+  --bg-color-hover: #fff;
+  --h1-color-hover: #000;
+  --p-color-hover: #2e2e2e;
 }
 
 /** main scrollbar **/

@@ -21,6 +21,7 @@ import CollectionPrivate from "./components/CollectionPrivate/CollectionPrivate"
 import ImageSlider from "./components/ImageSlider/ImageSlider";
 import ImagesPrivateSlider from "./components/ImagesPrivateSlider/ImagesPrivateSlider";
 import SignUp from "./components/SignUp/SignUp";
+import EditProfile from "./components/EditProfile/EditProfile";
 
 const App: FC = () => {
   //state redux
@@ -30,6 +31,8 @@ const App: FC = () => {
   const currentUser = useSelector(selectCurrentUser);
   const selectInImage = (state: AppType) => state.appState.inImage;
   const inImage = useSelector(selectInImage);
+  const selectUserIsLogged = (state: AppType) => state.appState.userIsLogged;
+  const userIsLogged = useSelector(selectUserIsLogged);
 
   //actions redux
   const dispatch = useDispatch();
@@ -52,19 +55,24 @@ const App: FC = () => {
           <Route path="/users" exact component={Users} />
           <Route path="/users/:userID" exact component={UserDashboard} />
           <Route
-            path="/users/:userID/images_private/:image_id/:image_index"
+            path="/users/:userID/edit-profile"
             exact
+            component={userIsLogged ? EditProfile : SignIn}
+          />
+          <Route
+            path="/users/:userID/images_private/:image_id/:image_index"
             component={ImagesPrivateSlider}
+            exact
           />
           <Route
             path="/users/:userID/collection_private/:collection_private_id"
-            exact
             component={CollectionPrivate}
+            exact
           />
           <Route
             path="/users/:userID/collection_private/:collection_private_id/image/:image_id/:image_index"
-            exact
             component={ImageSlider}
+            exact
           />
           <Route path="/images" exact component={Images} />
           <Route path="/privacy-policy" exact component={PrivacyPolicy} />
@@ -75,7 +83,7 @@ const App: FC = () => {
           />
           {!currentUser && <Route path="/signin" exact component={SignIn} />}
           <Route path="/signup" component={SignUp} />
-          <Route component={NotFound404} />
+          <Route path="/*" component={NotFound404} />
         </Switch>
         {/* {!inImage && <SpeechRecognition />} */}
         {!inImage && <Artist />}

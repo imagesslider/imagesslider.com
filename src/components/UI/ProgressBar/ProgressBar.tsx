@@ -2,15 +2,16 @@ import React, { FC } from "react";
 
 type ProgressBarType = {
   percentage?: number | null;
+  bgColor?: string;
 };
 
-const ProgressBar: FC<ProgressBarType> = ({ percentage }) => {
+const ProgressBar: FC<ProgressBarType> = ({ percentage, bgColor }) => {
   return (
     <div
       style={{
         width: `${percentage}%`,
         height: "10px",
-        background: "#000",
+        background: `${bgColor}`,
         alignSelf: "flex-start",
       }}
     ></div>

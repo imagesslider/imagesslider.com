@@ -18,15 +18,18 @@ const Users: FC = () => {
   //useEffect
   useEffect(() => {
     dispatch(isImageAction(false));
-    const unmount = firestore.collection("users").onSnapshot((snapshot) => {
-      let user = snapshot.docs.map((doc) => {
-        const data = doc.data();
-        const user_id = doc.id;
-        return { user_id, ...data };
+    const unmount = firestore
+      .collection("users")
+      .where("user_visibility", "==", "public")
+      .onSnapshot((snapshot) => {
+        let user = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const user_id = doc.id;
+          return { user_id, ...data };
+        });
+        setUsers(user);
+        setIsLoading(false);
       });
-      setUsers(user);
-      setIsLoading(false);
-    });
     return unmount;
   }, [dispatch]);
 
@@ -52,7 +55,6 @@ const Users: FC = () => {
                     <i className="fas fa-user-circle fa-5x"></i>
                   ) : (
                     <img
-                      crossOrigin="anonymous"
                       src={user?.user_image}
                       alt={user?.user_image}
                       className="users_user_img"

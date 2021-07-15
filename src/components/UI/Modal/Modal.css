@@ -23,3 +23,9 @@
   background: #fff;
   z-index: 101;
 }
+
+@media screen and (max-width: 425px) {
+  .modal_styles {
+    min-width: 80%;
+  }
+}
