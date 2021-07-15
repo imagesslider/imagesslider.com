@@ -3,7 +3,6 @@ import "../SignUp/SignUp.css";
 import { Link, useHistory } from "react-router-dom";
 import { auth, firestore } from "../../Firebase/Firebase";
 import Error from "../UI/Error/Error";
-import SignOut from "../SignOut/SignOut";
 
 const SignUp: FC = () => {
   //state
@@ -68,6 +67,7 @@ const SignUp: FC = () => {
           user_id: auth.currentUser?.uid,
           user_image: "",
           user_pro: false,
+          user_visibility: "public",
         });
         setFirstNameBlured(false);
         setLastNameBlured(false);

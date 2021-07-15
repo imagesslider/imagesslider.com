@@ -66,7 +66,7 @@ const CollectionPrivate: FC<CollectionPrivateType> = ({ match }) => {
   //onMouseUpDelete
   const onMouseUpDelete = async (event: any, imageId: any) => {
     event.stopPropagation();
-    var r = window.confirm("Really delete?");
+    var r = window.confirm("Remove from collection private?");
     if (r === true) {
       await firestore
         .collection("collections_private")

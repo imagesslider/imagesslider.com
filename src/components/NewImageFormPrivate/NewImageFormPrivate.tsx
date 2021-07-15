@@ -106,7 +106,9 @@ const NewImageFormPrivate: FC<NewImageFormPrivateType> = ({ userId }) => {
         ></i>
       </label>
       {file && <h4>{file.name}</h4>}
-      {file && onClickSave && <ProgressBar percentage={percentage} />}
+      {file && onClickSave && (
+        <ProgressBar percentage={percentage} bgColor="#000" />
+      )}
       {file && (
         <button onClick={onSave} className="new_image_form_private_button">
           Save image
