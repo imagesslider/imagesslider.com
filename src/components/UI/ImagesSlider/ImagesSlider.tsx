@@ -365,6 +365,7 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
 
   //onTouchStart
   const onTouchStart = (event: any) => {
+    event.stopPropagation();
     setTouchStart(event.touches[0].clientX);
     setHover(true);
     setButtonHover(true);
@@ -372,12 +373,14 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
 
   //onTouchMove
   const onTouchMove = (event: any) => {
+    event.stopPropagation();
     setTouchMove(event.touches[0].clientX);
     setIsTouchMove(true);
   };
 
   //onTouchEnd
-  const onTouchEnd = () => {
+  const onTouchEnd = (event: any) => {
+    event.stopPropagation();
     if (
       touchStart > touchMove &&
       indexImage === imagesArray.length - 1 &&
