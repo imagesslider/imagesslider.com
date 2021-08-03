@@ -40,7 +40,7 @@ import {
   SpeechRecognitionType,
 } from "../../../Type/Type";
 import RangeSlider from "../RangeSlider/RangeSlider";
-import SpeechRecognition from "../../SpeechRecognition/SpeechRecognition";
+// import SpeechRecognition from "../../SpeechRecognition/SpeechRecognition";
 
 type ImagesSliderProps = {
   children?: React.ReactNode;
@@ -64,10 +64,10 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   const [mouseMove, setMouseMove] = useState<number>(0);
   const [isMouseMove, setIsMouseMove] = useState<boolean>(false);
   const [isGrabbing, setIsGrabbing] = useState<boolean>(false);
-  //Touch event
-  const [touchStart, setTouchStart] = useState<number>(0);
-  const [touchMove, setTouchMove] = useState<number>(0);
-  const [isTouchMove, setIsTouchMove] = useState<boolean>(false);
+  // //Touch event
+  // const [touchStart, setTouchStart] = useState<number>(0);
+  // const [touchMove, setTouchMove] = useState<number>(0);
+  // const [isTouchMove, setIsTouchMove] = useState<boolean>(false);
   //state redux
   const selectAutoSlider = (state: SliderType) => state.slider.autoSlider;
   const autoSlider = useSelector(selectAutoSlider);
@@ -89,9 +89,9 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
   const fullscreen = useSelector(selectFullScreen);
   const selectImages = (state: AppType) => state.appState.images;
   const images = useSelector(selectImages);
-  const selectInImages = (state: SpeechRecognitionType) =>
-    state.speechRecognition.inImages;
-  const inImages = useSelector(selectInImages);
+  // const selectInImages = (state: SpeechRecognitionType) =>
+  //   state.speechRecognition.inImages;
+  // const inImages = useSelector(selectInImages);
   const selectIsListening = (state: SpeechRecognitionType) =>
     state.speechRecognition.isListening;
   const isListening = useSelector(selectIsListening);
@@ -363,64 +363,64 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
     setButtonHover(false);
   };
 
-  //onTouchStart
-  const onTouchStart = (event: any) => {
-    event.stopPropagation();
-    setTouchStart(event.touches[0].clientX);
-    setHover(true);
-    setButtonHover(true);
-  };
+  // //onTouchStart
+  // const onTouchStart = (event: any) => {
+  //   event.stopPropagation();
+  //   setTouchStart(event.touches[0].clientX);
+  //   setHover(true);
+  //   setButtonHover(true);
+  // };
 
-  //onTouchMove
-  const onTouchMove = (event: any) => {
-    event.stopPropagation();
-    setTouchMove(event.touches[0].clientX);
-    setIsTouchMove(true);
-  };
+  // //onTouchMove
+  // const onTouchMove = (event: any) => {
+  //   event.stopPropagation();
+  //   setTouchMove(event.touches[0].clientX);
+  //   setIsTouchMove(true);
+  // };
 
-  //onTouchEnd
-  const onTouchEnd = (event: any) => {
-    event.stopPropagation();
-    if (
-      touchStart > touchMove &&
-      indexImage === imagesArray.length - 1 &&
-      isTouchMove
-    ) {
-      setTransitionImgage(false);
-      setIndexImage(0);
-      if (providerSearch === "google-allImages") {
-        if (!!nextPageToken) {
-          dispatch(setAllImagesActionGoogle(token, nextPageToken));
-        } else {
-          dispatch(setAllImagesActionGoogle(token, nextPageToken));
-        }
-      }
-      if (providerSearch === "google-albumImages") {
-        if (!!nextPageToken) {
-          dispatch(
-            setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
-          );
-        } else {
-          dispatch(
-            setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
-          );
-        }
-      }
-    } else if (
-      touchStart > touchMove &&
-      indexImage !== imagesArray.length - 1 &&
-      isTouchMove
-    ) {
-      setTransitionImgage(true);
-      setIndexImage(indexImage + 1);
-    } else if (touchStart < touchMove && indexImage !== 0 && isTouchMove) {
-      setTransitionImgage(true);
-      setIndexImage(indexImage - 1);
-    }
-    setIsTouchMove(false);
-    setHover(false);
-    setButtonHover(false);
-  };
+  // //onTouchEnd
+  // const onTouchEnd = (event: any) => {
+  //   event.stopPropagation();
+  //   if (
+  //     touchStart > touchMove &&
+  //     indexImage === imagesArray.length - 1 &&
+  //     isTouchMove
+  //   ) {
+  //     setTransitionImgage(false);
+  //     setIndexImage(0);
+  //     if (providerSearch === "google-allImages") {
+  //       if (!!nextPageToken) {
+  //         dispatch(setAllImagesActionGoogle(token, nextPageToken));
+  //       } else {
+  //         dispatch(setAllImagesActionGoogle(token, nextPageToken));
+  //       }
+  //     }
+  //     if (providerSearch === "google-albumImages") {
+  //       if (!!nextPageToken) {
+  //         dispatch(
+  //           setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
+  //         );
+  //       } else {
+  //         dispatch(
+  //           setImagesActionGoogle(selelctedAlbumId, token, nextPageToken)
+  //         );
+  //       }
+  //     }
+  //   } else if (
+  //     touchStart > touchMove &&
+  //     indexImage !== imagesArray.length - 1 &&
+  //     isTouchMove
+  //   ) {
+  //     setTransitionImgage(true);
+  //     setIndexImage(indexImage + 1);
+  //   } else if (touchStart < touchMove && indexImage !== 0 && isTouchMove) {
+  //     setTransitionImgage(true);
+  //     setIndexImage(indexImage - 1);
+  //   }
+  //   setIsTouchMove(false);
+  //   setHover(false);
+  //   setButtonHover(false);
+  // };
 
   /* Get the documentElement (<html>) to display the page in fullscreen */
   let elem = document.documentElement;
@@ -495,14 +495,14 @@ const ImagesSlider: React.FC<ImagesSliderProps> = ({
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
       onMouseUp={onMouseUp}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-      onTouchMove={onTouchMove}
+      // onTouchStart={onTouchStart}
+      // onTouchEnd={onTouchEnd}
+      // onTouchMove={onTouchMove}
       style={{
         cursor: isGrabbing ? "grabbing" : "grab",
       }}
     >
-      {inImages && <SpeechRecognition style={hoverStyles} />}
+      {/* {inImages && <SpeechRecognition style={hoverStyles} />} */}
       {!isListening && (
         <i
           className="fas fa-arrow-left back  fa-2x"
