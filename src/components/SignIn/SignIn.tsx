@@ -3,6 +3,7 @@ import "./SignIn.css";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../Firebase/Firebase";
 import Error from "../UI/Error/Error";
+import ForgotPassword from "../Modals/ForgotPassword/ForgotPassword";
 
 const SignIn: FC = () => {
   //state
@@ -46,6 +47,7 @@ const SignIn: FC = () => {
             Submit
           </button>
         </form>
+        <ForgotPassword />
         <p className="sign_in_description">
           Click “Sign In” to agree to ImagesSlider acknowledge that ImagesSlider{" "}
           <Link to="/privacy-policy" className="footer_privacy-policy">
