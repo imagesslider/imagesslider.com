@@ -27,6 +27,7 @@ export type UserType = {
   email?: string | undefined;
   user_pro?: boolean | undefined;
   user_id?: string;
+  user_visibility?: string;
 };
 
 export type CollectionsPrivateType = {
@@ -104,6 +105,7 @@ export const initalStore: Store = {
     user_pro: false,
     created_at: "",
     user_id: "",
+    user_visibility: "public",
   },
   albums: [],
   defaultAlbums: [],
