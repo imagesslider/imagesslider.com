@@ -46,9 +46,9 @@ const Header: FC = () => {
           }
         >
           <div className="header_dropDown_wrapper">
-            <Link to="/users" className="header_link">
+            {/* <Link to="/users" className="header_link">
               Users
-            </Link>
+            </Link> */}
             {currentUser?.uid && (
               <Link to={`/users/${currentUser?.uid}`} className="header_link">
                 View profile
