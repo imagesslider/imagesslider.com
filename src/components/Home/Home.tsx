@@ -6,6 +6,7 @@ import { firestore } from "../../Firebase/Firebase";
 import { AppType } from "../../Type/Type";
 import {
   isImageAction,
+  setImages,
   setUserAction,
   setUserIsLoggedAction,
 } from "../../Actions/actionsApp";
@@ -49,6 +50,10 @@ const Home: FC = () => {
       dispatch(setUserIsLoggedAction(JSON.parse(localUser)));
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(setImages([]));
+  }, []);
 
   useEffect(() => {
     dispatch(isImageAction(false));
